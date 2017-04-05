@@ -74,7 +74,7 @@ public class SapCxfConfig {
 @WebService
 public interface ISapPushExpenseWebservice {
     @WebMethod
-    Result<Object> pushExpense(Set<SapExpenseDTO> expenseDTOSet);
+    Result<Object> pushExpense(@WebParam(name="expenseDTOSet")Set<SapExpenseDTO> expenseDTOSet);
 
 }
 
