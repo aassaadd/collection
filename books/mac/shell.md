@@ -1,0 +1,2 @@
+* 修改bash;[How to uninstall zsh](http://apple.stackexchange.com/questions/100468/how-to-uninstall-zsh)
+> If the default login shell was changed, you can change it back to /bin/bash by running chsh -s /bin/bash.
