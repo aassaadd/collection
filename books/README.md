@@ -35,4 +35,5 @@
 * 一致性哈希算法
 * 多线程交替输出变量
 * tcp/ip
-* mq模式
+* mq模式 direct headers topic match fanout
+* 
