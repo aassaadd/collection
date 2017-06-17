@@ -41,3 +41,6 @@
 * 通讯原理
 * 长连接
 * 机器学习
+* zookeeper，Hbase，HDFS，Lucene，Redis,Cassandra,MongoDB
+* SOA和Web Services（REST, SOAP）
+* Jenkins, Maven/Sbt/Npm/Ant, Git/SVN
