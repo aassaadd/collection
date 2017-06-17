@@ -44,3 +44,4 @@
 * zookeeper，Hbase，HDFS，Lucene，Redis,Cassandra,MongoDB
 * SOA和Web Services（REST, SOAP）
 * Jenkins, Maven/Sbt/Npm/Ant, Git/SVN
+* storm,spark stream
