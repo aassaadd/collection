@@ -29,7 +29,7 @@
 * Socket
 * 阿里云计算课程  https://yq.aliyun.com/articles/62910
 * Hadoop
-* *[JVM性能调优监控工具jps、jstack、jmap、jhat、jstat等使用详解](http://blog.csdn.net/tzs_1041218129/article/details/61630981)
+* [JVM性能调优监控工具jps、jstack、jmap、jhat、jstat等使用详解](http://blog.csdn.net/tzs_1041218129/article/details/61630981)
 * Https
 * 设计模式
 * 一致性哈希算法
@@ -46,3 +46,4 @@
 * Jenkins, Maven/Sbt/Npm/Ant, Git/SVN
 * storm,spark stream
 * ThreadPoolExecutor 多线程创建的理解
+* hadoop hive 本地搭建安装
