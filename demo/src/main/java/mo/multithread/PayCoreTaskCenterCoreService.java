@@ -24,6 +24,7 @@ public class PayCoreTaskCenterCoreService {
 
     class SendMessageTask implements Callable<Object> {
         public SendMessageTask() {
+
         }
 
         @Override
