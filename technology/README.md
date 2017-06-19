@@ -45,3 +45,4 @@
 * SOA和Web Services（REST, SOAP）
 * Jenkins, Maven/Sbt/Npm/Ant, Git/SVN
 * storm,spark stream
+* ThreadPoolExecutor 多线程创建的理解
