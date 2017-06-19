@@ -30,7 +30,7 @@ public class PayCoreTaskCenterCoreService {
         @Override
         public Object call() throws Exception {
             try {
-
+                System.out.println("test");
                 return null;
             } catch (Exception e) {
                 return null;
