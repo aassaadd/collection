@@ -11,3 +11,4 @@
 * [理解Docker（2）：Docker 镜像](http://www.cnblogs.com/sammyliu/p/5877964.html)
 * [全面了解Docker](https://github.com/moxingwang/Docker-introduce)
 * [一分钟看懂Docker的网络模式和跨主机通信](http://www.cnblogs.com/yy-cxd/p/6553624.html)
+* [ Docker学习笔记 — Weave实现跨主机容器互联](http://blog.csdn.net/wangtaoking1/article/details/45244525)
