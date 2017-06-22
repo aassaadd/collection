@@ -20,3 +20,7 @@
 * [ Docker学习笔记 — Weave实现跨主机容器互联](http://blog.csdn.net/wangtaoking1/article/details/45244525)
 * [docker常用命令详解](http://blog.csdn.net/permike/article/details/51879578)
 * [docker常用命令详解](http://blog.csdn.net/permike/article/details/51879578)
+
+## 镜像位置
+* mac: /Users/MyUserName/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64
+* windows: C:\Users\Public\Documents\Hyper-V
