@@ -3,6 +3,7 @@
 ## install java8
 * [Ubuntu 安装 JDK 7 / JDK8 的两种方式](http://www.cnblogs.com/a2211009/p/4265225.html)
 * [Ubuntu的add-apt-repository: command not found](http://blog.csdn.net/dogfish/article/details/67150703)
+* [Hadoop安装教程_单机/伪分布式配置](http://www.powerxing.com/install-hadoop/)
 ````aidl
 sudo apt-get install software-properties-common python-software-properties  
 sudo add-apt-repository ppa:webupd8team/java
