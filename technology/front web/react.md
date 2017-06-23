@@ -3,3 +3,4 @@
 * [慕课网视频教程](http://www.imooc.com/course/list?c=reactjs)
 * [服务端渲染、前端渲染、前后端同构](http://blog.csdn.net/shelly1072/article/details/55668908)
 * [react前后端同构渲染](http://blog.csdn.net/llm913114267/article/details/68946043)
+* [React+Webpack 前后端同构（服务端渲染）理论篇](http://www.tuicool.com/articles/AfIjqq3)
