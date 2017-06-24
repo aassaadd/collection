@@ -2,3 +2,4 @@
 * [iTerm2 快捷键大全](http://blog.csdn.net/zheng0518/article/details/50817329)
 * [Mac下终端配置（item2 + oh-my-zsh + solarized配色方案）](http://www.cnblogs.com/weixuqin/p/7029177.html)
 * [改变vim配色：安装colorscheme](http://blog.csdn.net/simple_the_best/article/details/51901361)
+* [incr.zsh 补全插件 让你在zsh 模式下全自动补全指令或目录](http://yijiebuyi.com/blog/36955b84c57e338dd8255070b80829bf.html)
