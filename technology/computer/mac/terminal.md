@@ -13,3 +13,11 @@ $ cd /usr/local/share/
 $ sudo chmod -R 755 zsh
 $ sudo chown -R root:staff zsh
 ````
+
+## 隐藏 Dock 图标 和恢复
+````aidl
+隐藏
+/usr/libexec/PlistBuddy  -c "Add :LSUIElement bool true" /Applications/iTerm.app/Contents/Info.plist
+恢复
+/usr/libexec/PlistBuddy  -c "Delete :LSUIElement" /Applications/iTerm.app/Contents/Info.plist
+````
