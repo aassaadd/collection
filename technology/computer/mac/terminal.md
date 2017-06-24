@@ -3,3 +3,13 @@
 * [Mac下终端配置（item2 + oh-my-zsh + solarized配色方案）](http://www.cnblogs.com/weixuqin/p/7029177.html)
 * [改变vim配色：安装colorscheme](http://blog.csdn.net/simple_the_best/article/details/51901361)
 * [incr.zsh 补全插件 让你在zsh 模式下全自动补全指令或目录](http://yijiebuyi.com/blog/36955b84c57e338dd8255070b80829bf.html)(http://mimosa-pudica.net/src/incr-0.2.zsh)
+
+## error:zsh compinit: insecure directories, run compaudit for list
+* [zsh compinit: insecure directories](https://stackoverflow.com/questions/13762280/zsh-compinit-insecure-directories)
+````aidl
+EDIT2: On OSX 10.11, only this worked:
+
+$ cd /usr/local/share/
+$ sudo chmod -R 755 zsh
+$ sudo chown -R root:staff zsh
+````
