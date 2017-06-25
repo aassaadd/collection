@@ -6,3 +6,4 @@
 * [React+Webpack 前后端同构（服务端渲染）理论篇](http://www.tuicool.com/articles/AfIjqq3)
 * [使用React、Node.js、MongoDB、Socket.IO开发一个角色投票应用](https://www.kancloud.cn/kancloud/create-voting-app/63978)
 * [webpack command not working](https://stackoverflow.com/questions/38788166/webpack-command-not-working)
+* [从零开始，教你用Webpack构建React基础工程](http://www.jianshu.com/p/4df92c335617)
