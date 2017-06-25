@@ -4,3 +4,4 @@
 * [服务端渲染、前端渲染、前后端同构](http://blog.csdn.net/shelly1072/article/details/55668908)
 * [react前后端同构渲染](http://blog.csdn.net/llm913114267/article/details/68946043)
 * [React+Webpack 前后端同构（服务端渲染）理论篇](http://www.tuicool.com/articles/AfIjqq3)
+* [使用React、Node.js、MongoDB、Socket.IO开发一个角色投票应用](https://www.kancloud.cn/kancloud/create-voting-app/63978)
