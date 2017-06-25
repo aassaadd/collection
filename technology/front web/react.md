@@ -7,4 +7,4 @@
 * [使用React、Node.js、MongoDB、Socket.IO开发一个角色投票应用](https://www.kancloud.cn/kancloud/create-voting-app/63978)
 * [webpack command not working](https://stackoverflow.com/questions/38788166/webpack-command-not-working)
 * [从零开始，教你用Webpack构建React基础工程](http://www.jianshu.com/p/4df92c335617)
-* [React Router 使用教程](http://www.ruanyifeng.com/blog/2016/05/react_router.html?utm_source=tool.lu)
+* [阮一峰-React 技术栈系列教程](http://www.ruanyifeng.com/blog/2016/09/react-technology-stack.html)
