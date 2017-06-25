@@ -8,3 +8,4 @@
 * [webpack command not working](https://stackoverflow.com/questions/38788166/webpack-command-not-working)
 * [从零开始，教你用Webpack构建React基础工程](http://www.jianshu.com/p/4df92c335617)
 * [阮一峰-React 技术栈系列教程](http://www.ruanyifeng.com/blog/2016/09/react-technology-stack.html)
+* [入门 Webpack，看这篇就够了](https://segmentfault.com/a/1190000006178770)
