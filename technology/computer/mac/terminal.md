@@ -21,3 +21,13 @@ $ sudo chown -R root:staff zsh
 恢复
 /usr/libexec/PlistBuddy  -c "Delete :LSUIElement" /Applications/iTerm.app/Contents/Info.plist
 ````
+
+## npm 在mac出错的解决
+* [npm mac上安装命令报错](https://segmentfault.com/q/1010000007681402/a-1020000007681841)
+```aidl
+npm ERR! Darwin 15.6.0
+npm ERR! argv "/usr/local/bin/node" "/usr/local/bin/npm" "install" "webpack" "--save-dev"
+npm ERR! node v6.9.1
+npm ERR! npm v3.10.8
+npm ERR! code MODULE_NOT_FOUND
+```
