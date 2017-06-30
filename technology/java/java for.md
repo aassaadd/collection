@@ -20,8 +20,7 @@ for (type var : coll) {
 }
 ````
 
-## The for Statement
-For用来处理哪些数据结构
+## For用来处理哪些数据结构
 1. 数组
 ````aidl
 int[] a = {1,2,3,4,5,6};
