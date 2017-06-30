@@ -1,19 +1,19 @@
 ## java中for的几种常见形式
-1. @1 For loop using index.
+1. For loop using index.
 ````aidl
 for (int i = 0; i < arr.length; i++) { 
     type var = arr[i];
     body-of-loop
 }
 ````
-2. @2 Loop using explicit iterator.
+2. Loop using explicit iterator.
 ````aidl
 for (Iterator<type> iter = coll.iterator(); iter.hasNext(); ) {
     type var = iter.next();
     body-of-loop
 }
 ````
-3. @3 Foreach loop over all elements in arr.
+3. Foreach loop over all elements in arr.
 ````aidl
 for (type var : coll) {
     body-of-loop
