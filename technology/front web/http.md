@@ -2,3 +2,4 @@
 * [HTTP访问控制（CORS）](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS)
 * [RESTful Api 身份认证中的安全性设计探讨](https://mengkang.net/625.html)
 * [REST API 安全设计指南](http://blog.nsfocus.net/rest-api-design-safety/)
+* [如何用 JavaScript 下载文件](https://scarletsky.github.io/2016/07/03/download-file-using-javascript/)
