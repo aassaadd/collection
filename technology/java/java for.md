@@ -20,9 +20,6 @@ for (type var : coll) {
 }
 ````
 
-### 普通for
-普通for可以用来遍历
-
 ## The for Statement
 ### For用来处理哪些数据结构
 1. 数组
