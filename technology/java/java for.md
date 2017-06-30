@@ -21,7 +21,7 @@ for (type var : coll) {
 ````
 
 ## The for Statement
-### For用来处理哪些数据结构
+For用来处理哪些数据结构
 1. 数组
 ````aidl
 int[] a = {1,2,3,4,5,6};
@@ -77,12 +77,11 @@ public class IterableTest<E> implements Iterable<E> {
 ````
 
 ## 普通for遍历和增强for的一些区别
-### 增强的for循环的底层使用迭代器来实现
 增强的for循环的底层使用迭代器来实现，所以它就与普通for循环有一些差异
 1. 增强for使用增强for循环的时候不能使用集合删除集合中的元素；
 2. 增强for循环不能使用迭代器中的方法，例如remove()方法删除元素；
 3. 与普通for循环的区别：增强For循环有遍历对象，普通for循环没有遍历对象;
-### 遍历RandomAccess的实现类
+
 对于实现了RandomAccess接口的集合类，推荐使用普通for，这种方式faster than Iterator.next
 > The RandomAccess interface identifies that a particular java.util.List implementation has fast random access. (A more accurate name for the interface would have been "FastRandomAccess.") This interface tries to define an imprecise concept: what exactly is fast? The documentation provides a simple guide: if repeated access using the List.get( ) method is faster than repeated access using the Iterator.next( ) method, then the List has fast random access. The two types of access are shown in the following code examples.
   
