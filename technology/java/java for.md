@@ -22,6 +22,7 @@ for (type var : coll) {
 
 ## For循环用来处理哪些数据结构
 1. 数组
+
 ````aidl
 int[] a = {1,2,3,4,5,6};
 int[] b = new int[]{1,2,3,4,5,6};
@@ -34,7 +35,9 @@ for (int i : a) {
     System.out.println(i);
 }
 ````
+
 2. 实现了java.util.Iterator的类
+
 ````aidl
 import java.util.Iterator;
 
