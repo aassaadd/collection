@@ -1,4 +1,4 @@
-## java中for的几种常见形式
+## Java中for的几种常见形式
 1. For loop using index.
 ````aidl
 for (int i = 0; i < arr.length; i++) { 
