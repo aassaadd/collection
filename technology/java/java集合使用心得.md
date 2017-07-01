@@ -14,5 +14,10 @@
 
 * 选用普通for循环而不是Iterator
 
-为什么要使用普通for循环呢？对于ArrayList来说他实现了RandomAccess接口，
+为什么要使用普通for循环呢？对于ArrayList来说他实现了RandomAccess接口，循环速度
+会快于Iterator，或者增强for循环（底层就是Iterator实现）。
+
+* ArrayList非线程安全
+
+在多线程的环境下肯定不能使用ArrayList作为共享变量操作。
 
