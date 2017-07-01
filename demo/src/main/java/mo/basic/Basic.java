@@ -60,7 +60,7 @@ public class Basic {
 
         Integer[] tt = new Integer[]{1,1,1,1,1,1,1};
 
-        Integer[] integers = (Integer[]) list.toArray(tt);
+        Integer[] integers =  list.toArray(tt);
 
 
     }

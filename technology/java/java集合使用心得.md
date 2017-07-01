@@ -16,3 +16,7 @@ ArrayList的一些心得。
 * ArrayList非线程安全
 >在多线程的环境下肯定不能使用ArrayList作为共享变量操作数据。
 
+* toArray()，可能引起“java.lang.ClassCastException”
+> 对于这个问题，需要理解清楚对象继承关系，以及typeInstance.toArray后虽然返回的Object[],然而实质
+上typeInstance的类型，理解这一点非常重要。具体请参考[JDK-6260652 : (coll) Arrays.asList(x).toArray().getClass() should be Object[].class](http://bugs.java.com/bugdatabase/view_bug.do?bug_id=6260652)
+
