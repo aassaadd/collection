@@ -1,5 +1,5 @@
 ## ArrayList
->首先时说ArrayList，估计他是大多数java程序员用过的最多的集合类了吧，ArrayList并没
+首先时说ArrayList，估计他是大多数java程序员用过的最多的集合类了吧，ArrayList并没
 有多么高大上的地方。想必大家都知道ArrayList就是围绕一个数组，包装了一些方法方便调用
 者对其数组操作，对，就这么简单。推荐大家阅读源码一探究竟。接下来列举我平时使用
 ArrayList的一些心得。
