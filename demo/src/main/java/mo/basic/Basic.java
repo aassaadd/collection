@@ -2,6 +2,7 @@ package main.java.mo.basic;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -9,6 +10,8 @@ import java.util.List;
  */
 public class Basic {
     public static void main(String[] args) {
+        List<Integer> linkedList = new LinkedList<Integer>();
+
         int[] a = {1,2,3,4,5,6};
         int[] b = new int[]{1,2,3,4,5,6};
         int[] c = new int[6];
@@ -30,6 +33,17 @@ public class Basic {
         list.add(1);
         list.add(2);
         list.add(3);
+
+        list.add(null);
+        list.add(null);
+        list.add(null);
+
+        System.out.println(list.indexOf(null));
+
+        List<Integer> temp = list.subList(1,2);
+
+        System.out.println(temp.getClass());
+
 
         for (int i = 0; i < list.size(); i++) {
             
