@@ -197,4 +197,6 @@ modCount属性，但是Itr中的这cursor、expectedModCount却没有发生变�
    ````
 
    + 其它方法
-
+   思路总是多的，比如说加个锁保证数据正确，什么去掉这么到校验自己实现个ArrayList，
+   怎么地都行，你想怎么玩就怎么玩，方便点的话直接使用java.util.concurrent包下面的CopyOnWriteArrayList。
+   方法很多，怎么开心就好。
