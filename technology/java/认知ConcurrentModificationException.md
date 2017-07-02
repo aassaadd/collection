@@ -272,5 +272,7 @@ Exception in thread "main" java.util.ConcurrentModificationException
 想必按照例子一的分析一定非常简单的找到答案，这就就不举例子了。
 
 #### 总结
-总得来说，当我们再处理Iterable的实现类做元素remove操作，并且是在for循环中处理的时候，
+总得来说，本文虽让没有对ConcurrentModificationException发生的情况深入涉及，
+但是理解方法和思路都是一样的，文章中的两个例子告诉我们，
+当在处理Iterable的实现类做元素remove操作，并且是在for循环中处理的时候，
 理解了这些东西就会避免掉bug以及出现错误。
