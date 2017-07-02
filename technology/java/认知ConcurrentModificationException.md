@@ -200,3 +200,77 @@ modCount属性，但是Itr中的这cursor、expectedModCount却没有发生变�
    思路总是多的，比如说加个锁保证数据正确，什么去掉这么到校验自己实现个ArrayList，
    怎么地都行，你想怎么玩就怎么玩，方便点的话直接使用java.util.concurrent包下面的CopyOnWriteArrayList。
    方法很多，怎么开心就好。
+
+#### 例二
+说完例一说例二，刚刚是ArrayList，现在试试LinkedList。
+````
+package main.java.mo.basic;
+
+import java.util.LinkedList;
+
+/**
+ * Created by MoXingwang on 2017/7/2.
+ */
+public class ConcurrentModificationExceptionTest {
+    public static void main(String[] args) {
+        LinkedList<String> strings = new LinkedList<String>();
+        strings.add("a");
+        strings.add("b");
+        strings.add("c");
+        strings.add("d");
+        strings.add("e");
+
+        for (String string : strings) {
+            if ("e".equals(string)) {
+                strings.remove(string);
+            }
+        }
+    }
+}
+````
+
+这段代码和例一的没啥区别，唯一不同的就是ArrayList换成了LinkedList，突然发现执行这段代码怎么就不报错了呢。
+这不是搞事情么？好吧，再上一段代码。
+
+````
+package main.java.mo.basic;
+
+import java.util.LinkedList;
+
+/**
+ * Created by MoXingwang on 2017/7/2.
+ */
+public class ConcurrentModificationExceptionTest {
+    public static void main(String[] args) {
+        LinkedList<String> strings = new LinkedList<String>();
+        strings.add("a");
+        strings.add("b");
+        strings.add("c");
+        strings.add("d");
+        strings.add("e");
+        strings.add("f");
+        strings.add("g");
+
+        for (String string : strings) {
+            if ("e".equals(string)) {
+                strings.remove(string);
+            }
+        }
+    }
+}
+````
+
+再执行一下这一段代码，返回结果居然是这样：
+````
+Exception in thread "main" java.util.ConcurrentModificationException
+	at java.util.LinkedList$ListItr.checkForComodification(LinkedList.java:953)
+	at java.util.LinkedList$ListItr.next(LinkedList.java:886)
+	at main.java.mo.basic.ConcurrentModificationExceptionTest.main(ConcurrentModificationExceptionTest.java:19)
+````
+
+仔细一看才发现strings里面多了两个元素，怎么差别就这么大呢，分析方法和例一完全一样，
+想必按照例子一的分析一定非常简单的找到答案，这就就不举例子了。
+
+#### 总结
+总得来说，当我们再处理Iterable的实现类做元素remove操作，并且是在for循环中处理的时候，
+理解了这些东西就会避免掉bug以及出现错误。
