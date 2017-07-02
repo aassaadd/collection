@@ -53,7 +53,7 @@ Exception in thread "main" java.util.ConcurrentModificationException
 会调用Iterator实现类的两个方法，hasNext()和next(),所以说这个知识点是最重要最核心
 的。
 
-先看ArrayList.Iterator的部分源码
+先看ArrayList.Iterator的部分源码,以及ArrayList.remove(Object o)的部分源码
 ````
 int cursor;       // index of next element to return
 int lastRet = -1; // index of last element returned; -1 if no such
@@ -75,4 +75,46 @@ public E next() {
     cursor = i + 1;
     return (E) elementData[lastRet = i];
 }
+...
+final void checkForComodification() {
+ if (expectedModCount != ArrayList.this.modCount)
+     throw new ConcurrentModificationException();
+}
+
 ````
+````
+public boolean remove(Object o) {
+    if (o == null) {
+        for (int index = 0; index < size; index++)
+            if (elementData[index] == null) {
+                fastRemove(index);
+                return true;
+            }
+    } else {
+        for (int index = 0; index < size; index++)
+            if (o.equals(elementData[index])) {
+                fastRemove(index);
+                return true;
+            }
+    }
+    return false;
+}
+
+/*
+ * Private remove method that skips bounds checking and does not
+ * return the value removed.
+ */
+private void fastRemove(int index) {
+    modCount++;
+    int numMoved = size - index - 1;
+    if (numMoved > 0)
+        System.arraycopy(elementData, index+1, elementData, index,
+                         numMoved);
+    elementData[--size] = null; // clear to let GC do its work
+}
+````
+我们会发现当执行remove(Object o)方法后，ArrayList对象的size减一此时size==4,
+modCount++了，然后Iterator对象中的cursor==5，hasNext发回了true，导致增强for循
+环去寻找下一个元素调用next()方法，checkForComodification做校验的时候，发现modCount
+已经和Iterator对象中的expectedModCount不一致，说明ArrayList对象已经被修改过，
+为了防止错误，抛出异常ConcurrentModificationException。
