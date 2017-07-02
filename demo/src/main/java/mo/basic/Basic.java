@@ -10,7 +10,62 @@ import java.util.List;
  */
 public class Basic {
     public static void main(String[] args) {
-        List<Integer> linkedList = new LinkedList<Integer>();
+        List<String> strings = new LinkedList<String>();
+        strings.add("a");
+        strings.add("b");
+        strings.add("c");
+        strings.add("d");
+        strings.add("e");
+
+        for (String string : strings) {
+            strings.remove("e");
+        }
+
+
+
+
+
+
+
+
+        LinkedList<Integer> linkedList = new LinkedList<Integer>();
+        linkedList.add(1);
+        linkedList.add(2);
+        linkedList.add(3);
+        linkedList.add(4);
+
+        LinkedList<Integer> linkedList2 = new LinkedList<Integer>();
+        linkedList2.add(11);
+        linkedList2.add(22);
+        linkedList2.add(3);
+        linkedList2.add(9);
+//        linkedList2.add(8);
+
+
+        /*for (int i = 0; i < linkedList.size(); i++) {
+            for (int i1 = 0; i1 < linkedList2.size(); i1++) {
+                if(linkedList.get(i).equals(linkedList2.get(i1))){
+                    linkedList2.remove(i1);
+//                    i1 --;
+                }
+            }
+        }*/
+
+        for (Integer integer : linkedList) {
+            for (Integer integer1 : linkedList2) {
+                if(integer1.equals(integer)) {
+                    linkedList2.remove(integer1);
+                }
+            }
+            /*for(Iterator<Integer> iterator = linkedList2.iterator();iterator.hasNext();){
+                if(iterator.next().equals(integer)){
+                    iterator.remove();
+                }
+            }*/
+        }
+
+
+
 
         int[] a = {1,2,3,4,5,6};
         int[] b = new int[]{1,2,3,4,5,6};
@@ -45,6 +100,7 @@ public class Basic {
         System.out.println(temp.getClass());
 
 
+        list.get(1);
         for (int i = 0; i < list.size(); i++) {
             
         }
