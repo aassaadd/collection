@@ -118,3 +118,83 @@ modCount++了，然后Iterator对象中的cursor==5，hasNext发回了true，导
 环去寻找下一个元素调用next()方法，checkForComodification做校验的时候，发现modCount
 已经和Iterator对象中的expectedModCount不一致，说明ArrayList对象已经被修改过，
 为了防止错误，抛出异常ConcurrentModificationException。
+
+回过头来，再一思考ArrayList的代码，让我们来看看ArrayList本身和内部类Itr，Itr
+implements Iterator是为了返回给ArrayList.iterator()，在使用的时候可以说他们是
+独立的两个类，其中各自有两个重要的属性;ArrayList中的size、modCount；以及Itr中的
+cursor、expectedModCount，理论上他们是同步的，但是我们在某些操作的过程中导致会导致
+他们不一致，比如说在这个例子中，我们调用的是ArrayList.remove()方法，修改了size和
+modCount属性，但是Itr中的这cursor、expectedModCount却没有发生变化，当增强for
+循环再次执行的时候，调用的却是Itr中的方法，最终发现了数据不一致。这就是本例ConcurrentModificationException
+产生的根本原因。
+
+
+既然问题我们分析清楚了，如何解决呢？这里我们顺着这个思路倒推，列出集中解决办法。
+
+* 解决问题
+   + 不使用增强for循环
+
+   对于这个例子，很明显我们知道异常的产生原因是由于ArrayList中的属性和内部类Itr中的
+   属性不一致导致的，那么可以假设在for循环和remove操作的时候不设计到Itr类不就得了。
+   是的，思路很清晰，就这么简单。啥都不说先上代码。
+   ````
+   ArrayList<String> strings = new ArrayList<String>();
+   strings.add("a");
+   strings.add("b");
+   strings.add("c");
+   strings.add("d");
+   strings.add("e");
+
+   for (int i = 0; i < strings.size(); i++) {
+       String element = strings.get(i);
+       if("e".equals(element)){
+           strings.remove(element);
+           i --;//需要自己手动维护索引
+       }
+   }
+   ````
+   使用这种方式处理remove操作，比较尴尬的一点是需要自己手动维护索引，避免漏掉数据。
+
+   + 使用Iterator中的remove方法，不要和ArrayList中的remove方法混着搞
+
+   基于上面的思路，既然不想和Itr有来望，好吧，看来直接使用Itr类中的remove方法，
+   使用Itr遍历对象不也是一个好的想法么。上代码。
+   ````
+   ArrayList<String> strings = new ArrayList<String>();
+   strings.add("a");
+   strings.add("b");
+   strings.add("c");
+   strings.add("d");
+   strings.add("e");
+
+   Iterator<String> iterator = strings.iterator();
+   while (iterator.hasNext()){
+       String element = iterator.next();
+       if("e".equals(element)){
+           iterator.remove();
+       }
+   }
+   ````
+
+   + 删除元素的时候不再遍历了，直接removeAll
+   既然异常是对list做遍历和remove操作的时候出现的，好吧，暴力点，我能不遍历的时候做remove操作吗？
+   好吧，思路正确，满足你。
+   ````
+   ArrayList<String> strings = new ArrayList<String>();
+   strings.add("a");
+   strings.add("b");
+   strings.add("c");
+   strings.add("d");
+   strings.add("e");
+
+   ArrayList<String> tempStrings = new ArrayList<String>();
+   for (String string : strings) {
+       if("e".equals(string)){
+           tempStrings.add(string);
+       }
+   }
+   strings.removeAll(tempStrings);
+   ````
+
+   + 其它方法
+
