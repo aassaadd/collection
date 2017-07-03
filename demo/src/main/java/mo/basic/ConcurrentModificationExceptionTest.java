@@ -16,6 +16,8 @@ public class ConcurrentModificationExceptionTest {
         strings.add("f");
         strings.add("g");
 
+        strings.subList(1,1);
+
         for (String string : strings) {
             if ("e".equals(string)) {
                 strings.remove(string);
