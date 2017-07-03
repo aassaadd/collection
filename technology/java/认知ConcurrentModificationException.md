@@ -49,9 +49,8 @@ Exception in thread "main" java.util.ConcurrentModificationException
 我们才能分析为什么会出现异常，这个知识点也是最重要最核心的。
 
 根据上面的异常信息可以看出，异常是从"for (String string : strings) {"，这一行抛
-出的，这一行怎么会出错呢？理解增强for的实现原理了，我们就会知道，执行这一行代买的时候
-会调用Iterator实现类的两个方法，hasNext()和next(),所以说这个知识点是最重要最核心
-的。
+出的，这一行怎么会出错呢？理解增强for的实现原理了，我们就会知道，
+执行这一行代码的时候会调用Iterator实现类的两个方法，hasNext()和next(),所以说这个知识点是最重要最核心的。
 
 先看ArrayList.Iterator的部分源码,以及ArrayList.remove(Object o)的部分源码
 ````
