@@ -26,25 +26,72 @@ HashMap和HashTable都是一种以键值对存储数据的容器，An object tha
 | :--- | :----: |
 | Dictionary<K,V> | AbstractMap<K,V> |
 
+4. NULL
+
 | HashTable | HashMap |
 | :--- | :----: |
-|  |  |
-
-4. NULL
+| key和value都不支持null | key和value都能为null |
 
 5. 锁
 
+| HashTable | HashMap |
+| :--- | :----: |
+| synchronized | 非线程安全 |
+
 6. 支持的遍历种类不同
+
+| HashTable | HashMap |
+| :--- | :----: |
+| Enumeration、Iterator | Iterator |
 
 7. 通过Iterator迭代器遍历时，遍历的顺序不同
 
+| HashTable | HashMap |
+| :--- | :----: |
+| “从后往前”的遍历数组；再对数组具体某一项对应的链表，从表头开始进行遍历。 | “从前向后”的遍历数组；再对数组具体某一项对应的链表，从表头开始进行遍历。 |
+
 8. 容量的初始值
+
+| HashTable | HashMap |
+| :--- | :----: |
+| 11 | 16 |
 
 9. 扩容方式
 
+| HashTable | HashMap |
+| :--- | :----: |
+| “原始容量x2 + 1” | “原始容量x2” |
+
 10. hash值算
+
+* HashTable
+
+````
+private int hash(Object k) {
+    // hashSeed will be zero if alternative hashing is disabled.
+    return hashSeed ^ k.hashCode();
+}
+````
+
+* HashMap
+
+````
+ final int hash(Object k) {
+    int h = hashSeed;
+    if (0 != h && k instanceof String) {
+        return sun.misc.Hashing.stringHash32((String) k);
+    }
+
+    h ^= k.hashCode();
+
+    // This function ensures that hashCodes that differ only by
+    // constant multiples at each bit position have a bounded
+    // number of collisions (approximately 8 at default load factor).
+    h ^= (h >>> 20) ^ (h >>> 12);
+    return h ^ (h >>> 7) ^ (h >>> 4);
+}
+````
 
 11. API
 
-## 学习
-* [Java 集合系列14之 Map总结(HashMap, Hashtable, TreeMap, WeakHashMap等使用场景)](http://wangkuiwu.github.io/2012/02/14/collection-14-mapsummary/#anchor2)
+> 有部分API他们是不同的，需要仔细阅读对比源码查看。
