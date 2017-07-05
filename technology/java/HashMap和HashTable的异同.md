@@ -1,4 +1,4 @@
-HashMap和HashTable都是一种以键值对存储数据的容器，An object that maps keys to values。
+> HashMap和HashTable都是一种以键值对存储数据的容器，An object that maps keys to values。
 
 ## 相同之处
 1. 实现接口
@@ -20,7 +20,7 @@ HashMap和HashTable都是一种以键值对存储数据的容器，An object tha
 | :--- | :----: |
 | Arthur van Hoff、Josh Bloch、Neal Gafter | Doug Lea、Arthur van Hoff、Josh Bloch、Neal Gafter |
 
-3.继承类不同
+3. 继承类不同
 
 | HashTable | HashMap |
 | :--- | :----: |
