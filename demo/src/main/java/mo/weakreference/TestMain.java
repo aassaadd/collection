@@ -1,5 +1,6 @@
 package main.java.mo.weakreference;
 
+import com.sun.org.apache.xpath.internal.operations.String;
 import main.java.mo.io.bio.Test;
 
 import java.lang.ref.WeakReference;
@@ -9,21 +10,23 @@ import java.lang.ref.WeakReference;
  */
 public class TestMain {
     public static void main(String[] args) {
-        TestObject testObject = new TestObject(100L,"tom");
+        TestObject testObject = new TestObject(100L, "tom");
 
         WeakReference<TestObject> weakCar = new WeakReference<TestObject>(testObject);
 
-        int i=0;
+        int i = 0;
 
-        while(true){
-            if(weakCar.get()!=null){
+        while (true) {
+            if (weakCar.get() != null) {
+                System.gc();
+                System.runFinalization();
                 i++;
-                System.out.println("Object is alive for "+i+" loops - "+weakCar);
-            }else{
+//                new String();
+                System.out.println("Object is alive for " + i + " loops - " + weakCar);
+            } else {
                 System.out.println("Object has been collected.");
                 break;
             }
         }
-
     }
 }
