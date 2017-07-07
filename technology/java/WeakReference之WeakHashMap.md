@@ -18,3 +18,7 @@ Reference 是一个抽象类，而 SoftReference，WeakReference，PhantomRefere
 ## 参考
 * [深入探讨 java.lang.ref 包](https://www.ibm.com/developerworks/cn/java/j-lo-langref/)
 * [JVM源码分析之FinalReference完全解读](http://www.infoq.com/cn/articles/jvm-source-code-analysis-finalreference)
+* [JVM结构、GC工作机制详解](http://www.jianshu.com/p/a94912709e29)
+* [JAVA GC 原理详解](https://segmentfault.com/a/1190000008384410)
+* [Java垃圾回收基础的系列文章](http://youli9056.github.io/blog/java-garbage-collection-introduction/)
+* [JVM 架构解读](http://www.codeceo.com/article/jvm-architecture-explained.html)
