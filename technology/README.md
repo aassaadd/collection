@@ -50,3 +50,4 @@
 * RandomAccess实现原理
 * GC策略好好学习  [垃圾收集](https://www.ibm.com/developerworks/cn/java/i-garbage2/index.html?ca=drs-)
 * jvm理解 [深入理解Java内存模型（一）——基础](http://www.infoq.com/cn/articles/java-memory-model-1)
+* 继承关系内存分布

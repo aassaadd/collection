@@ -375,7 +375,7 @@ public class HashMap<K,V>
     static int indexFor(int h, int length) {
         // assert Integer.bitCount(length) == 1 : "length must be a non-zero power of 2";
         int result = h & (length-1);
-        return 1;
+        return  result;
     }
 
     /**
@@ -930,6 +930,7 @@ public class HashMap<K,V>
         }
 
         public void remove() {
+            if (current == null)
             if (current == null)
                 throw new IllegalStateException();
             if (modCount != expectedModCount)

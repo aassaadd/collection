@@ -10,6 +10,7 @@ import java.util.*;
  */
 public class Basic {
     public static void main(String[] args) {
+//        HashMap
         WeakHashMap<Object,Object> weakHashMap = new WeakHashMap<>();
         weakHashMap.put("1","1");
         weakHashMap.put("2","2");
