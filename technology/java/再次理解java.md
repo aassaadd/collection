@@ -37,8 +37,15 @@
 
 ![image](https://github.com/moxingwang/collection/blob/master/resources/image/java%E6%96%87%E4%BB%B6%E7%BC%96%E8%AF%91%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B%E7%AE%80%E5%8D%95%E5%9B%BE.png?raw=true)
 
+参考
+[Java详解之——Javac 编译原理](http://blog.csdn.net/qq756161569/article/details/50486946)
 
 ## java文件编译
+
+![image](http://images2015.cnblogs.com/blog/866881/201602/866881-20160216214708767-653617912.jpg)
+
+参考
+[Javac编译原理](http://www.cnblogs.com/java-zhao/p/5194064.html)
 
 ## jvm启动过程概述
 
