@@ -151,3 +151,4 @@ Java的动态类加载功能由类加载器子系统处理。它在运行时首�
 * [JAVA GC 原理详解](https://segmentfault.com/a/1190000008384410)
 * [Java垃圾回收基础的系列文章](http://youli9056.github.io/blog/java-garbage-collection-introduction/)
 * [【深入理解Java虚拟机-0】思维导图汇总](http://hippo-jessy.com/2017/02/03/%E3%80%90%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA-0%E3%80%91%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE%E6%B1%87%E6%80%BB/)
+* [深入理解JVM读书笔记思维导图，深入理解jvm读书笔记](http://www.bkjia.com/Javabc/861553.html)
