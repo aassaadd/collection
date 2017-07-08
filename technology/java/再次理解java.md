@@ -62,13 +62,13 @@
 参考
 [JVM 架构解读](http://www.codeceo.com/article/jvm-architecture-explained.html)
 
-## class loader
+### class loader
 
-## jvm执行引擎
+### jvm内存模型
 
-## jvm内存模型
+### jvm执行引擎
 
-## jvm GC
+### jvm GC
 
 ### jvm对象生命周期
 
