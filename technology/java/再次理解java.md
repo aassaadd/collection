@@ -49,9 +49,19 @@
 
 ## jvm启动过程概述
 
-## class loader
+![image](http://images0.cnblogs.com/blog/641601/201508/211701559568932.png)
+
+参考
+[Java虚拟机详解02----JVM内存结构](http://www.cnblogs.com/smyhvae/p/4748392.html)
+[JVM启动过程——JVM之一](http://www.cnblogs.com/muffe/p/3540001.html)
+
+### jvm生命周期
 
 ## jvm架构
+
+## class loader
+
+## jvm执行引擎
 
 ## jvm内存模型
 
