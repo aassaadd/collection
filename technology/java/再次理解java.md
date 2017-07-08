@@ -61,10 +61,38 @@
 
 参考
 [JVM 架构解读](http://www.codeceo.com/article/jvm-architecture-explained.html)
+[The JVM Architecture Explained](https://dzone.com/articles/jvm-architecture-explained)
 
-### class loader
+JVM分为三个主要子系统,分别是
+* 类加载子系统
+* 运行时数据区
+* 执行引擎
 
-### jvm内存模型
+### 类加载子系统
+
+Java的动态类加载功能由类加载器子系统处理。它在运行时首次引用类的时候加载、链接、并初始化类文件。
+
+#### 加载
+
+类将通过这些组件加载。Boot Strap Class Loader，Extension Class Loader和Application Class Loader是有助于实现的三个类加载器。
+
+1. Boot Strap Class Loader——负责加载来自于Bootstrap类路径的类，就是rt.jar。此加载程序将给予最高优先级。
+2. Extension Class Loader——负责加载在ext文件夹（jre \ lib）内的类。
+3. Application Class Loader——负责加载应用程序级类路径，路径提到环境变量等
+
+上面的类记载器在加载类文件时遵循Delegation Hierarchy 算法。
+
+#### 链接
+
+1. 验证——字节码验证器将验证生成的字节码是否正确，如果验证失败，我们将得到verification error。
+2. 准备——对于所有的静态变量，内存将被分配和配置默认值。
+3. 解决——所有的符号存储器引用都将替换为来自Method Area的原始引用。
+
+#### 初始化
+
+这是类加载的最后阶段，这里所有的静态变量都将被赋予原始值，并执行静态块。
+
+### 运行时数据区（jvm内存模型）
 
 ### jvm执行引擎
 
