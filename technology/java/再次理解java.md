@@ -55,9 +55,12 @@
 [Java虚拟机详解02----JVM内存结构](http://www.cnblogs.com/smyhvae/p/4748392.html)
 [JVM启动过程——JVM之一](http://www.cnblogs.com/muffe/p/3540001.html)
 
-### jvm生命周期
-
 ## jvm架构
+
+![image](http://static.codeceo.com/images/2016/10/JVM-Architecture.png)
+
+参考
+[JVM 架构解读](http://www.codeceo.com/article/jvm-architecture-explained.html)
 
 ## class loader
 
@@ -67,10 +70,14 @@
 
 ## jvm GC
 
+### jvm对象生命周期
+
+参考
+[解读JVM对象生命周期](http://developer.51cto.com/art/201009/227897_all.htm)
+
 # 参考资料
 * [深入探讨 java.lang.ref 包](https://www.ibm.com/developerworks/cn/java/j-lo-langref/)
 * [JVM源码分析之FinalReference完全解读](http://www.infoq.com/cn/articles/jvm-source-code-analysis-finalreference)
 * [JVM结构、GC工作机制详解](http://www.jianshu.com/p/a94912709e29)
 * [JAVA GC 原理详解](https://segmentfault.com/a/1190000008384410)
 * [Java垃圾回收基础的系列文章](http://youli9056.github.io/blog/java-garbage-collection-introduction/)
-* [JVM 架构解读](http://www.codeceo.com/article/jvm-architecture-explained.html)
