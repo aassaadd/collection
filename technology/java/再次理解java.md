@@ -60,6 +60,7 @@
 [JVM启动过程——JVM之一](http://www.cnblogs.com/muffe/p/3540001.html)
 
 ## jvm架构
+jvm就是jvm规范的一个实例，可用使用多种语言实现jvm虚拟机。
 
 ![image](http://static.codeceo.com/images/2016/10/JVM-Architecture.png)
 
@@ -157,3 +158,4 @@ Java的动态类加载功能由类加载器子系统处理。它在运行时首�
 * [【深入理解Java虚拟机-0】思维导图汇总](http://hippo-jessy.com/2017/02/03/%E3%80%90%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA-0%E3%80%91%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE%E6%B1%87%E6%80%BB/)
 * [深入理解JVM读书笔记思维导图，深入理解jvm读书笔记](http://www.bkjia.com/Javabc/861553.html)
 * [Java 代码编译和执行的整个过程](http://wiki.jikexueyuan.com/project/java-vm/java-debug.html)
+* [Java 虚拟机规范](http://files.cnblogs.com/files/zhuYears/Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E8%A7%84%E8%8C%83%EF%BC%88JavaSE7%EF%BC%89.pdf)
