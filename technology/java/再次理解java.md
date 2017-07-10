@@ -155,6 +155,7 @@ Java的动态类加载功能由类加载器子系统处理。它在运行时首�
 [缓存一致性（Cache Coherency）入门](http://www.infoq.com/cn/articles/cache-coherency-primer/)
 [原子操作和竞争](http://www.infoq.com/cn/articles/atomic-operations-and-contention)
 [单核,多核CPU的原子操作](https://my.oschina.net/jcseg/blog/316726)
+[关于单CPU，多CPU上的原子操作](https://software.intel.com/zh-cn/blogs/2010/01/14/cpucpu)
 
 ### jvm对象生命周期
 
