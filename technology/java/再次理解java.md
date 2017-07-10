@@ -151,6 +151,7 @@ Java的动态类加载功能由类加载器子系统处理。它在运行时首�
 参考
 [深入JVM锁机制1-synchronized](http://blog.csdn.net/chen77716/article/details/6618779)
 [synchronized、锁、多线程同步的原理是咋样的](http://www.jianshu.com/p/5dbb07c8d5d5)
+[CPU并发特性CAS、Volatile](http://blog.sina.com.cn/s/blog_ee34aa660102wsuv.html)
 
 ### jvm对象生命周期
 
