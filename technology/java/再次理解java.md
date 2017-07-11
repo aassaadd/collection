@@ -186,3 +186,4 @@ Java的动态类加载功能由类加载器子系统处理。它在运行时首�
 * [Java Virtual Machine Specification 官方文档](https://docs.oracle.com/javase/specs/jvms/se7/html/jvms-2.html)
 * [Is stack in CPU or RAM?](https://stackoverflow.com/questions/15433390/is-stack-in-cpu-or-ram)
 * [JVM memory model](http://coding-geek.com/jvm-memory-model/)
+* [《Java虚拟机原理图解》5. JVM类加载器机制与类加载过程](http://blog.csdn.net/luanlouis/article/details/50529868)
