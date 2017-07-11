@@ -190,3 +190,4 @@ Java的动态类加载功能由类加载器子系统处理。它在运行时首�
 * [JVM体系结构与工作方式概览](https://segmentfault.com/a/1190000006914597?hmsr=toutiao.io&utm_medium=toutiao.io&utm_source=toutiao.io)
 * [ JVM 指令集与 X86 等真实cpu指令集的异同](http://blog.csdn.net/zhaoyw2008/article/details/9321313)
 * [ Java 虚拟机内存模型 与 cpu类比](http://blog.csdn.net/zhaoyw2008/article/details/9316189)
+* [虚拟机随谈（一）：解释器，树遍历解释器，基于栈与基于寄存器，大杂烩](http://rednaxelafx.iteye.com/blog/492667)
