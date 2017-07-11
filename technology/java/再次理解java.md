@@ -173,3 +173,4 @@ Java的动态类加载功能由类加载器子系统处理。它在运行时首�
 * [Java 代码编译和执行的整个过程](http://wiki.jikexueyuan.com/project/java-vm/java-debug.html)
 * [Java 虚拟机规范](http://files.cnblogs.com/files/zhuYears/Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E8%A7%84%E8%8C%83%EF%BC%88JavaSE7%EF%BC%89.pdf)
 * [Java Memory Model](http://tutorials.jenkov.com/java-concurrency/java-memory-model.html)
+* [Java Virtual Machine Specification 官方文档](https://docs.oracle.com/javase/specs/jvms/se7/html/jvms-2.html)
