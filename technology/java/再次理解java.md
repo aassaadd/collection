@@ -113,7 +113,7 @@ Java的动态类加载功能由类加载器子系统处理。它在运行时首�
 > 如果线程正在执行的是一个Java方法，这个计数器记录的是正在执行的虚拟机字节码指令的地址；如果正在执行的是Natvie方法，这个计数器值则为空（Undefined）。
 此内存区域是唯一一个在Java虚拟机规范中没有规定任何OutOfMemoryError情况的区域。
 
-* java virtual machine statcks
+* java virtual machine stacks
 
 参考
 [深入理解Java虚拟机笔记---运行时栈帧结构](http://blog.csdn.net/xtayfjpk/article/details/41924283)
@@ -185,3 +185,4 @@ Java的动态类加载功能由类加载器子系统处理。它在运行时首�
 * [Java Memory Model](http://tutorials.jenkov.com/java-concurrency/java-memory-model.html)
 * [Java Virtual Machine Specification 官方文档](https://docs.oracle.com/javase/specs/jvms/se7/html/jvms-2.html)
 * [Is stack in CPU or RAM?](https://stackoverflow.com/questions/15433390/is-stack-in-cpu-or-ram)
+* [JVM memory model](http://coding-geek.com/jvm-memory-model/)
