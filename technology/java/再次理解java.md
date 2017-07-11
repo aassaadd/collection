@@ -119,6 +119,11 @@ Java的动态类加载功能由类加载器子系统处理。它在运行时首�
 这样一来各个线程独立计算互不干扰，虽然理论上浪费了些空间，但问题则变得简单多了。
 
 * java virtual machine stacks
+> 首先我要知道jvm虚拟机的实现大概有两种，一种是基于栈的架构（stack-based 不同），另一种是基于寄存器的架构（register-based）。
+sun jvm是基于栈架构的实现。
+
+> 在jvm的内存模型里面，栈、堆...各司其职,概括的来说栈内存用来存储局部变量和方法调用。
+
 
 参考
 [深入理解Java虚拟机笔记---运行时栈帧结构](http://blog.csdn.net/xtayfjpk/article/details/41924283)
@@ -198,3 +203,4 @@ Java的动态类加载功能由类加载器子系统处理。它在运行时首�
 * [ JVM 指令集与 X86 等真实cpu指令集的异同](http://blog.csdn.net/zhaoyw2008/article/details/9321313)
 * [ Java 虚拟机内存模型 与 cpu类比](http://blog.csdn.net/zhaoyw2008/article/details/9316189)
 * [虚拟机随谈（一）：解释器，树遍历解释器，基于栈与基于寄存器，大杂烩（牛逼）](http://rednaxelafx.iteye.com/blog/492667)
+* [Dalvik 虚拟机和 Sun JVM 在架构和执行方面有什么本质区别？](https://www.zhihu.com/question/20207106)
