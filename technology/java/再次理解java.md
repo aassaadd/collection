@@ -98,7 +98,7 @@ Java的动态类加载功能由类加载器子系统处理。它在运行时首�
 ### 运行时数据区（jvm内存模型）
 
 运行时数据区分为5个主要组件。
-
+![image](https://github.com/moxingwang/collection/blob/master/resources/image/JVM-Run-time-Data-Areas.png)
 * 方法区
 > 所有的类级别数据将存储在这里，包括静态变量。每个JVM只有一个方法区，并且它是一个共享资源。
   
