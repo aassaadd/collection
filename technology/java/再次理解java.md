@@ -60,7 +60,7 @@
 [JVM启动过程——JVM之一](http://www.cnblogs.com/muffe/p/3540001.html)
 
 ## jvm架构
-jvm就是jvm规范的一个实例，可用使用多种语言实现jvm虚拟机。
+jvm就是jvm规范的一个实例，可用使用多种语言实现jvm虚拟机。hostspot 是stack-based architecture；
 
 ![image](http://static.codeceo.com/images/2016/10/JVM-Architecture.png)
 
