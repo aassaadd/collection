@@ -98,7 +98,7 @@ Java的动态类加载功能由类加载器子系统处理。它在运行时首�
 ### 运行时数据区（jvm内存模型）
 
 运行时数据区分为5个主要组件。
-![image](https://github.com/moxingwang/collection/blob/master/resources/image/JVM-Run-time-Data-Areas.png)
+![image](https://github.com/moxingwang/collection/blob/master/resources/image/jvm%20data%20areas%20structure.png)
 
 * the pc register
 > 每个线程都有单独的PC寄存器，用于保存当前执行指令的地址，一旦指令执行，PC寄存器将更新到下一条指令。
