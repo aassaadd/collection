@@ -100,7 +100,7 @@ Java的动态类加载功能由类加载器子系统处理。它在运行时首�
 运行时数据区分为5个主要组件。
 ![image](https://github.com/moxingwang/collection/blob/master/resources/image/jvm%20data%20areas%20structure.png)
 
-* the pc register
+#### the pc register
 > 每个线程都有单独的PC寄存器，用于保存当前执行指令的地址，一旦指令执行，PC寄存器将更新到下一条指令。
 程序计数器（Program Counter Register）是一块较小的内存空间，
 它的作用可以看做是当前线程所执行的字节码的行号指示器。
@@ -127,14 +127,14 @@ sun jvm是基于栈架构的实现。
 虚拟机栈描述的是Java方法执行的内存模型：每个方法被执行的时候都会同时创建一个栈帧（Stack Frame①）用于存储局部变量表、操作栈、动态链接、方法出口等信息。
 每一个方法被调用直至执行完成的过程，就对应着一个栈帧在虚拟机栈中从入栈到出栈的过程。
 
-** 栈帧
+#### 栈帧
 
 
 
 参考
 [深入理解Java虚拟机笔记---运行时栈帧结构](http://blog.csdn.net/xtayfjpk/article/details/41924283)
 
-* heap
+#### heap
 > 。
 
 * method area
@@ -143,7 +143,7 @@ sun jvm是基于栈架构的实现。
 * run-time constant pool
 > 所有对象及其对应的实例变量和数组将存储在这里。每个JVM也有一个堆区域。由于方法和堆区域共享多个线程的内存，因此所存储的数据非线程安全。
 
-* native method stacks
+#### native method stacks
   
 
 #### 对象的创建过程
