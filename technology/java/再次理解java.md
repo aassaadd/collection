@@ -254,3 +254,5 @@ sun jvm是基于栈架构的实现。
 * [ Java 虚拟机内存模型 与 cpu类比](http://blog.csdn.net/zhaoyw2008/article/details/9316189)
 * [虚拟机随谈（一）：解释器，树遍历解释器，基于栈与基于寄存器，大杂烩（牛逼）](http://rednaxelafx.iteye.com/blog/492667)
 * [Dalvik 虚拟机和 Sun JVM 在架构和执行方面有什么本质区别？](https://www.zhihu.com/question/20207106)
+* [Java工程师要懂的硬件知识-前言](http://www.voidcn.com/blog/xiaoyufu007/article/p-6013180.html)
+* [Linux与JVM的内存关系分析](http://www.voidcn.com/blog/xiaoyufu007/article/p-6013180.html)
