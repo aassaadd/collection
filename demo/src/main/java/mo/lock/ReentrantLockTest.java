@@ -1,13 +1,12 @@
 package main.java.mo.lock;
 
 import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Created by M on 17/7/12.
  */
 public class ReentrantLockTest {
-    Lock lock = new ReentrantLock();
+    ReentrantLock lock = new ReentrantLock();
 
     public static void main(String[] args) {
         ReentrantLockTest test = new ReentrantLockTest();
@@ -36,7 +35,7 @@ public class ReentrantLockTest {
     public void testA() {
 
         lock.lock();
-        lock.lock();
+//        lock.lock();
         for (int i = 0; i < 1000000; i++) {
             size = size + 1;
             System.out.println(Thread.currentThread().getName() + " : " + size);
