@@ -36,7 +36,7 @@ public class ReentrantLockTest {
     public void testA() {
 
         lock.lock();
-        for (int i = 0; i < 1000000; i++) {
+        for (int i = 0; i < 1000; i++) {
             size = size + 1;
             System.out.println(Thread.currentThread().getName() + " : " + size);
         }
