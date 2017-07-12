@@ -31,7 +31,7 @@ public class TestMain2 {
 //        testObject = null;
 
 
-        List<TestObject> testObjects = new ArrayList<>();
+        List<TestObject> testObjects = new ArrayList<TestObject>();
         WeakReference<TestObject>[] referents = new WeakReference[100000];
         for (int i = 0; i < referents.length; i++) {
             try {
