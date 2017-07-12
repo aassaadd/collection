@@ -11,6 +11,7 @@ public class SynchronizedTest {
 
     public static void main(String[] args) {
         SynchronizedTest synchronizedTest = new SynchronizedTest();
+//        SynchronizedTest.ThreadA threadA = synchronizedTest.new ThreadA();
         synchronizedTest.test();
     }
 
