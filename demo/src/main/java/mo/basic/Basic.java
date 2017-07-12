@@ -11,7 +11,7 @@ import java.util.*;
 public class Basic {
     public static void main(String[] args) {
 //        HashMap
-        WeakHashMap<Object,Object> weakHashMap = new WeakHashMap<>();
+        WeakHashMap<Object,Object> weakHashMap = new WeakHashMap<Object,Object>();
         weakHashMap.put("1","1");
         weakHashMap.put("2","2");
         weakHashMap.put("3","2");
