@@ -259,3 +259,4 @@ sun jvm是基于栈架构的实现。
 * [Java工程师要懂的硬件知识-前言](http://www.voidcn.com/blog/xiaoyufu007/article/p-6013180.html)
 * [Linux与JVM的内存关系分析](http://www.voidcn.com/blog/xiaoyufu007/article/p-6013180.html)
 * [扒一扒ReentrantLock以及AQS实现原理](https://my.oschina.net/andylucc/blog/651982)
+* [全面理解Java内存模型(JMM)及volatile关键字](http://blog.csdn.net/javazejian/article/details/72772461)
