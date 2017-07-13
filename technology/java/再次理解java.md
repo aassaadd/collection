@@ -202,7 +202,7 @@ sun jvm是基于栈架构的实现。
 #### 实现原理
 * 代码块的实现基于Monitor对象，monitorenter和monitorexit配合使用。
 
-* 
+* 同步方法锁信息放在对象的对象头里面
 
 
 ### 指令重排
