@@ -195,6 +195,15 @@ sun jvm是基于栈架构的实现。
 * 对于静态同步方法，锁是当前类的class对象。
 * 对于同步方法块，锁是synchronized括号里配置的对象。
 
+参考
+[Thread Synchronization](http://www.artima.com/insidejvm/ed2/threadsynchP.html)
+
+#### 实现原理
+* 代码块的实现基于Monitor对象，monitorenter和monitorexit配合使用。
+
+* 
+
+
 ### 指令重排
 > 计算机在执行程序时，为了提高性能，编译器和处理器的常常会对指令做重排，一般分以下3种编译器优化的重排
 

@@ -6,6 +6,7 @@ import java.util.List;
  * Created by M on 17/7/12.
  */
 public class ObjectA {
+    private short i = 0;
     public synchronized void add(List<Integer> list){
         for (int i=0;i<10;i++){
             try {
@@ -16,5 +17,27 @@ public class ObjectA {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void aa(){
+        if(i ==0){
+            synchronized (this){
+                System.out.println("111111");
+            }
+        }
+    }
+
+
+    public void bb(){
+        if(i ==0){
+            synchronized (this){
+                i = 100;
+            }
+        }
+    }
+
+
+    public static void main(String[] args) {
+        System.out.println("");
     }
 }
