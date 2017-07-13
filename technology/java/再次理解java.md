@@ -197,6 +197,7 @@ sun jvm是基于栈架构的实现。
 
 参考
 [Thread Synchronization](http://www.artima.com/insidejvm/ed2/threadsynchP.html)
+[深入理解Java并发之synchronized实现原理](http://blog.csdn.net/javazejian/article/details/72828483#理解java对象头与monitor)
 
 #### 实现原理
 * 代码块的实现基于Monitor对象，monitorenter和monitorexit配合使用。
