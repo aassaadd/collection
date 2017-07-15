@@ -1,18 +1,22 @@
-Title         : jvm内存模型深度理解
-Author        : Mo
-Logo          : True
 
-[TITLE]
+之前是对jvm内存模型一知半解，本次打算抽时间认认真真的理解一遍jvm内存模型，在这个过程中遇到了好多问题，针对这些问题查询资料再加上自己的理解对jvm内存模型做一个理解分析。
 
-# Madoko 
+`注` 本篇文章有大量知名博客内容的应用，每一个段落中我会尽量标明文章内容出处，方便大家获取原文分享知识。
 
-Madoko is a fast markdown processor for writing professional articles
-with a focus on simplicity and plain text readability.
+# 概述
 
-* Read the [reference manual].
-* Explore the upper-right toolbox menu to discover how Markdown works. 
-* `Alt-Q` reformats the current paragraph.
+## 1. jvm内存模型是什么
 
-Enjoy!
+`参考`
+1. [深入理解Java内存模型（一）——基础](http://www.infoq.com/cn/articles/java-memory-model-1)
 
-[reference manual]: http://research.microsoft.com/en-us/um/people/daan/madoko/doc/reference.html  "Madoko reference manual"
+
+
+## 2. jvm内存模型的作用
+
+## 3. jvm内存模型架构
+
+# 参考
+这里需要说明的是文章中大部分内容都不是我创造的，为了让自己能够理解知识，自己阅读他人文章分析和总结再分享给大家。一下就是这篇总结文章中参考的文章和书籍（去掉各个章节中已经表明‘参考’的文章或书籍）。
+
+1. [Java并发编程的艺术](https://www.amazon.cn/%E5%9B%BE%E4%B9%A6/dp/B012NDCEA0/ref=sr_1_1?ie=UTF8&qid=1500128230&sr=8-1&keywords=Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9A%84%E8%89%BA%E6%9C%AF)
