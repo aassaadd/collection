@@ -200,6 +200,8 @@ JMM 对正确同步的多线程程序的内存一致性做了如下保证:
 * 一个线程中的所有操作必须按照程序的顺序来执行。
 * (不管程序是否同步)所有线程都只能看到一个单一的操作执行顺序。在顺序一致性内存模型中,每个操作都必须原子执行且立刻对所有线程可见。
 
+#### CAS
+
 ## volatile
 
 volatile语义如下：
@@ -211,8 +213,43 @@ volatile语义如下：
 
 ## 锁
 
+### 锁的获取和释放
+
+* 线程 A 释放一个锁,实质上是线程A向接下来将要获取这个锁的某个线程发出 了(线程 A 对共享变量所做修改的)消息。
+* 线程 B 获取一个锁,实质上是线程B接收了之前某个线程发出的(在释放这个 锁之前对共享变量所做修改的)消息。
+* 线程 A 释放锁,随后线程 B 获取这个锁,这个过程实质上是线程A通过主内存 向线程 B 发送消息。
+
+### synchronized
+
+#### 作用域
+
+1. 对于普通同步方法，锁是当前实力对象。
+2. 对于静态同步方法，锁是当前类的class对象。
+3. 对于同步方法块，锁是synchronized括号里配置的对象。
+
+#### 实现原理
+
+Java 虚拟机中的同步(Synchronization)基于进入和退出管程(Monitor)对象实现， 无论是显式同步(有明确的monitorenter和monitorexit指令,即同步代码块)还是隐式同步都是如此。在Java语言中，同步用的最多的地方可能是被 synchronized修饰的同步方法。同步方法并不是由monitorenter和monitorexit 指令来实现同步的，而是由方法调用指令读取运行时常量池中方法的ACC_SYNCHRONIZED 标志来隐式实现的。
+
+#### Java虚拟机对synchronized的优化
+
+锁的状态总共有四种，无锁状态、偏向锁、轻量级锁和重量级锁。
+
+
+`参考`
+[Thread Synchronization](http://www.artima.com/insidejvm/ed2/threadsynchP.html)
+[深入理解Java并发之synchronized实现原理](http://blog.csdn.net/javazejian/article/details/72828483#理解java对象头与monitor)
+
+### Lock接口
+
+#### ReentrantLock
+
 ## final
 
+与前面介绍的锁和 volatile相比较,对final域的读和写更像是普通的变量访问。 对于 final 域,编译器和处理器要遵守两个重排序规则:
+
+* 在构造函数内对一个final域的写入,与随后把这个被构造对象的引用赋值给一 个引用变量,这两个操作之间不能重排序。
+* 初次读一个包含 final域的对象的引用,与随后初次读这个final域,这两个操 作之间不能重排序。
 
 # 参考
 
