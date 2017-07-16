@@ -52,3 +52,4 @@
 * jvm理解 [深入理解Java内存模型（一）——基础](http://www.infoq.com/cn/articles/java-memory-model-1)
 * 继承关系内存分布
 * Https流程
+* bigdecimal原理
