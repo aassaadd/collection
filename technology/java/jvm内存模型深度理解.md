@@ -243,6 +243,7 @@ Java 虚拟机中的同步(Synchronization)基于进入和退出管程(Monitor)�
 ### Lock接口
 
 #### ReentrantLock
+ReentrantLock 基于底层CAS
 
 ## final
 
