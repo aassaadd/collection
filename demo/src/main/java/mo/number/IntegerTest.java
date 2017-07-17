@@ -11,6 +11,12 @@ public class IntegerTest {
         Integer integer2 = new Integer(1);
 
         Integer integer3 = Integer.valueOf(1);
+        Integer integer4 = Integer.valueOf(1);
+        Integer integer5 = Integer.valueOf(10000);
+
+        System.out.println(integer1 == integer3);
+        System.out.println(integer4 == integer3);
+        System.out.println(integer5 == integer3);
 
         System.out.println(integer1.hashCode());
         System.out.println(integer2.hashCode());
