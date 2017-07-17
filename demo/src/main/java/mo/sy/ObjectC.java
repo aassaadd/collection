@@ -1,5 +1,7 @@
 package main.java.mo.sy;
 
+import java.math.BigDecimal;
+
 /**
  * Created by M on 17/7/16.
  */
@@ -21,6 +23,15 @@ public class ObjectC {
     public static void main(String[] args) {
         ObjectC objectC = new ObjectC();
 
+        double a = 0.1 + 0.2;
+
+        BigDecimal bigDecimal = new BigDecimal(a);
+
+        System.out.println(a);
+        System.out.println(bigDecimal.toString());
+
+
+/*
         Thread threada = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -37,6 +48,7 @@ public class ObjectC {
 
         threada.start();
         threadb.start();
+*/
 
     }
 }
