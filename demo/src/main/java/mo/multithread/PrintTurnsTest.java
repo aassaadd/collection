@@ -1,4 +1,4 @@
-package main.java.mo.thread;
+package main.java.mo.multithread;
 
 /**
  * 基于 wait方法实现多线程轮询输出
