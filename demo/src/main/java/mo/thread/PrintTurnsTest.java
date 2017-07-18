@@ -60,10 +60,10 @@ public class PrintTurnsTest {
         });
 
 
-//        thread1.start();
-//        thread2.start();
+        thread1.start();
+        thread2.start();
 
-        thread3.start();
+//        thread3.start();
     }
 
     public static void main(String[] args) {
