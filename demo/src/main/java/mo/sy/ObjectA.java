@@ -6,6 +6,7 @@ import java.util.List;
  * Created by M on 17/7/12.
  */
 public class ObjectA {
+    Object object = new Object();
     private short i = 0;
     public synchronized void add(List<Integer> list){
         for (int i=0;i<10;i++){
