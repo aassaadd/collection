@@ -1,50 +1,50 @@
-| 命令            | 功能                                                                             | 用法    |
-| :---            | :----:                                                                          | ----:  |
-| appletviewer    |                                                                                 |        |
-| jarsigner       |                                                                                 |        |
-| extcheck        |                                                                                 |        |
-| idlj            |                                                                                 |        |
-| jar             |                                                                                 |        |
-| jarsigner       |                                                                                 |        |
-| java            |                                                                                 |        |
-| javac           |                                                                                 |        |
-| javadoc         |                                                                                 |        |
-| javafxpackager  |                                                                                 |        |
-| javah           |                                                                                 |        |
-| javap           |                                                                                 |        |
-| javapackager    |                                                                                 |        |
-| jcmd            |                                                                                 |        |
-| jconsole        |                                                                                 |        |
-| jdb             |                                                                                 |        |
-| jdeps           |                                                                                 |        |
-| jhat            |                                                                                 |        |
-| jinfo           |                                                                                 |        |
-| jjs             |                                                                                 |        |
-| jmap            |                                                                                 |        |
-| jmc             |                                                                                 |        |
-| jps             |                                                                                 |        |
-| jrunscript      |                                                                                 |        |
-| jsadebugd       |                                                                                 |        |
-| jstack          |                                                                                 |        |
-| jstat           |                                                                                 |        |
-| jstatd          |                                                                                 |        |
-| jvisualvm       |                                                                                 |        |
-| keytool         |                                                                                 |        |
-| native2ascii    |                                                                                 |        |
-| orbd            |                                                                                 |        |
-| pack200         |                                                                                 |        |
-| policytool      |                                                                                 |        |
-| rmic            |                                                                                 |        |
-| rmid            |                                                                                 |        |
-| rmiregistry     |                                                                                 |        |
-| schemagen       |                                                                                 |        |
-| serialver       |                                                                                 |        |
-| servertool      |                                                                                 |        |
-| tnameserv       |                                                                                 |        |
-| unpack200       |                                                                                 |        |
-| wsgen           |                                                                                 |        |
-| wsimport        |                                                                                 |        |
-| xjc             |                                                                                 |        |
+| 命令            | 功能 | 用法    |
+| :---            | :----: | ----:  |
+| appletviewer    | 用于运行并浏览applet小程序。 |        |
+| jarsigner       | jar密匙签名工具。 |        |
+| extcheck        |  扩展检测工具，主要用于检测指定jar文件与当前已安装的Java SDK扩展之间是否存在版本冲突。|        |
+| idlj            |    |        |
+| jar             |    |        |
+| jarsigner       |    |        |
+| java            |    |        |
+| javac           |    |        |
+| javadoc         |    |        |
+| javafxpackager  |    |        |
+| javah           |    |        |
+| javap           |    |        |
+| javapackager    |    |        |
+| jcmd            |    |        |
+| jconsole        |    |        |
+| jdb             |    |        |
+| jdeps           |    |        |
+| jhat            |    |        |
+| jinfo           |    |        |
+| jjs             |    |        |
+| jmap            |    |        |
+| jmc             |    |        |
+| jps             |    |        |
+| jrunscript      |    |        |
+| jsadebugd       |    |        |
+| jstack          |    |        |
+| jstat           |    |        |
+| jstatd          |    |        |
+| jvisualvm       |    |        |
+| keytool         |    |        |
+| native2ascii    |    |        |
+| orbd            |    |        |
+| pack200         |    |        |
+| policytool      |    |        |
+| rmic            |    |        |
+| rmid            |    |        |
+| rmiregistry     |    |        |
+| schemagen       |    |        |
+| serialver       |    |        |
+| servertool      |    |        |
+| tnameserv       |    |        |
+| unpack200       |    |        |
+| wsgen           |    |        |
+| wsimport        |    |        |
+| xjc             |    |        |
 
 
 * 参考
