@@ -23,6 +23,11 @@ public class SonObject extends FatherObject {
         System.out.println(fatherObject.name);
 
         fatherObject.say();
+
+        System.out.println(Integer.toBinaryString(16));
+        System.out.println(Integer.toHexString(10));
+        System.out.println(Integer.valueOf("000001",2).toString());
+        System.out.println(Integer.valueOf("000010",2).toString());
     }
 
 }
