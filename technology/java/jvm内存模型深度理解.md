@@ -265,3 +265,4 @@ ReentrantLock 基于底层CAS
 
 1. [Java并发编程的艺术](https://www.amazon.cn/%E5%9B%BE%E4%B9%A6/dp/B012NDCEA0/ref=sr_1_1?ie=UTF8&qid=1500128230&sr=8-1&keywords=Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9A%84%E8%89%BA%E6%9C%AF)
 2. [深入Java内存模型](http://files.cnblogs.com/files/skywang12345/%E6%B7%B1%E5%85%A5Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B.pdf)
+3. [指令重排序](https://uestc-dpz.github.io/blog/2016/11/17/Reordering.html)
