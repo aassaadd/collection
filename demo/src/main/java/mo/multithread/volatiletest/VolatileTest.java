@@ -13,7 +13,6 @@ public class VolatileTest {
     public static void main(String[] args) {
         System.out.println("testA");
 
-
         try{
             throw new RuntimeException("test");
         }catch (Exception e){
