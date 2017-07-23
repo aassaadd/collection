@@ -2,7 +2,7 @@ package main.java.mo.multithread.volatiletest;
 
 /**
  * 缓存行的原因
- * 差点思考城傻逼了
+ * 差点思考成傻逼了
  */
 
 public class TestTwo {
