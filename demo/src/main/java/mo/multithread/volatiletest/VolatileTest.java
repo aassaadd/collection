@@ -14,7 +14,7 @@ public class VolatileTest {
         System.out.println("testA");
 
         try{
-            throw new RuntimeException("test");
+//            throw new RuntimeException("test");
         }catch (Exception e){
             e.printStackTrace();
         }
