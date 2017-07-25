@@ -114,3 +114,6 @@ public class CacheVolatile {
     }
 }
 ````
+
+## 分析
+这三段代码执行结果自然各有差异，分析这三段代码可以让你理解volatile和缓存的知识点。
