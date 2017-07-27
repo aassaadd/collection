@@ -12,6 +12,7 @@ public class Bar {
     private static int id = 111;
 
     public static void main(String[] args) {
+        id = 222;
 //        System.out.println(id);
     }
 
