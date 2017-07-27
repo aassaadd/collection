@@ -2,6 +2,7 @@ package main.java.mo.multithread.volatiletest;
 
 /**
  * Created by M on 17/7/23.
+ * java -XX:+PrintAssembly -Xcomp -XX:CompileCommand=dontinline,*Bar.sum -XX:CompileCommand=compileonly,*Bar.sum Bar
  */
 public class Bar {
 
