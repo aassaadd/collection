@@ -9,7 +9,7 @@ package main.java.mo.multithread.volatiletest;
  */
 public class Bar {
 
-    private int id = 0;
+    private volatile int id = 0;
 
     public void test(){
         id ++;
