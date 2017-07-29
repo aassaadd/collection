@@ -28,6 +28,8 @@
 
 ## 4. jvm工作内存
 
+线程的working memory是cpu的寄存器和高速缓存的抽象描述。
+
 # 三 volatile是如何解决问题的
 
 知道了java多线程可以共享数据、CPU缓存工作原理，以及volatile要解决的问题就是保证多线程对共享数据的读的可见性，接下来说明volatile是如何保证内存可见性的。
@@ -48,9 +50,6 @@
 
 # 四 volatile的使用
 
-# 其它
-
-* 线程的working memory：线程的working memory是cpu的寄存器和高速缓存的抽象描述。
 
 
 
@@ -65,3 +64,4 @@
 * [What Volatile Means in Java](http://jeremymanson.blogspot.hu/2008/11/what-volatile-means-in-java.html)
 * [How Volatile in Java works? Example of volatile keyword in Java](http://javarevisited.blogspot.com/2011/06/volatile-keyword-java-example-tutorial.html)
 * [Java线程内存模型,线程、工作内存、主内存](https://zhuanlan.zhihu.com/p/25474331)
+* [CPU缓存](https://zh.wikipedia.org/wiki/CPU%E7%BC%93%E5%AD%98)
