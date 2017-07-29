@@ -1,7 +1,16 @@
 # 一 volatile用来解决什么问题
 
+声明为volatile的变量在多线程共享的情况下，java内存模型保证了所有线程看到的变量一致的。（[Java Language Specification volatile Fields](https://docs.oracle.com/javase/specs/jls/se8/html/jls-8.html#jls-8.3.1.4)）
 
 # 二 问题产生的原因
+
+## 1. java多线程内存共享
+
+## 2. CPU缓存
+
+正确理解CPU缓存的知识，推荐参考官方文档[英特尔® 64 位和 IA-32 架构开发人员手册：卷 3A CHAPTER 11](http://www.intel.cn/content/www/cn/zh/architecture-and-technology/64-ia-32-architectures-software-developer-vol-3a-part-1-manual.html?wapkw=ia-32+%E6%9E%B6%E6%9E%84%E5%BC%80%E5%8F%91%E4%BA%BA%E5%91%98%E6%89%8B%E5%86%8C)。
+
+
 
 # 三 volatile是如何解决问题的
 
