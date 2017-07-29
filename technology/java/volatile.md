@@ -56,3 +56,4 @@
 * [Volatile and memory barriers](http://jpbempel.blogspot.co.uk/2013/05/volatile-and-memory-barriers.html)
 * [Does cache line flush write the whole line to the memory?](https://stackoverflow.com/questions/18001954/does-cache-line-flush-write-the-whole-line-to-the-memory)
 * [What Volatile Means in Java](http://jeremymanson.blogspot.hu/2008/11/what-volatile-means-in-java.html)
+* [How Volatile in Java works? Example of volatile keyword in Java](http://javarevisited.blogspot.com/2011/06/volatile-keyword-java-example-tutorial.html)
