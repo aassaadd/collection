@@ -6,6 +6,8 @@
 
 ## 1. java多线程内存共享
 
+按照jvm内存模型的规范，java多线程存在共享数据区域。[Run-Time Data Areas](https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-2.html#jvms-2.5)。
+
 ## 2. CPU缓存
 
 正确理解CPU缓存的知识，推荐参考官方文档[英特尔® 64 位和 IA-32 架构开发人员手册：卷 3A CHAPTER 11](http://www.intel.cn/content/www/cn/zh/architecture-and-technology/64-ia-32-architectures-software-developer-vol-3a-part-1-manual.html?wapkw=ia-32+%E6%9E%B6%E6%9E%84%E5%BC%80%E5%8F%91%E4%BA%BA%E5%91%98%E6%89%8B%E5%86%8C)。
@@ -19,6 +21,12 @@
 * 2.3 CPU操作完数据后并不是马上写入主存，CPU有多种写入策略，比如说回写，CPU会在适当的时间把缓存中的脏数据写入主存，保证缓存和主存一致。
 
 # 三 volatile是如何解决问题的
+
+知道了java多线程可以共享数据、CPU缓存工作原理，以及volatile要解决的问题就是保证多线程对共享数据的读的可见性，接下来说明volatile是如何保证内存可见性的。
+
+## 1. 实现原理
+
+## 2. 如何证明
 
 # 四 volatile的使用
 
