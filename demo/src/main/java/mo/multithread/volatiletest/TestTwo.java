@@ -8,31 +8,14 @@ package main.java.mo.multithread.volatiletest;
 public class TestTwo {
 
      int i = 0;
-    volatile int b = 0;
 
     public void add(){
         System.out.println(i);
         i ++;
-        b ++;
     }
 
     public void testA(){
         while (true){
-//            Integer.toString(i);
-
-//            toString(i);
-
-//            String s = new String("11212");
-//            Object a = new Integer(10);
-
-//            String aaa = "dsfsdfsd";
-
-//                new Object();
-
-//            if(b > 0){
-                System.out.println("b " + b);
-//            }
-
             if(i > 0){
                 System.out.println("------------------i > 0");
                 break;
@@ -53,7 +36,7 @@ public class TestTwo {
             e.printStackTrace();
         }
 
-        while (testTwo.i < 10000){
+        while (testTwo.i < 1000000){
             testTwo.add();
         }
     }

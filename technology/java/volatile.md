@@ -65,3 +65,4 @@
 * [How Volatile in Java works? Example of volatile keyword in Java](http://javarevisited.blogspot.com/2011/06/volatile-keyword-java-example-tutorial.html)
 * [Java线程内存模型,线程、工作内存、主内存](https://zhuanlan.zhihu.com/p/25474331)
 * [CPU缓存](https://zh.wikipedia.org/wiki/CPU%E7%BC%93%E5%AD%98)
+* [Multithreading and Cache Coherence](http://docs.roguewave.com/threadspotter/2011.2/manual_html_linux/manual_html/ch_intro_coherence.html)
