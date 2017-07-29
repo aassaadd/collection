@@ -13,7 +13,7 @@
 | javah           | Java头文件工具，用于根据Java类生成C/C++头文件和源文件(主要用于JNI开发领域)。   |        |
 | javap           | Java反编译工具，主要用于根据Java字节码文件反汇编为Java源代码文件。   |        |
 | javapackager    | 执行针对Java应用程序和JavaFX应用程序的打包和签名的任务。包含了javafxpackager的功能。   |        |
-| jcmd            |    |        |
+| jcmd            | 用来导出堆，查看Java进程，导出线程信息，执行GC等。   |        |
 | jconsole        |    |        |
 | jdb             |    |        |
 | jdeps           |    |        |
