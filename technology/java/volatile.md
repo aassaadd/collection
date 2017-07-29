@@ -38,6 +38,10 @@
 
 ## 2. 证明实现原理
 
+# 提出问题
+
+## 1. 多线程在单核CPU的情况下，会有可见性的问题吗？
+
 # 四 volatile的使用
 
 
@@ -51,3 +55,4 @@
 * [JVM内存模型、指令重排、内存屏障概念解析](http://www.cnblogs.com/chenyangyao/p/5269622.html)
 * [Volatile and memory barriers](http://jpbempel.blogspot.co.uk/2013/05/volatile-and-memory-barriers.html)
 * [Does cache line flush write the whole line to the memory?](https://stackoverflow.com/questions/18001954/does-cache-line-flush-write-the-whole-line-to-the-memory)
+* [What Volatile Means in Java](http://jeremymanson.blogspot.hu/2008/11/what-volatile-means-in-java.html)
