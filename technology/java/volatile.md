@@ -8,7 +8,11 @@
 
 按照jvm内存模型的规范，java多线程存在共享数据区域。[Run-Time Data Areas](https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-2.html#jvms-2.5)。
 
-## 2. CPU缓存
+## CPU多核心
+
+首先要知道进程是组织资源的最小单位,而线程是安排CPU执行的最小单位单。而进程多线程可以同时用到CPU的双核心，每个CPU核心都有自己独立的高速缓存。[英特尔® 64 位和 IA-32 架构开发人员手册：卷 3A CHAPTER 8 # 8.8 MULTI-CORE ARCHITECTURE ](http://www.intel.cn/content/www/cn/zh/architecture-and-technology/64-ia-32-architectures-software-developer-vol-3a-part-1-manual.html?wapkw=ia-32+%E6%9E%B6%E6%9E%84%E5%BC%80%E5%8F%91%E4%BA%BA%E5%91%98%E6%89%8B%E5%86%8C)。
+
+## 3. CPU缓存
 
 正确理解CPU缓存的知识，推荐参考官方文档[英特尔® 64 位和 IA-32 架构开发人员手册：卷 3A CHAPTER 11](http://www.intel.cn/content/www/cn/zh/architecture-and-technology/64-ia-32-architectures-software-developer-vol-3a-part-1-manual.html?wapkw=ia-32+%E6%9E%B6%E6%9E%84%E5%BC%80%E5%8F%91%E4%BA%BA%E5%91%98%E6%89%8B%E5%86%8C)。
 
@@ -25,6 +29,12 @@
 知道了java多线程可以共享数据、CPU缓存工作原理，以及volatile要解决的问题就是保证多线程对共享数据的读的可见性，接下来说明volatile是如何保证内存可见性的。
 
 ## 1. 实现原理
+
+理解了CPU缓存的工作原理，可以理解两个点。
+
+* (1) CPU操作完数据先写入缓存，而不能确保立马写入主存。
+
+* (2) 多喝
 
 ## 2. 证明实现原理
 
