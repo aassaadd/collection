@@ -2,6 +2,8 @@
 
 声明为volatile的变量在多线程共享的情况下，java内存模型保证了所有线程看到的变量一致的。（[Java Language Specification volatile Fields](https://docs.oracle.com/javase/specs/jls/se8/html/jls-8.html#jls-8.3.1.4)）
 
+>java程序运行在java虚拟机平台上，java程序员不可能直接去控制底层线程对寄存器高速缓存内存之间的同步，那么java从语法层面，应该给开发人员提供一种解决方案，这个方案就是诸如 synchronized, volatile,锁机制（如同步块，就绪队 列，阻塞队列）等等。
+
 # 二 问题产生的原因
 
 ## 1. java多线程内存共享
@@ -43,6 +45,10 @@
 ## 1. 多线程在单核CPU的情况下，会有可见性的问题吗？
 
 # 四 volatile的使用
+
+# 其它
+
+* 线程的working memory：线程的working memory是cpu的寄存器和高速缓存的抽象描述。
 
 
 
