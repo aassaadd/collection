@@ -10,7 +10,13 @@
 
 正确理解CPU缓存的知识，推荐参考官方文档[英特尔® 64 位和 IA-32 架构开发人员手册：卷 3A CHAPTER 11](http://www.intel.cn/content/www/cn/zh/architecture-and-technology/64-ia-32-architectures-software-developer-vol-3a-part-1-manual.html?wapkw=ia-32+%E6%9E%B6%E6%9E%84%E5%BC%80%E5%8F%91%E4%BA%BA%E5%91%98%E6%89%8B%E5%86%8C)。
 
+对于CPU缓存的知识一点要明确这几个点：
 
+* 2.1 CPU要读取一个数据时，首先从Cache中查找，如果找到就立即读取并送给CPU处理；如果没有找到，就用相对慢的速度从内存中读取并送给CPU处理，同时把这个数据所在的数据块调入Cache中，可以使得以后对整块数据的读取都从Cache中进行，不必再调用内存。
+
+* 2.2 缓存是由缓存行组成的。CPU存取缓存都是按照一行为最小单位操作的，一般一行缓存行有64字节，使用缓存时，并不是一个一个字节使用，而是一行缓存行、一行缓存行这样使用。
+
+* 2.3 缓存写
 
 # 三 volatile是如何解决问题的
 
@@ -26,3 +32,4 @@
 * [JSR 133 (Java Memory Model) FAQ](http://www.cs.umd.edu/~pugh/java/memoryModel/jsr-133-faq.html#volatile)
 * [JVM内存模型、指令重排、内存屏障概念解析](http://www.cnblogs.com/chenyangyao/p/5269622.html)
 * [Volatile and memory barriers](http://jpbempel.blogspot.co.uk/2013/05/volatile-and-memory-barriers.html)
+* [Does cache line flush write the whole line to the memory?](https://stackoverflow.com/questions/18001954/does-cache-line-flush-write-the-whole-line-to-the-memory)
