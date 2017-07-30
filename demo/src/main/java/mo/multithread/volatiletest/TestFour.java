@@ -2,7 +2,7 @@ package main.java.mo.multithread.volatiletest;
 
 public class TestFour {
 
-    int i = 0;
+    volatile int i = 0;
 
     public void add() {
         System.out.println(i);
@@ -20,10 +20,10 @@ public class TestFour {
 
     public static void main(String[] args) {
         TestFour testTwo = new TestFour();
-        Thread thread1 = new Thread(() -> {
+        Thread threadA = new Thread(() -> {
             testTwo.testA();
         });
-        thread1.start();
+        threadA.start();
 
         try {
             Thread.sleep(1000);
