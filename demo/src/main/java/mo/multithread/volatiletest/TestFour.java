@@ -1,5 +1,8 @@
 package main.java.mo.multithread.volatiletest;
 
+/**
+ * http://www.cnblogs.com/emanlee/p/3587571.html
+ */
 public class TestFour {
 
     volatile int i = 0;
