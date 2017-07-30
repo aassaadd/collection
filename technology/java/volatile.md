@@ -14,12 +14,9 @@
 
 线程的working memory是cpu的寄存器和高速缓存的抽象描述。
 
-
-## CPU多核心
+## 2. CPU缓存
 
 首先要知道进程是组织资源的最小单位,而线程是安排CPU执行的最小单位单。而进程多线程可以同时用到CPU的双核心，每个CPU核心都有自己独立的高速缓存。[英特尔® 64 位和 IA-32 架构开发人员手册：卷 3A CHAPTER 8 # 8.8 MULTI-CORE ARCHITECTURE ](http://www.intel.cn/content/www/cn/zh/architecture-and-technology/64-ia-32-architectures-software-developer-vol-3a-part-1-manual.html?wapkw=ia-32+%E6%9E%B6%E6%9E%84%E5%BC%80%E5%8F%91%E4%BA%BA%E5%91%98%E6%89%8B%E5%86%8C)。
-
-## 3. CPU缓存
 
 正确理解CPU缓存的知识，推荐参考官方文档[英特尔® 64 位和 IA-32 架构开发人员手册：卷 3A CHAPTER 11](http://www.intel.cn/content/www/cn/zh/architecture-and-technology/64-ia-32-architectures-software-developer-vol-3a-part-1-manual.html?wapkw=ia-32+%E6%9E%B6%E6%9E%84%E5%BC%80%E5%8F%91%E4%BA%BA%E5%91%98%E6%89%8B%E5%86%8C)。
 
@@ -66,3 +63,4 @@
 * [Java线程内存模型,线程、工作内存、主内存](https://zhuanlan.zhihu.com/p/25474331)
 * [CPU缓存](https://zh.wikipedia.org/wiki/CPU%E7%BC%93%E5%AD%98)
 * [Multithreading and Cache Coherence](http://docs.roguewave.com/threadspotter/2011.2/manual_html_linux/manual_html/ch_intro_coherence.html)
+* [Java可见性机制的原理](http://developer.51cto.com/art/201611/521120.htm)
