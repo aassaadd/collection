@@ -71,3 +71,5 @@
 * [CPU缓存](https://zh.wikipedia.org/wiki/CPU%E7%BC%93%E5%AD%98)
 * [Multithreading and Cache Coherence](http://docs.roguewave.com/threadspotter/2011.2/manual_html_linux/manual_html/ch_intro_coherence.html)
 * [Java可见性机制的原理](http://developer.51cto.com/art/201611/521120.htm)
+* [Fixing the Java Memory Model, Part 2](https://www.ibm.com/developerworks/library/j-jtp03304/)
+* [关于单CPU，多CPU上的原子操作 intel.com](https://software.intel.com/zh-cn/blogs/2010/01/14/cpucpu)

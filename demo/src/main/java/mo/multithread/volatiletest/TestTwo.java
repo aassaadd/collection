@@ -24,7 +24,6 @@ package main.java.mo.multithread.volatiletest;
  请注意，循环中只读的共享数据不会导致虚假共享。
 
  https://docs.oracle.com/cd/E19205-01/819-5270/aewcy/index.html
-
  */
 
 public class TestTwo {
@@ -40,20 +39,9 @@ public class TestTwo {
 
     public void testA(){
         while (true){
-//            Integer.toString(i);
 
-//            toString(i);
-
-//            String s = new String("11212");
-//            Object a = new Integer(10);
-
-//            String aaa = "dsfsdfsd";
-
-//                new Object();
-
-//            if(b > 0){
+            //嫌疑点
             System.out.println("b " + b);
-//            }
 
             if(i > 0){
                 System.out.println("------------------i > 0");
@@ -79,8 +67,5 @@ public class TestTwo {
             testTwo.add();
         }
     }
-
-
-
 
 }
