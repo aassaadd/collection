@@ -5,9 +5,9 @@ package main.java.mo.multithread.volatiletest;
  */
 public class TestFour {
 
-    volatile int i = 0;
+     int i = 0;
 
-    public void add() {
+    public synchronized void add() {
         System.out.println(i);
         i++;
     }
@@ -28,13 +28,26 @@ public class TestFour {
         });
         threadA.start();
 
+
+
+
+
+
+
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        while (testTwo.i < 10000) {
+        Thread threadC = new Thread(() -> {
+            while (testTwo.i < 100000) {
+                testTwo.add();
+            }
+        });
+        threadC.start();
+
+        while (testTwo.i < 100000) {
             testTwo.add();
         }
     }

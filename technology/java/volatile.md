@@ -4,15 +4,18 @@
 
 >java程序运行在java虚拟机平台上，java程序员不可能直接去控制底层线程对寄存器高速缓存内存之间的同步，那么java从语法层面，应该给开发人员提供一种解决方案，这个方案就是诸如 synchronized, volatile,锁机制（如同步块，就绪队 列，阻塞队列）等等。
 
+
 # 二 问题产生的原因
 
 ## 1. jvm内存模型
+
+* jvm内存模型
 
 按照jvm内存模型的规范，java多线程存在共享数据区域。[Run-Time Data Areas](https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-2.html#jvms-2.5)。
 
 * 工作内存
 
-线程的working memory是cpu的寄存器和高速缓存的抽象描述。
+线程的working memory是cpu的寄存器和高速缓存的抽象描述。cpu在计算的时候，并不总是从内存读取数据，它的数据读取顺序优先级是：寄存器－高速缓存－内存。
 
 ## 2. CPU缓存
 
@@ -30,6 +33,8 @@
 
 * 2.4 地址翻译，由于计算机程序一般使用虚拟地址，一个必须决定的设计策略是缓存的地址标签及索引是使用虚拟地址还是物理地址。
 
+## 3. reordering
+
 # 三 volatile是如何解决问题的
 
 知道了java多线程可以共享数据、CPU缓存工作原理，以及volatile要解决的问题就是保证多线程对共享数据的读的可见性，接下来说明volatile是如何保证内存可见性的。
@@ -37,6 +42,8 @@
 ## 1. 实现原理
 
 理解了CPU缓存的工作原理以及jvm内存模型，多线程共享数据可见性的主要问题在于CPU高速缓存里面的数据什么时间写入到主存，以及写入主存之后如何通知其他线程缓存的数据失效。
+
+* happens-before Order [Java Language Specification 17.4.5. Happens-before Order](https://docs.oracle.com/javase/specs/jls/se8/html/jls-17.html#jls-17.4.5)
 
 
 ## 2. 证明实现原理
