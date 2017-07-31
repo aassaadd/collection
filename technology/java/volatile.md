@@ -73,3 +73,4 @@
 * [Java可见性机制的原理](http://developer.51cto.com/art/201611/521120.htm)
 * [Fixing the Java Memory Model, Part 2](https://www.ibm.com/developerworks/library/j-jtp03304/)
 * [关于单CPU，多CPU上的原子操作 intel.com](https://software.intel.com/zh-cn/blogs/2010/01/14/cpucpu)
+* [聊聊并发（一）——深入分析Volatile的实现原理](http://www.infoq.com/cn/articles/ftf-java-volatile)
