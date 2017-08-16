@@ -17,4 +17,5 @@ http://www.lucenetutorial.com/lucene-query-syntax.html
 
 
 https://www.elastic.co/guide/cn/elasticsearch/guide/current/match-query.html
+https://www.gitbook.com/book/looly/elasticsearch-the-definitive-guide-cn/details
 
