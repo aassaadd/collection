@@ -56,3 +56,4 @@
 * 子类继承夫类的变量在内存中是如何存放的，比如书同名变量？
 * IO
 * java对象创建过程
+* [Java架构师必会的技能（你都会了吗？）](https://juejin.im/entry/5992b4a65188254891517793?utm_source=gold_browser_extension)
