@@ -1,4 +1,5 @@
 * [在线简历，脚步网](http://www.jiaobu365.com/)
+* [在线简历, 五百丁](http://www.500d.me/)
 
 * [阿里、百度、搜狐等公司社招面试记录与总结](http://www.cnblogs.com/binyue/p/4015884.html
 
