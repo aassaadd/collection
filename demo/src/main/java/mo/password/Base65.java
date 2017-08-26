@@ -1,8 +1,5 @@
 package main.java.mo.password;
 
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
-
 import java.io.UnsupportedEncodingException;
 
 /**
@@ -10,7 +7,7 @@ import java.io.UnsupportedEncodingException;
  */
 public class Base65 {
     // 加密
-    public static String getBase64(String str) {
+    public static String encode(String str) {
         byte[] b = null;
         String s = null;
         try {
@@ -25,11 +22,11 @@ public class Base65 {
     }
 
     // 解密
-    public static String getFromBase64(String s) {
+    public static String decode(String s) {
         byte[] b = null;
         String result = null;
         if (s != null) {
-            BASE64Decoder decoder = new BASE64Decoder();
+            BASE65Decoder decoder = new BASE65Decoder();
             try {
                 b = decoder.decodeBuffer(s);
                 result = new String(b, "utf-8");

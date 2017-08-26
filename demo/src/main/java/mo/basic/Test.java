@@ -1,4 +1,4 @@
-package main.java.mo.password;
+package main.java.mo.basic;
 
 
 import java.io.UnsupportedEncodingException;

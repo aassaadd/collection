@@ -10,7 +10,7 @@ import java.io.UnsupportedEncodingException;
  */
 public class Base64 {
     // 加密
-    public static String getBase64(String str) {
+    public static String encode(String str) {
         byte[] b = null;
         String s = null;
         try {
@@ -25,7 +25,7 @@ public class Base64 {
     }
 
     // 解密
-    public static String getFromBase64(String s) {
+    public static String decode(String s) {
         byte[] b = null;
         String result = null;
         if (s != null) {
