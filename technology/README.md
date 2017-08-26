@@ -13,6 +13,9 @@
   实际将UNICODE转换为UTF-8编码时应先去除高位0，然后根据所剩编码的位数决定所需最小的UTF-8编码位数。 
   因此那些基本ASCII字符集中的字符（UNICODE兼容ASCII）只需要一个字节的UTF-8编码（7个二进制位）便可以表示。 
 
+* Base64
+* [Base64笔记](http://www.ruanyifeng.com/blog/2008/06/base64.html)
+
 # 20170824
 * 正则表达式
 * Mybatis 返回hashmap 
