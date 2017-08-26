@@ -1,6 +1,6 @@
 # 2017年08月26日15:40:11
 * UTF8
-[UTF-8编码规则](http://blog.csdn.net/sandyen/article/details/1108168)
+* [UTF-8编码规则](http://blog.csdn.net/sandyen/article/details/1108168)
 > UTF-8是一种变长字节编码方式。对于某一个字符的UTF-8编码，如果只有一个字节则其最高二进制位为0；如果是多字节，其第一个字节从最高位开始，连续的二进制位值为1的个数决定了其编码的位数，其余各字节均以10开头。UTF-8最多可用到6个字节。 
   如表： 
   1字节 0xxxxxxx 
