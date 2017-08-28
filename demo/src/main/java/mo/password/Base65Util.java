@@ -9,11 +9,11 @@ public class Base65Util implements Base65Interface{
 
         String s = "3,password,update gis_delete_log set code='222',content='cn' WHERE id=5,$";
 
-        byte[] a = s.getBytes();
+//        byte[] a = s.getBytes();
 
-        System.out.println("base64 encode: " + Base64.encode(s));
-        System.out.println("base64 decode: " + Base64.decode(Base64.encode(s)));
-
+//        System.out.println("base64 encode: " + Base64.encode(s));
+//        System.out.println("base64 decode: " + Base64.decode(Base64.encode(s)));
+//
 
         System.out.println("-------------------------------------------------------");
 
