@@ -14,9 +14,12 @@ public class StringTest {
         System.out.println(s.indexOf("moxingwang111"));
 
         String ss = "I am a boy !";
+        while (true){
+            System.out.println(1);
+        }
 
-        System.out.println(revert(ss));
-        System.out.println(convert2(ss));
+//        System.out.println(revert(ss));
+//        System.out.println(convert2(ss));
     }
 
     public static String revert(String str){
