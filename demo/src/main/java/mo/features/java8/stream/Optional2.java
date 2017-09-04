@@ -39,9 +39,9 @@ public class Optional2 {
     }
 
     public static void main(String[] args) {
-        test1();
+//        test1();
         test2();
-        test3();
+//        test3();
     }
 
     public static <T> Optional<T> resolve(Supplier<T> resolver) {
