@@ -9,6 +9,8 @@ import java.util.function.Supplier;
  * http://winterbe.com/posts/2015/03/15/avoid-null-checks-in-java/
  *
  * @author Benjamin Winterberg
+ *
+ * Optional给了我们一个真正优雅的Java风格的方法来解决null安全问题。虽然没有直接提供一个操作符写起来短，但是代码看起来依然很爽很舒服。更何况?.这样的语法好不好看还见仁见智呢。(http://www.importnew.com/26066.html)
  */
 public class Optional2 {
 
@@ -59,6 +61,7 @@ public class Optional2 {
     }
 
     private static void test2() {
+        Optional.ofNullable(new Outer());
         Optional.of(new Outer())
                 .map(Outer::getNested)
                 .map(Nested::getInner)

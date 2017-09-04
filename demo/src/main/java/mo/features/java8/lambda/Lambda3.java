@@ -29,7 +29,7 @@ public class Lambda3 {
 
         predicate.test("foo");              // true
         predicate.negate().test("foo");     // false
-
+//        Predicate<Boolean> nonNull = (o)-> Objects.nonNull(o);
         Predicate<Boolean> nonNull = Objects::nonNull;
         Predicate<Boolean> isNull = Objects::isNull;
 

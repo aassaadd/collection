@@ -1,5 +1,8 @@
 package main.java.mo.features.java8.lambda;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Benjamin Winterberg
  */
@@ -25,13 +28,11 @@ public class Lambda2 {
         Integer converted1 = integerConverter1.convert("123");
         System.out.println(converted1);   // result: 123
 
-
         // method reference
 
         Converter<String, Integer> integerConverter2 = Integer::valueOf;
         Integer converted2 = integerConverter2.convert("123");
         System.out.println(converted2);   // result: 123
-
 
         Something something = new Something();
 
@@ -41,7 +42,9 @@ public class Lambda2 {
 
         // constructor reference
 
+        //双冒号：lambda的一种简写方式
         PersonFactory<Person> personFactory = Person::new;
+        PersonFactory<Person> personFactory2 = (p,a)-> new Person(p,a);
         Person person = personFactory.create("Peter", "Parker");
     }
 }
