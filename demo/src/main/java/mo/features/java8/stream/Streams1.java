@@ -3,6 +3,7 @@ package main.java.mo.features.java8.stream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 /**
  * @author Benjamin Winterberg
@@ -11,7 +12,7 @@ public class Streams1 {
 
     public static void main(String[] args) {
 
-        List<String> stringCollection = new ArrayList<>();
+        ArrayList<String> stringCollection = new ArrayList<>();
         stringCollection.add("ddd2");
         stringCollection.add("aaa2");
         stringCollection.add("bbb1");
@@ -20,6 +21,13 @@ public class Streams1 {
         stringCollection.add("ccc");
         stringCollection.add("bbb2");
         stringCollection.add("ddd1");
+
+        stringCollection.forEach(new Consumer<String>() {
+            @Override
+            public void accept(String s) {
+
+            }
+        });
 
 
         // filtering
