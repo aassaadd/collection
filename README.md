@@ -1,3 +1,6 @@
+# 20170908
+LinkedBlockingqueue  队列比较 （http://www.cnblogs.com/wzhanke/p/4763356.html）
+redis使用
 # 20170907
 ResultCode 先校验flag再校验code
 TransactionTimedOutException
