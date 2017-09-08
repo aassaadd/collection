@@ -1,5 +1,6 @@
 # 20170907
 ResultCode 先校验flag再校验code
+TransactionTimedOutException
 
 # 20170904
 Optional http://www.importnew.com/6675.html
