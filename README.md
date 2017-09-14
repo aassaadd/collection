@@ -1,3 +1,6 @@
+# 20170914
+MySQL field [fiedl](https://segmentfault.com/a/1190000003742537)
+十六进制英文名称：Hex number system
 # 20170908
 LinkedBlockingqueue  队列比较 （http://www.cnblogs.com/wzhanke/p/4763356.html）
 redis使用
