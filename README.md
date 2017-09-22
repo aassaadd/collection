@@ -1,6 +1,7 @@
 #20170922
 Nginx 服务器停止服务，IO耗尽
 TCP nio
+pinpoint 安装
 
 #20170919
 MySQL 慢查询
