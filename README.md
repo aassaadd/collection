@@ -1,3 +1,15 @@
+#20170922
+Nginx 服务器停止服务，IO耗尽
+TCP nio
+
+#20170919
+MySQL 慢查询
+jvm内存占用分析
+pinpoint调用失败分析
+
+# 20170914
+MySQL field [fiedl](https://segmentfault.com/a/1190000003742537)
+十六进制英文名称：Hex number system
 # 20170908
 LinkedBlockingqueue  队列比较 （http://www.cnblogs.com/wzhanke/p/4763356.html）
 redis使用
