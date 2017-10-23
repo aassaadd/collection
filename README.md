@@ -1,7 +1,7 @@
 
 
 # 20171023
-多核心多线程http://www.cnblogs.com/gtarcoder/p/5295281.html
+多核心多线程 [多核多线程理解](http://www.cnblogs.com/gtarcoder/p/5295281.html)
 看阿里巴巴java开发手册
 
 #20170926
