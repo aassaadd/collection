@@ -1,5 +1,8 @@
+
+
 # 20171023
 多核心多线程http://www.cnblogs.com/gtarcoder/p/5295281.html
+看阿里巴巴java开发手册
 
 #20170926
 软件许可协议
@@ -28,8 +31,8 @@ TransactionTimedOutException
 Optional http://www.importnew.com/6675.html
 
 # 20170902
-Json-rpc 
-restful 
+Json-rpc
+restful
 Rpc
 
 # 20170901
@@ -39,12 +42,12 @@ jvm内存参数
 
 # 20170824
 正则表达式
-Mybatis返回hashmap 
+Mybatis返回hashmap
 仔细聆听他人说问题
 
 # 20170823
 压缩算法lz77 lz78
-微服务Rpc restful 
+微服务Rpc restful
 分布式事务
 Apache License
 
@@ -54,4 +57,3 @@ Apache License
 # 20170821
 major.version
 maven classifier
-
