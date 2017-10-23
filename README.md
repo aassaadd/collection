@@ -1,3 +1,6 @@
+# 20171023
+多核心多线程http://www.cnblogs.com/gtarcoder/p/5295281.html
+
 #20170926
 软件许可协议
 
