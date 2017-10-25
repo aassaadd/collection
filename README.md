@@ -1,3 +1,7 @@
+
+#20171025
+rabbitmq 分布式事务
+
 # 20171024
 [Asyncdb（二）：Java IO 初探](https://juejin.im/post/59ee9d965188254115700264?utm_source=gold_browser_extension)
 
