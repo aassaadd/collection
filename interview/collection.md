@@ -9,3 +9,4 @@ ArrayList LinkedList HashMap LinkedHashMap WeakHashMap TreeMap
 ### java历史问题，比如说接口是在哪个版本出现的，还有比较大的区别的东西
 
 * [学生党如何拿到阿里技术offer： 《阿里巴巴常考面试题及汇总答案（Java方向）下篇》](https://yq.aliyun.com/articles/7468)
+* [最有价值的开源项目](https://gitee.com/gvp)
