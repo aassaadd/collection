@@ -8,6 +8,9 @@ sudo scp m@10.11.28.65:/Users/M/Downloads/jdk-8u151-linux-x64.tar.gz /usr/local/
 * 10.11.27.30
 * 10.11.27.20
 
+* 10.11.27.41
+* 10.11.27.43
+* 10.11.27.45
 
 ## jdk安装
 ````aidl
