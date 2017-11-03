@@ -22,3 +22,30 @@ export PATH=${JAVA_HOME}/bin:$PATH
 * 行未：$
 * 新增一行: o
 
+## 下载zk
+````aidl
+sudo wget http://mirrors.cnnic.cn/apache/zookeeper/zookeeper-3.4.8/zookeeper-3.4.8.tar.gz -P /usr/local/zk
+````
+
+## 环境变量设置
+````aidl
+ZOOKEEPER=/usr/local/zk/zookeeper-3.4.8
+PATH=$PATH:$ZOOKEEPER/bin
+````
+
+## 报错zkEnv.sh: Syntax error: "(" unexpected (expecting "fi")
+```aidl
+sudo ln -sf bash /bin/sh
+```
+
+## nohup: failed to run command 'java': No such file or directory
+````aidl
+export JAVA_HOME=/usr/local/java/jdk1.8.0_151   
+export PATH=${JAVA_HOME}/bin:$PATH
+
+加入到zkServer.sh 头部
+````
+
+
+
+
