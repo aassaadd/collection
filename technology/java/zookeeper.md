@@ -49,6 +49,10 @@ export PATH=${JAVA_HOME}/bin:$PATH
 加入到zkServer.sh 头部
 ````
 
+## dubbo admin配置
+````aidl
+dubbo.registry.address=zookeeper://192.168.199.191:2181?backup=192.168.199.192:2181,192.168.199.193:2181  
+````
 
 
 
