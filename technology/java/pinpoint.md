@@ -1,6 +1,8 @@
 ## 部署参照
 ````aidl
 http://www.cnblogs.com/yyhh/p/6106472.html
+
+http://blog.csdn.net/xiaozhuanddapang/article/details/75554807
 ````
 
 sudo scp m@10.11.28.213:/Users/M/Downloads/pinpoint-web-1.6.2.war /root/pinpoint
