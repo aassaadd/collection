@@ -12,7 +12,24 @@ sudo scp m@10.11.28.213:/Users/M/Downloads/hbase-create.hbase /root/pinpoint
 unzip -oq common.war -d common
 ````
 
-## java7
+## tomcat访问不了需要修改server.xml
 ````aidl
-http://download.oracle.com/otn/java/jdk/7u80-b15/jdk-7u80-linux-x64.tar.gz?AuthParam=1510209824_5bee6f9bb6680e455b661134991b4834
+<Host name="10.168.17.135"  appBase="webapps"
+            unpackWARs="true" autoDeploy="true">
+
+        <!-- SingleSignOn valve, share authentication between web applications
+             Documentation at: /docs/config/valve.html -->
+        <!--
+        <Valve className="org.apache.catalina.authenticator.SingleSignOn" />
+        -->
+
+        <!-- Access log processes all example.
+             Documentation at: /docs/config/valve.html
+             Note: The pattern used is equivalent to using pattern="common" -->
+        <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
+               prefix="10.168.17.135_access_log" suffix=".txt"
+               pattern="%h %l %u %t "%r" %s %b" />
+
+      </Host>
+
 ````
