@@ -3,6 +3,7 @@
 http://www.jianshu.com/p/1448d1550c8b
 http://www.powerxing.com/install-hadoop/
 http://blog.csdn.net/yhao2014/article/details/44938237
+https://www.cnblogs.com/ivan0626/p/4144277.html
 ````
 
 ## 修改hostname
@@ -73,43 +74,43 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQColSgDD+R48lABMsyk9vjgYH4zrKw97Q5Y+BiHxfRG
     <!-- mycluster下面有两个NameNode，分别是nn1，nn2 -->  
     <property>  
         <name>dfs.ha.namenodes.mycluster</name>  
-        <value>nn1,nn2</value>  
+        <value>server1,server2</value>  
     </property>  
       
-    <!-- nn1的RPC通信地址 -->  
+    <!-- server1的RPC通信地址 -->  
     <property>  
-        <name>dfs.namenode.rpc-address.mycluster.nn1</name>  
-        <value>h1m1:9000</value>  
+        <name>dfs.namenode.rpc-address.mycluster.server1</name>  
+        <value>server1:9000</value>  
     </property>  
       
-    <!-- nn1的http通信地址 -->  
+    <!-- server1的http通信地址 -->  
     <property>  
-        <name>dfs.namenode.http-address.mycluster.nn1</name>  
-        <value>h1m1:50070</value>  
+        <name>dfs.namenode.http-address.mycluster.server1</name>  
+        <value>server1:50070</value>  
     </property>  
       
-    <!-- nn2的RPC通信地址 -->  
+    <!-- server2的RPC通信地址 -->  
     <property>  
-        <name>dfs.namenode.rpc-address.mycluster.nn2</name>  
-        <value>h1m2:9000</value>  
+        <name>dfs.namenode.rpc-address.mycluster.server2</name>  
+        <value>server2:9000</value>  
     </property>  
       
-    <!-- nn2的http通信地址 -->  
+    <!-- server2的http通信地址 -->  
     <property>  
-        <name>dfs.namenode.http-address.mycluster.nn2</name>  
-        <value>h1m2:50070</value>  
+        <name>dfs.namenode.http-address.mycluster.server2</name>  
+        <value>server2:50070</value>  
     </property>  
       
     <!-- 指定NameNode的元数据在JournalNode上的存放位置 -->  
     <property>  
         <name>dfs.namenode.shared.edits.dir</name>  
-        <value>qjournal://h1s1:8485;h1s2:8485;h1s3:8485;h1s4:8485;h1s5:8485/mycluster</value>  
+        <value>qjournal://server1:8485;server2:8485/mycluster</value>  
     </property>  
       
     <!-- 指定JournalNode在本地磁盘存放数据的位置 -->  
     <property>  
         <name>dfs.journalnode.edits.dir</name>  
-        <value>/usr/lib/hadoop/journal</value>  
+        <value>/usr/local/hadoop/journal</value>  
     </property>  
       
     <!-- 开启NameNode失败自动切换 -->  
@@ -136,7 +137,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQColSgDD+R48lABMsyk9vjgYH4zrKw97Q5Y+BiHxfRG
     <!-- 使用sshfence隔离机制时需要ssh免登陆 -->  
     <property>  
         <name>dfs.ha.fencing.ssh.private-key-files</name>  
-        <value>/home/hadoop/.ssh/id_rsa</value>  
+        <value>/root/.ssh/id_rsa</value>  
     </property>  
       
     <!-- 配置sshfence隔离机制超时时间 -->  
@@ -146,3 +147,65 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQColSgDD+R48lABMsyk9vjgYH4zrKw97Q5Y+BiHxfRG
     </property>  
 </configuration>  
 ````
+
+## mapred-site.xml
+````aidl
+<configuration>  
+    <property>  
+        <name>mapreduce.framework.name</name>  
+        <value>yarn</value>  
+        <final>true</final>  
+     </property>  
+</configuration>  
+````
+
+## yarn-site.xml
+````aidl
+<configuration>  
+    <!-- 开启RM高可靠 -->  
+    <property>  
+        <name>yarn.resourcemanager.ha.enabled</name>  
+        <value>true</value>  
+    </property>  
+  
+    <!-- 指定RM的cluster id -->  
+    <property>  
+        <name>yarn.resourcemanager.cluster-id</name>  
+        <value>yrc</value>  
+    </property>  
+  
+    <!-- 指定RM的名字 -->  
+    <property>  
+        <name>yarn.resourcemanager.ha.rm-ids</name>  
+        <value>rm1,rm2</value>  
+    </property>  
+  
+    <!-- 分别指定RM的地址 -->  
+    <property>  
+        <name>yarn.resourcemanager.hostname.rm1</name>  
+        <value>server1</value>  
+    </property>  
+  
+    <property>  
+        <name>yarn.resourcemanager.hostname.rm2</name>  
+        <value>server1</value>  
+    </property>  
+  
+    <!-- 指定zk集群地址 -->  
+    <property>  
+        <name>yarn.resourcemanager.zk-address</name>  
+        <value>server1:2181,server2:2181,server3:2181</value>  
+    </property>  
+  
+    <property>  
+        <name>yarn.nodemanager.aux-services</name>  
+        <value>mapreduce_shuffle</value>  
+    </property>  
+</configuration>
+````
+
+## 修改slaves
+````aidl
+/usr/local/hadoop/hadoop-2.8.2/etc/hadoop slaves
+````
+
