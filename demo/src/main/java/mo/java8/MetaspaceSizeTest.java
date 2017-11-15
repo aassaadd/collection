@@ -12,7 +12,7 @@ import java.util.List;
  * -Xss1M -Xms1m -Xmx10m -XX:MetaspaceSize=1m -XX:MaxMetaspaceSize=6m
  */
 public class MetaspaceSizeTest {
-    int i = 0;
+
     List<java.lang.String> s = new ArrayList<>();
 
     public static void main(java.lang.String[] args) {
@@ -23,8 +23,12 @@ public class MetaspaceSizeTest {
 
 
     void test(){
+        java.lang.String a = "";
+        int i = 0;
         while (true){
-            s.add(new java.lang.String());
+//            a += "fdsssssssssssssfsdafsafsfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfdsfsdds";
+            i += i * 10000;
+//            s.add(new java.lang.String());
         }
         /*
         i ++;
