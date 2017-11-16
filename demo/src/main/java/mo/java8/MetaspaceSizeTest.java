@@ -30,7 +30,7 @@ public class MetaspaceSizeTest {
             i += i * 10000;
 //            s.add(new java.lang.String());
         }
-        /*
+        /*x
         i ++;
         if(i > 1000000){
             return;
