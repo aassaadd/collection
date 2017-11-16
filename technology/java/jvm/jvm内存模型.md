@@ -13,3 +13,5 @@ jvm内存模型是一个抽象（Java 虚拟机规范中试图定义一种 Java 
 
 * 内回收的意思
 
+[指针的意义和linux的内存回收艺术](http://blog.csdn.net/dog250/article/details/5303284)
+
