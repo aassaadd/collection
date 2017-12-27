@@ -1,0 +1,1 @@
+* [MySQL中的两种临时表](http://mysql.taobao.org/monthly/2016/06/07/)
