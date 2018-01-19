@@ -16,7 +16,14 @@
 			</plugin>
 		</plugins>
 	</build>
-	<packaging>pom</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.4</version>
+        </dependency>
+    </dependencies>
+    <packaging>pom</packaging>
 	<name>collection</name>
 	<description>moxingwang's collection</description>
 	<url>https://github.com/moxingwang</url>
