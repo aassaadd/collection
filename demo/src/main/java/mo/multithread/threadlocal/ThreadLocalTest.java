@@ -6,6 +6,7 @@ import java.util.Map;
 
 /**
  * @author MoXingwang on 2018/1/23.
+ * https://juejin.im/post/5a64a581f265da3e3b7aa02d?utm_source=gold_browser_extension
  * http://blog.csdn.net/ni357103403/article/details/51970748
  */
 public class ThreadLocalTest implements Runnable {
