@@ -10,6 +10,8 @@ import java.util.Locale;
 
 /**
  * @author Benjamin Winterberg
+ * 时间处理
+ * https://juejin.im/post/5a693bc1f265da3e4f0a598e?utm_medium=be&utm_source=weixinqun
  */
 public class LocalDate1 {
 
@@ -17,6 +19,7 @@ public class LocalDate1 {
         LocalDate today = LocalDate.now();
         LocalDate tomorrow = today.plus(1, ChronoUnit.DAYS);
         LocalDate yesterday = tomorrow.minusDays(2);
+
 
         System.out.println(today);
         System.out.println(tomorrow);
@@ -32,6 +35,7 @@ public class LocalDate1 {
                         .withLocale(Locale.GERMAN);
 
         LocalDate xmas = LocalDate.parse("24.12.2014", germanFormatter);
+        
         System.out.println(xmas);   // 2014-12-24
 
 
