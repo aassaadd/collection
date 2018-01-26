@@ -106,7 +106,7 @@
 ````
 lsof -i:端口
 ll /proc/PID
-z
+netstat -ntlp
 ````
 
 ### Nmap 网络端口扫描（nmap -ST 172.16.10.9）
