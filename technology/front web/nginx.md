@@ -1,4 +1,5 @@
 * [centos安装](http://blog.csdn.net/yx0628/article/details/53148451)
+* [nginx.cn](http://www.nginx.cn/nginx-how-to)
 
 * 代理配置
 
