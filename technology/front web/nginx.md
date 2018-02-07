@@ -6,7 +6,7 @@
 ````aidl
     server {
         listen       8002;
-        server_name  127.0.0.1;
+        server_name  127.0.0.1;::
 
         #charset koi8-r;
 
