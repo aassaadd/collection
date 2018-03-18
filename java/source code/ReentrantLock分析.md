@@ -83,7 +83,7 @@ public static void main(String[] args) {
     }
 ````
 
- ReentrantLock被实例化后（实例对象称为rLock,方便下文描述），第一个线程调用lock方法获取锁，该方法首先使用CAS去更新AQS中state的值，如果更新成功那么当前线程抢占锁成功，显然ReentrantLock实例化后默认值就是0，抢占成功，既线程1持有当前锁。
+ ReentrantLock被实例化后（实例对象称为rLock,方便下文描述），第一个线程调用lock方法获取锁，该方法首先使用CAS去更新AQS中state的值，如果更新成功那么当前线程抢占锁成功，显然ReentrantLock实例化后默认值就是0，抢占成功，既当前锁被线程1独占。
 
 ````
 static final class NonfairSync extends Sync {
@@ -209,6 +209,7 @@ final boolean acquireQueued(final Node node, int arg) {
 # 参考
 * [ReentrantLock解析](http://blog.csdn.net/yanlinwang/article/details/40450769)
 * [AbstractQueuedSynchronizer源码剖析（六）- 深刻解析与模拟线程竞争资源](http://blog.csdn.net/pfnie/article/details/53191892)
-* ![ReentrantLock实现原理深入探究](http://www.cnblogs.com/xrq730/p/4979021.html)
+* [ReentrantLock实现原理深入探究](http://www.cnblogs.com/xrq730/p/4979021.html)
+* [AbstractQueuedSynchronizer的介绍和原理分析](http://ifeve.com/introduce-abstractqueuedsynchronizer/)
 
 
