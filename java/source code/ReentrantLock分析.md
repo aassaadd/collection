@@ -118,10 +118,45 @@ static final class NonfairSync extends Sync {
     }
  ````
 
- 着里的方法调用比较复杂，首先我们给一张图，说明这些方法都在哪些具体的类中。
+ 着里的方法调用比较复杂，首先我们给一张图，说明这些方法都在哪些类中。
+
  ![](../../resources/image/非公平锁qcquire调用图.png)
 
+ 先来看ReentrantLock中的nonfairTryAcquire方法，源码如下：
 
+````
+final boolean nonfairTryAcquire(int acquires) {
+            final Thread current = Thread.currentThread();
+            //获取AQS的state属性，getState方法在AQS类中，直接返回了state变量的值。
+            int c = getState();
+            //=0表示没有线程持有锁，
+            if (c == 0) {
+                if (compareAndSetState(0, acquires)) {
+                    setExclusiveOwnerThread(current);
+                    //竞争锁成功
+                    return true;
+                }
+            }
+            //当前持有锁的线程就是本身，那么重入，这里也是重入锁的核心，之前我对这一行代码非常疑惑，看了知乎的一个话题后霍然开朗，主要是没有理解重入锁和自旋锁的概念。
+            //这里实现了偏向锁
+            else if (current == getExclusiveOwnerThread()) {
+                int nextc = c + acquires;
+                //限制了重入锁的次数是小于Integer.MAX_VALUE,这是为什么呢?我们知道int的最大值是2147483647，当加一后二进制符号为1，此刻为-2147483648。
+                if (nextc < 0) // overflow
+                    throw new Error("Maximum lock count exceeded");
+                setState(nextc);
+                //竞争锁成功
+                return true;
+            }
+            //未竞争到锁
+            return false;
+        }
+````
+
+* state
+> state是AQS中的一个实例变量（private volatile int state;），他主要负责记录是否有线程持有锁，以及同一个线程重入的次数。当state=0的时候表示没有线程持有锁，state>0表示已有线程持有锁，他的值就表示重入的次数。当然了state是基于CAS原子操作的，compareAndSetState方法就是用来修改state的值。
+* 理解自旋锁和重入锁
+> [java的可重入锁用在哪些场合？](https://www.zhihu.com/question/23284564)
 
 
 
@@ -204,8 +239,11 @@ final boolean acquireQueued(final Node node, int arg) {
     }
 ````
 
-# 问题探讨
 
+# Lock和synchromnized实现原理对比
+
+
+# 问题探讨
 #### 程序中为什么要使用锁？
  我们写的程序部署在操作系统中，应用程序运行操作的都是资源，应用程序对资源有读写的权限，简单的说为了保证多个应用或者多个线程对同一个数据处理，保持数据的原子性使用的一种策略。
 
@@ -213,13 +251,17 @@ final boolean acquireQueued(final Node node, int arg) {
 
 #### Lock与synchronized的区别在哪里？
 
+
 # 分析思路
-* 按照多个线程走代码的方式去调试。
+* 按照多个线程走代码的方式去调试，然后反推，多思考。
+
 
 # 参考
 * [ReentrantLock解析](http://blog.csdn.net/yanlinwang/article/details/40450769)
 * [AbstractQueuedSynchronizer源码剖析（六）- 深刻解析与模拟线程竞争资源](http://blog.csdn.net/pfnie/article/details/53191892)
 * [ReentrantLock实现原理深入探究](http://www.cnblogs.com/xrq730/p/4979021.html)
 * [AbstractQueuedSynchronizer的介绍和原理分析](http://ifeve.com/introduce-abstractqueuedsynchronizer/)
-
+* [Java并发机制及锁的实现原理](http://blog.csdn.net/sunxianghuang/article/details/51932179)
+* [Java锁--Lock实现原理(底层实现)](http://blog.csdn.net/Luxia_24/article/details/52403033)
+* [synchronized的JVM底层实现（很详细 很底层）](http://blog.csdn.net/niuwei22007/article/details/51433669)
 
