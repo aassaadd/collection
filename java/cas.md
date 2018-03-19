@@ -1,6 +1,7 @@
 * [浅谈CAS(Compare and Swap) 原理](https://www.cnblogs.com/Leo_wl/p/6899716.html)
 * [面试问题（java cas有什么优点和问题）](http://blog.csdn.net/hxpjava1/article/details/79408692)
 
+
 ### 优点
 * 利用CPU的CAS指令，同时借助JNI来完成Java的非阻塞算法。
 * 基于CPU保证基本内存操作的原子性。
