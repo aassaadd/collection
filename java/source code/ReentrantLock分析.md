@@ -108,8 +108,18 @@ static final class NonfairSync extends Sync {
  * setExclusiveOwnerThread做了什么？ 
 > setExclusiveOwnerThread只是一个简单的set操作，他更新了rLock中的exclusiveOwnerThread属性，exclusiveOwnerThread是AQS类中的一个实例变量（"private transient Thread exclusiveOwnerThread;"）用来引用当前锁的持有者。
 
+ 此时假设thread1还没有执行完到unlock，即还未释放锁，另一个线程thread2进入，那么thread2首先会进行抢占式的去获取锁调用compareAndSetState，此时thread1还未释放锁，compareAndSetState方法返回false，thread2抢占锁失败。接下来调用acquire方法，此方法在AbstractQueuedSynchronizer中，源码如下。
 
+ ````
+ public final void acquire(int arg) {
+        if (!tryAcquire(arg) &&
+            acquireQueued(addWaiter(Node.EXCLUSIVE), arg))
+            selfInterrupt();
+    }
+ ````
 
+ 着里的方法调用比较复杂，首先我们给一张图，说明这些方法都在哪些具体的类中。
+ ![](../../resources/image/非公平锁qcquire调用图.png)
 
 
 
