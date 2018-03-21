@@ -216,9 +216,9 @@ static final class Node {
         static final Node EXCLUSIVE = null;
         //因为超时或者中断，结点会被设置为取消状态，被取消状态的结点不应该去竞争锁，只能保持取消状态不变，不能转换为其他状态。处于这种状态的结点会被踢出队列，被GC回收。 
         static final int CANCELLED =  1;
-        //表示这个结点的继任结点被阻塞了，到时需要通知它。
+        //从前面的代码状态转换可以看得出是前面有线程在运行，需要前面线程结束后，调用unpark()方法才能激活自己。
         static final int SIGNAL    = -1;
-        //表示这个结点在条件队列中，因为等待某个条件而被阻塞。
+        //线程基于Condition对象发生了等待，进入了相应的队列，自然也需要Condition对象来激活
         static final int CONDITION = -2;
         //使用在共享模式头结点有可能牌处于这种状态，表示锁的下一次获取可以无条件传播。
         static final int PROPAGATE = -3;
@@ -299,6 +299,39 @@ final boolean acquireQueued(final Node node, int arg) {
     }
 ````
 
+ thread2进入for循环后，predecessor获取到的node，可以知道获取到的node就是header，再次尝试调用tryAcquire方法，根据上文中对tryAcquire方法的分析，tryAcquire返回false，接下来逻辑走到if (shouldParkAfterFailedAcquire(p, node) && parkAndCheckInterrupt())逻辑，先看shouldParkAfterFailedAcquire方法的源码。
+
+````
+private static boolean shouldParkAfterFailedAcquire(Node pred, Node node) {
+        int ws = pred.waitStatus;
+        if (ws == Node.SIGNAL)
+            /*
+             * This node has already set status asking a release
+             * to signal it, so it can safely park.
+             */
+            return true;
+        if (ws > 0) {
+            /*
+             * Predecessor was cancelled. Skip over predecessors and
+             * indicate retry.
+             */
+            do {
+                node.prev = pred = pred.prev;
+            } while (pred.waitStatus > 0);
+            pred.next = node;
+        } else {
+            /*
+             * waitStatus must be 0 or PROPAGATE.  Indicate that we
+             * need a signal, but don't park yet.  Caller will need to
+             * retry to make sure it cannot acquire before parking.
+             */
+            compareAndSetWaitStatus(pred, ws, Node.SIGNAL);
+        }
+        return false;
+    }
+````
+ 
+ 从方法名就能够看出此方法的大概意思，在尝试获取锁失败后检查是否应该进入线程阻塞。
 
 ````
 private void cancelAcquire(Node node) {
@@ -319,12 +352,11 @@ private void cancelAcquire(Node node) {
         //将node的waitStatus置为CANCELLED      
         node.waitStatus = Node.CANCELLED;
 
-        // If we are the tail, remove ourselves.
+        //<1>当前node是tail
         if (node == tail && compareAndSetTail(node, pred)) {
             compareAndSetNext(pred, predNext, null);
         } else {
-            // If successor needs signal, try to set pred's next-link
-            // so it will get one. Otherwise wake it up to propagate.
+            //<2>当前node既不是head也不是tail
             int ws;
             if (pred != head &&
                 ((ws = pred.waitStatus) == Node.SIGNAL ||
@@ -334,6 +366,8 @@ private void cancelAcquire(Node node) {
                 if (next != null && next.waitStatus <= 0)
                     compareAndSetNext(pred, predNext, next);
             } else {
+                //<3>当前node是head
+                //唤醒node的后续节点的线程
                 unparkSuccessor(node);
             }
 
@@ -375,4 +409,5 @@ private void cancelAcquire(Node node) {
 * [Java显式锁学习总结之六：Condition源码分析](https://www.cnblogs.com/sheeva/p/6484224.html)
 * [Java AbstractQueuedSynchronizer源码阅读3-cancelAcquire()](https://www.jianshu.com/p/01f2046aab64)
 * [Java线程中断的本质和编程原则](http://blog.csdn.net/dlite/article/details/4218105)
+* [AQS的原理浅析](http://ifeve.com/java-special-troops-aqs/)
 
