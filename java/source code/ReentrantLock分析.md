@@ -340,7 +340,7 @@ private final boolean parkAndCheckInterrupt() {
     }
 ````
  
- 
+
 
 ````
 private void cancelAcquire(Node node) {
@@ -387,24 +387,6 @@ private void cancelAcquire(Node node) {
 
 
 
-
-
-
-# Lock和synchromnized实现原理对比
-
-
-# 问题探讨
-#### 程序中为什么要使用锁？
- 我们写的程序部署在操作系统中，应用程序运行操作的都是资源，应用程序对资源有读写的权限，简单的说为了保证多个应用或者多个线程对同一个数据处理，保持数据的原子性使用的一种策略。
-
-#### 常见实现锁的方法，你知道的有哪些？
-
-#### Lock与synchronized的区别在哪里？
-
-
-# 分析思路
-* 按照多个线程走代码的方式去调试，然后反推，多思考。
-* 看源码要把思维都放到多线程的情况下，不然好多地方理解不了为什么。
 
 
 # 参考
