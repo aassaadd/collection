@@ -110,13 +110,14 @@ static final class NonfairSync extends Sync {
 
  此时假设thread1还没有执行完到unlock，即还未释放锁，另一个线程thread2进入，那么thread2首先会进行抢占式的去获取锁调用compareAndSetState，此时thread1还未释放锁，compareAndSetState方法返回false，thread2抢占锁失败。接下来调用acquire方法，此方法在AbstractQueuedSynchronizer中，源码如下。
 
- ````
+````
  public final void acquire(int arg) {
         if (!tryAcquire(arg) &&
             acquireQueued(addWaiter(Node.EXCLUSIVE), arg))
             selfInterrupt();
     }
- ````
+````
+【代码块1】
 
  着里的方法调用比较复杂，首先我们给一张图，说明这些方法都在哪些类中。
 
@@ -158,70 +159,127 @@ final boolean nonfairTryAcquire(int acquires) {
 * 理解自旋锁和重入锁
 > [java的可重入锁用在哪些场合？](https://www.zhihu.com/question/23284564)
 
+ 线程2进入nonfairTryAcquire方法后，此时state为1，getExclusiveOwnerThread为线程1，最终return false，回到【代码块1】线程2会执行到『acquireQueued(addWaiter(Node.EXCLUSIVE), arg)』这里，代码会先走到addWaiter方法，我们先看看addWaiter的源码。
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#### 添加Node到队列尾部
 ````
 private Node addWaiter(Node mode) {
+        //在这里mode仅仅用来指定Node的模式（共享或者独占，作为Node对象属性nextWaiter的引用）
         Node node = new Node(Thread.currentThread(), mode);
         // Try the fast path of enq; backup to full enq on failure
         Node pred = tail;
+        //如果队列中已经有了Node，直接把node添加到队列的尾部
         if (pred != null) {
             node.prev = pred;
+            //设置全局变量tail为新增的node，使用CAS保证多个线程下，设置tail的原子性。CAS成功才真正的添加到队列的尾部。
             if (compareAndSetTail(pred, node)) {
                 pred.next = node;
                 return node;
             }
         }
+        //如果队列中不存在等待线程，或者compareAndSetTail失败，调用enq方法
         enq(node);
         return node;
     }
 ````
+
 ````
 private Node enq(final Node node) {
-        //自旋位置
+        //自旋
+        //在多个线程进入的情况下，最终还是CAS保证了原子性。
         for (;;) {
             Node t = tail;
+            //如果队列中没有元素，初始化一个空的node，并且设置为header，当然了，tail也是指向这个node
             if (t == null) { // Must initialize
                 if (compareAndSetHead(new Node()))
                     tail = head;
             } else {
                 node.prev = t;
+                //添加到队列的尾部
                 if (compareAndSetTail(t, node)) {
                     t.next = node;
+                    //自旋锁的唯一出口
                     return t;
                 }
             }
         }
     }
 ````
-    在多个线程进入的情况下，最终还是CAS保证了原子性。
-#### acquireQueued
+    
+
+ addWaiter方法的作用就是把当前无法获得锁的线程包装成一个Node添加到队列的尾部。 enq是一个自旋锁，保证了初始化一个空的node作为header，同时保证了多个线程的情况下添加队列到尾部的安全性。既然addWaiter方法add的是Node对象，接着看Node对象的源码。
+
+````
+static final class Node {
+        //标志共享模式
+        static final Node SHARED = new Node();
+        //标志独占模式
+        static final Node EXCLUSIVE = null;
+        //因为超时或者中断，结点会被设置为取消状态，被取消状态的结点不应该去竞争锁，只能保持取消状态不变，不能转换为其他状态。处于这种状态的结点会被踢出队列，被GC回收。 
+        static final int CANCELLED =  1;
+        //表示这个结点的继任结点被阻塞了，到时需要通知它。
+        static final int SIGNAL    = -1;
+        //表示这个结点在条件队列中，因为等待某个条件而被阻塞。
+        static final int CONDITION = -2;
+        //使用在共享模式头结点有可能牌处于这种状态，表示锁的下一次获取可以无条件传播。
+        static final int PROPAGATE = -3;
+        //等待状态,初始状态为0（新节点的状态）
+        volatile int waitStatus;
+        //头节点
+        volatile Node prev;
+        //引用链表的下一个节点
+        volatile Node next;
+        //引用当前节点所代表的线程
+        volatile Thread thread;
+        //Node既可以作为同步队列节点使用，也可以作为Condition的等待队列节点使用(将会在后面讲Condition时讲到)。在作为同步队列节点时，nextWaiter可能有两个值：EXCLUSIVE、SHARED标识当前节点是独占模式还是共享模式；在作为等待队列节点使用时，nextWaiter保存后继节点。在这里我们先只关心作为同步队列节点使用，nextWaiter用来引用Node.SHARED或者Node.EXCLUSIVE。
+        Node nextWaiter;
+
+        /**
+         * Returns true if node is waiting in shared mode.
+         */
+        final boolean isShared() {
+            return nextWaiter == SHARED;
+        }
+
+        final Node predecessor() throws NullPointerException {
+            Node p = prev;
+            if (p == null)
+                throw new NullPointerException();
+            else
+                return p;
+        }
+
+        Node() {    // Used to establish initial head or SHARED marker
+        }
+
+        Node(Thread thread, Node mode) {     // Used by addWaiter
+            this.nextWaiter = mode;
+            this.thread = thread;
+        }
+
+        Node(Thread thread, int waitStatus) { // Used by Condition
+            this.waitStatus = waitStatus;
+            this.thread = thread;
+        }
+    }
+````
+
+ 继续说线程2在【代码块1】的执行位置，addWaiter执行完后，此时AQS的链表应该是这样一个结构。
+  ![](../../resources/image/thread2add后.png)
+ 
+ 链表中的head是一个空的node，tail引用线程2，在看acquireQueued方法的源码。
+
 ````
 final boolean acquireQueued(final Node node, int arg) {
+        //用来检查线程最终没有没有获得锁，如果未获得锁，从队列中释放Thread。
         boolean failed = true;
         try {
             boolean interrupted = false;
+            //自旋
             for (;;) {
                 final Node p = node.predecessor();
+                //尝试获得锁，直接进入这个if操作完成后，acquireQueued方法才会退出。
                 if (p == head && tryAcquire(arg)) {
-                    //保证了header永远是一个空的Node（thread）
+                    //
                     setHead(node);
                     p.next = null; // help GC
                     failed = false;
@@ -233,11 +291,60 @@ final boolean acquireQueued(final Node node, int arg) {
                     interrupted = true;
             }
         } finally {
+            //如果在这期间线程被中断，就抛出中断异常，如果有其他异常产生，就取消这次获取。
             if (failed)
+                //清理状态，node出队。
                 cancelAcquire(node);
         }
     }
 ````
+
+
+````
+private void cancelAcquire(Node node) {
+        // Ignore if node doesn't exist
+        if (node == null)
+            return;
+        //node不再关联到任何线程
+        node.thread = null;
+
+        //跳过被cancel的前继node，找到一个有效的前驱节点pred
+        Node pred = node.prev;
+        while (pred.waitStatus > 0)
+            node.prev = pred = pred.prev;
+
+        //引用前驱节点的下一个节点
+        Node predNext = pred.next;
+
+        //将node的waitStatus置为CANCELLED      
+        node.waitStatus = Node.CANCELLED;
+
+        // If we are the tail, remove ourselves.
+        if (node == tail && compareAndSetTail(node, pred)) {
+            compareAndSetNext(pred, predNext, null);
+        } else {
+            // If successor needs signal, try to set pred's next-link
+            // so it will get one. Otherwise wake it up to propagate.
+            int ws;
+            if (pred != head &&
+                ((ws = pred.waitStatus) == Node.SIGNAL ||
+                 (ws <= 0 && compareAndSetWaitStatus(pred, ws, Node.SIGNAL))) &&
+                pred.thread != null) {
+                Node next = node.next;
+                if (next != null && next.waitStatus <= 0)
+                    compareAndSetNext(pred, predNext, next);
+            } else {
+                unparkSuccessor(node);
+            }
+
+            node.next = node; // help GC
+        }
+    }
+````
+
+
+
+
 
 
 # Lock和synchromnized实现原理对比
@@ -254,6 +361,7 @@ final boolean acquireQueued(final Node node, int arg) {
 
 # 分析思路
 * 按照多个线程走代码的方式去调试，然后反推，多思考。
+* 看源码要把思维都放到多线程的情况下，不然好多地方理解不了为什么。
 
 
 # 参考
@@ -264,4 +372,7 @@ final boolean acquireQueued(final Node node, int arg) {
 * [Java并发机制及锁的实现原理](http://blog.csdn.net/sunxianghuang/article/details/51932179)
 * [Java锁--Lock实现原理(底层实现)](http://blog.csdn.net/Luxia_24/article/details/52403033)
 * [synchronized的JVM底层实现（很详细 很底层）](http://blog.csdn.net/niuwei22007/article/details/51433669)
+* [Java显式锁学习总结之六：Condition源码分析](https://www.cnblogs.com/sheeva/p/6484224.html)
+* [Java AbstractQueuedSynchronizer源码阅读3-cancelAcquire()](https://www.jianshu.com/p/01f2046aab64)
+* [Java线程中断的本质和编程原则](http://blog.csdn.net/dlite/article/details/4218105)
 
