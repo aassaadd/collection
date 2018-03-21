@@ -331,7 +331,16 @@ private static boolean shouldParkAfterFailedAcquire(Node pred, Node node) {
     }
 ````
  
- 从方法名就能够看出此方法的大概意思，在尝试获取锁失败后检查是否应该进入线程阻塞。
+ 从方法名就能够看出此方法的大概意思，在尝试获取锁失败后检查是否应该进入线程阻塞。当thread2线程第一次进入后，waitStates为0，CAS设置成了-1（Node.SIGNAL），表明此时线程的状态已经进入阻塞前提了，接下来回到acquireQueued方法的自旋位置，一个for循环后继续走到了shouldParkAfterFailedAcquire放，这个时候返回true，接下来我们看parkAndCheckInterrupt方法的源码，parkAndCheckInterrupt方法代码很少，做法也是比较简单就是让当前线程thraed2进入阻塞。
+
+````
+private final boolean parkAndCheckInterrupt() {
+        LockSupport.park(this);
+        return Thread.interrupted();
+    }
+````
+ 
+ 
 
 ````
 private void cancelAcquire(Node node) {
