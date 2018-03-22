@@ -466,7 +466,9 @@ private void unparkSuccessor(Node node) {
     }
 ````
 
- unLock的逻辑相对比较简单，不过想对每一行代码都理解清楚，必须要对加锁的逻辑都理解清楚，以及header是如何变化的，在什么时候headr引用更新，还有就是waitStatus是如何变化的。这里我们分别总结一下这个两个属性的变化过程。
+ unLock的逻辑相对比较简单，不过想对每一行代码都理解清楚，必须要对加锁的逻辑都理解清楚，以及header是如何变化的，在什么时候headr引用更新，还有就是waitStatus是如何变化的。waitStatus的变化稍微复杂一点。这里我们分别总结一下这个属性的变化过程。
+
+ ![](../../resources/image/ReentrantLock/waitStatusChange.jpg)
 
 # 参考
 * [ReentrantLock解析](http://blog.csdn.net/yanlinwang/article/details/40450769)
