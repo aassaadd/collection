@@ -42,7 +42,7 @@ Lock lock = new ReentrantLock();
     }
 ````
 
-#### 模拟线程竞争非公平锁分析源码
+### 模拟线程竞争非公平锁分析源码
  首先假设有以下代码片段（着里抽象描述代码结构，不按这里执行）。
 
 ````
@@ -82,6 +82,8 @@ public static void main(String[] args) {
         System.out.println("测试完成");
     }
 ````
+
+### lock
 
  ReentrantLock被实例化后（实例对象称为rLock,方便下文描述），第一个线程调用lock方法获取锁，该方法首先使用CAS去更新AQS中state的值，如果更新成功那么当前线程抢占锁成功，显然ReentrantLock实例化后默认值就是0，抢占成功，既当前锁被线程1独占。
 
@@ -264,7 +266,7 @@ static final class Node {
 ````
 
  继续说线程2在【代码块1】的执行位置，addWaiter执行完后，此时AQS的链表应该是这样一个结构。
-  ![](../../resources/image/thread2add后.png)
+  ![](../../resources/image/ReentrantLock/thread2Entry.jpg)
  
  链表中的head是一个空的node，tail引用线程2，在看acquireQueued方法的源码。
 
@@ -273,13 +275,14 @@ final boolean acquireQueued(final Node node, int arg) {
         //用来检查线程最终没有没有获得锁，如果未获得锁，从队列中释放Thread。
         boolean failed = true;
         try {
+            //用来标识线程是否被中断过
             boolean interrupted = false;
             //自旋
             for (;;) {
                 final Node p = node.predecessor();
                 //尝试获得锁，直接进入这个if操作完成后，acquireQueued方法才会退出。
                 if (p == head && tryAcquire(arg)) {
-                    //
+                    //线程被上一个执行完的线程唤醒后获得锁，自己又作为header
                     setHead(node);
                     p.next = null; // help GC
                     failed = false;
@@ -331,7 +334,7 @@ private static boolean shouldParkAfterFailedAcquire(Node pred, Node node) {
     }
 ````
  
- 从方法名就能够看出此方法的大概意思，在尝试获取锁失败后检查是否应该进入线程阻塞。当thread2线程第一次进入后，waitStates为0，CAS设置成了-1（Node.SIGNAL），表明此时线程的状态已经进入阻塞前提了，接下来回到acquireQueued方法的自旋位置，一个for循环后继续走到了shouldParkAfterFailedAcquire放，这个时候返回true，接下来我们看parkAndCheckInterrupt方法的源码，parkAndCheckInterrupt方法代码很少，做法也是比较简单就是让当前线程thraed2进入阻塞。
+ 从方法名就能够看出此方法的大概意思，在尝试获取锁失败后检查是否应该进入线程阻塞。当thread2线程第一次进入后，header是new Node(),header的waitStates为0，CAS设置成了-1（Node.SIGNAL），表明此时线程的状态已经进入阻塞前提了，接下来回到acquireQueued方法的自旋位置，一个for循环后继续走到了shouldParkAfterFailedAcquire放，这个时候返回true，接下来我们看parkAndCheckInterrupt方法的源码，parkAndCheckInterrupt方法代码很少，做法也是比较简单就是让当前线程thraed2进入阻塞。
 
 ````
 private final boolean parkAndCheckInterrupt() {
@@ -340,7 +343,7 @@ private final boolean parkAndCheckInterrupt() {
     }
 ````
  
-
+ 接下来继续看acquireQueued方法里面的最后finally语句里面的cancelAcquire方法，这个方法所做的事情就是在线程被中断，抛出中断异常的时候取消这次获取锁。下面给你一张图方便分析。
 
 ````
 private void cancelAcquire(Node node) {
@@ -367,6 +370,7 @@ private void cancelAcquire(Node node) {
         } else {
             //<2>当前node既不是head也不是tail
             int ws;
+            //这个长长的if其实就是判断pred不为head,waitStatus=-1(等待调用unpark()方法能激活自己的node)
             if (pred != head &&
                 ((ws = pred.waitStatus) == Node.SIGNAL ||
                  (ws <= 0 && compareAndSetWaitStatus(pred, ws, Node.SIGNAL))) &&
@@ -385,9 +389,84 @@ private void cancelAcquire(Node node) {
     }
 ````
 
+![](../../resources/image/ReentrantLock/cancelAcquire.jpg)
+ 
+ 结合上面的图来分析这段代码，可以看出这个方法主要是node出队，针对Node是head、tail、既不是head也不是tail分了三种情况处理逻辑，仔细阅读源码都可以理解。
 
+ 到此位置，我们再回到thread2，此时的thread2已经进入线程阻塞，为了方便我们分析，假设另一个线程同时重复了thread2的操作进入队列也被阻塞了，如下图。
 
+ ![](../../resources/image/ReentrantLock/thread3Entry.jpg)
 
+### unLock
+ 
+ 假如此时thread1执行到了unLock方法，接下来我们看解锁的源码。
+
+![](../../resources/image/ReentrantLock/unLock_time.png)
+
+````
+public void unlock() {
+        sync.release(1);
+    }
+````
+
+````
+public final boolean release(int arg) {
+        if (tryRelease(arg)) {
+            Node h = head;
+            //唤醒正在等待的header
+            if (h != null && h.waitStatus != 0)
+                unparkSuccessor(h);
+            return true;
+        }
+        return false;
+    }
+````
+
+````
+protected final boolean tryRelease(int releases) {
+            //每次重入+1，unLock的时候-1
+            int c = getState() - releases;
+            //保证了加锁和释放锁必须是同一个线程。
+            if (Thread.currentThread() != getExclusiveOwnerThread())
+                throw new IllegalMonitorStateException();
+            boolean free = false;
+            if (c == 0) {
+                free = true;
+                //释放node里面的thread引用
+                setExclusiveOwnerThread(null);
+            }
+            //更新node的状态
+            setState(c);
+            return free;
+        }
+````
+
+````
+private void unparkSuccessor(Node node) {
+        //ws<0表明正在等待获取锁
+        int ws = node.waitStatus;
+        if (ws < 0)
+            //更新状态为持有锁
+            compareAndSetWaitStatus(node, ws, 0);
+
+        //这里要理解为什么真正的解锁对象是header.next.
+        //其实header永远是一个未持有线程的对象，从一开始调用enq(final Node node) 方法的时候，header是new Node(),当持有锁的线程释放的时候，唤醒了header的next线程，next线程被唤醒后，在acquireQueued方法中自旋直到获得锁，获得锁后其Node被设置成了header,当这个线程执行完后又要释放，node的引用的thread设置成了null，着里永远保证了header为空，或者其持有线程已经释放锁。
+        Node s = node.next;
+        //s为空的时候或者，或者node被取消的情况
+        if (s == null || s.waitStatus > 0) {
+            s = null;
+            //倒序遍历找到正在等待被唤醒的node的线程
+            for (Node t = tail; t != null && t != node; t = t.prev)
+                if (t.waitStatus <= 0)
+                    s = t;
+        }
+        if (s != null)
+            //唤醒对应node的线程
+            LockSupport.unpark(s.thread);
+    }
+````
+
+ unLock的逻辑相对比较简单，不顾想对每一行代码都理解清楚，必须要对加锁的逻辑都理解清楚，以及header是如何变化的，在什么时候headr引用更新，还有就是waitStatus是如何变化的。这里我们分别总结一下这个两个属性的变化过程。
 
 # 参考
 * [ReentrantLock解析](http://blog.csdn.net/yanlinwang/article/details/40450769)
