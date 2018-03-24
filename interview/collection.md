@@ -10,3 +10,5 @@ ArrayList LinkedList HashMap LinkedHashMap WeakHashMap TreeMap
 
 * [学生党如何拿到阿里技术offer： 《阿里巴巴常考面试题及汇总答案（Java方向）下篇》](https://yq.aliyun.com/articles/7468)
 * [最有价值的开源项目](https://gitee.com/gvp)
+
+* [【干货】BAT面试经验分享会实录](https://mp.weixin.qq.com/s/xi1a4BV38_2xrK58rDnsjQ)
