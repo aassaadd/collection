@@ -4,12 +4,11 @@ ReentrantLock源码分析
 # 概述
  在JAVA中通常实现锁有两种方式，一种是synchronized关键字，另一种是Lock接口。synchronized是基于jvm层面实现的，Lock是基于jdk底层实现，接下来主要来分析ReentrantLock源码，理解ReentrantLock实现原理。 
 
- 为了理解锁的重要性和存在的意义，首先应该在思考以下几个问题。 
+ 为了理解锁的重要性和存在的意义，首先应该先思考以下几个问题，边思考边去阅读源码。 
 
  1. 程序中为什么要使用锁？
  2. 常见实现锁的方法，你知道的有哪些？
  3. Lock与synchronized的区别在哪里？
- 4. Lock锁定的主体是谁，谁是Lock拥有者？
 
 # ReentrantLock源码
  ReentrantLock类在java.util.concurrent.locks包中，它的上一级的包java.util.concurrent主要是常用的并发控制类，它是基于AQS（AbstractQueuedSynchronizer）实现的，这里先不说那么多原理，那么，我们就从AbstractQueuedSynchronizer的其中一个实现类ReentrantLock说起，理解AQS的实现原理，先来看看他们直接的关系。
@@ -533,6 +532,10 @@ protected final boolean tryAcquire(int acquires) {
 假设线程A持有一个锁，并且线程B请求这个锁。由于锁被A持有，因此B将被挂起。当A释放锁时，B将被唤醒，因此B会再次尝试获取这个锁。与此同时，如果线程C也请求这个锁，那么C很可能会在B被完全唤醒之前获得、使用以及释放这个锁。这样就是一种双赢的局面：B获得锁的时刻并没有推迟，C更早的获得了锁，并且吞吐量也提高了。
 
 > 当持有锁的时间相对较长或者请求锁的平均时间间隔较长，应该使用公平锁。在这些情况下，插队带来的吞吐量提升（当锁处于可用状态时，线程却还处于被唤醒的过程中）可能不会出现。
+
+### 总结
+
+ 要理解知识点光看别人写的文章不行，还要自己去仔细阅读分析源码才能真正掌握知识点，理解的更深刻，我也是刚刚开始看源码，边学习边理解。
 
 
 # 参考
