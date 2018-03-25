@@ -13,8 +13,8 @@ ReentrantLock源码分析
 # ReentrantLock源码
  ReentrantLock类在java.util.concurrent.locks包中，它的上一级的包java.util.concurrent主要是常用的并发控制类，它是基于AQS（AbstractQueuedSynchronizer）实现的，这里先不说那么多原理，那么，我们就从AbstractQueuedSynchronizer的其中一个实现类ReentrantLock说起，理解AQS的实现原理，先来看看他们直接的关系。
 
-![图1](../../resources/image/Sync结构.png)图1
-![图2](../../resources/image/ReentranLock内部类Sync.png)图2
+![图1](https://raw.githubusercontent.com/moxingwang/collection/master/resources/image/Sync结构.png)图1
+![图2](https://raw.githubusercontent.com/moxingwang/collection/master/resources/image/ReentranLock内部类Sync.png)图2
 
  ReentrantLock类的API调用都委托给一个静态内部类Sync，该类继承了AbstractQueuedSynchronizer类；而Sync分表有两个子类FairSync和NonfairSync，这也是我们常说的公平锁与非公平锁，他们两者有什么区分呢？我们先从非公平锁NonfairSync开始分析，最后再总结他们之间的异同。
 
@@ -124,7 +124,7 @@ static final class NonfairSync extends Sync {
 
  着里的方法调用比较复杂，首先我们给一张图，说明这些方法都在哪些类中。
 
- ![](../../resources/image/非公平锁qcquire调用图.png)
+ ![](https://raw.githubusercontent.com/moxingwang/collection/master/resources/image/非公平锁qcquire调用图.png)
 
  先来看ReentrantLock中的nonfairTryAcquire方法，源码如下：
 
@@ -270,7 +270,7 @@ static final class Node {
 ````
 
  继续说线程2在【代码块1】的执行位置，addWaiter执行完后，此时AQS的链表应该是这样一个结构。
-  ![](../../resources/image/ReentrantLock/thread2Entry.jpg)
+  ![](https://raw.githubusercontent.com/moxingwang/collection/master/resources/image/ReentrantLock/thread2Entry.jpg)
  
  链表中的head是一个空的node，tail引用线程2，在看acquireQueued方法的源码。
 
@@ -393,19 +393,19 @@ private void cancelAcquire(Node node) {
     }
 ````
 
-![](../../resources/image/ReentrantLock/cancelAcquire.jpg)
+![](https://raw.githubusercontent.com/moxingwang/collection/master/resources/image/ReentrantLock/cancelAcquire.jpg)
  
  结合上面的图来分析这段代码，可以看出这个方法主要是node出队，针对Node是head、tail、既不是head也不是tail分了三种情况处理逻辑，仔细阅读源码都可以理解。
 
  到此位置，我们再回到thread2，此时的thread2已经进入线程阻塞，为了方便我们分析，假设另一个线程同时重复了thread2的操作进入队列也被阻塞了，如下图。
 
- ![](../../resources/image/ReentrantLock/thread3Entry.jpg)
+ ![](https://raw.githubusercontent.com/moxingwang/collection/master/resources/image/ReentrantLock/thread3Entry.jpg)
 
 ### unLock
  
  假如此时thread1执行到了unLock方法，接下来我们看解锁的源码。
 
-![](../../resources/image/ReentrantLock/unLock_time.png)
+![](https://raw.githubusercontent.com/moxingwang/collection/master/resources/image/ReentrantLock/unLock_time.png)
 
 ````
 public void unlock() {
@@ -472,7 +472,7 @@ private void unparkSuccessor(Node node) {
 
  unLock的逻辑相对比较简单，不过想对每一行代码都理解清楚，必须要对加锁的逻辑都理解清楚，以及header是如何变化的，在什么时候headr引用更新，还有就是waitStatus是如何变化的。waitStatus的变化稍微复杂一点。这里我们分别总结一下这个属性的变化过程。
 
- ![](../../resources/image/ReentrantLock/waitStatusChange.jpg)
+ ![](https://raw.githubusercontent.com/moxingwang/collection/master/resources/image/ReentrantLock/waitStatusChange.jpg)
 
 ### 非公平锁和公平锁的区别
 
