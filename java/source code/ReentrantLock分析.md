@@ -105,10 +105,12 @@ static final class NonfairSync extends Sync {
 ````
 
  * compareAndSetState做了什么？
- > compareAndSetState方法是贯穿于整个ReentrantLock实现原理的重中之重，理解这个方法必须先要理解CAS的原理，这里简单的说一下CAS原理。比较和替换是设计并发算法时用到的一种技术。简单来说，比较和替换是使用一个期望值和一个变量的当前值进行比较，如果当前变量的值与我们期望的值相等，就使用一个新值替换当前变量的值。在JAVA中CAS的操作被封装到了Unsafe这个类中，看源码的时候常常看到以compareAndSwap打头的方法，看到这样的方法，不必要大惊小怪，原理都一样，都是CAS操作。并且这些方法都是native方法，利用JNI来完成CPU指令的操作,JAVA的CAS最终利用了CPU的原子操作来保证了JAVA原子操作。
+ 
+  compareAndSetState方法是贯穿于整个ReentrantLock实现原理的重中之重，理解这个方法必须先要理解CAS的原理，这里简单的说一下CAS原理。比较和替换是设计并发算法时用到的一种技术。简单来说，比较和替换是使用一个期望值和一个变量的当前值进行比较，如果当前变量的值与我们期望的值相等，就使用一个新值替换当前变量的值。在JAVA中CAS的操作被封装到了Unsafe这个类中，看源码的时候常常看到以compareAndSwap打头的方法，看到这样的方法，不必要大惊小怪，原理都一样，都是CAS操作。并且这些方法都是native方法，利用JNI来完成CPU指令的操作,JAVA的CAS最终利用了CPU的原子操作来保证了JAVA原子操作。
  
  * setExclusiveOwnerThread做了什么？ 
-> setExclusiveOwnerThread只是一个简单的set操作，他更新了rLock中的exclusiveOwnerThread属性，exclusiveOwnerThread是AQS类中的一个实例变量（"private transient Thread exclusiveOwnerThread;"）用来引用当前锁的持有者。
+
+ setExclusiveOwnerThread只是一个简单的set操作，他更新了rLock中的exclusiveOwnerThread属性，exclusiveOwnerThread是AQS类中的一个实例变量（"private transient Thread exclusiveOwnerThread;"）用来引用当前锁的持有者。
 
  此时假设thread1还没有执行完到unlock，即还未释放锁，另一个线程thread2进入，那么thread2首先会进行抢占式的去获取锁调用compareAndSetState，此时thread1还未释放锁，compareAndSetState方法返回false，thread2抢占锁失败。接下来调用acquire方法，此方法在AbstractQueuedSynchronizer中，源码如下。
 
@@ -157,9 +159,12 @@ final boolean nonfairTryAcquire(int acquires) {
 ````
 
 * state
-> state是AQS中的一个实例变量（private volatile int state;），他主要负责记录是否有线程持有锁，以及同一个线程重入的次数。当state=0的时候表示没有线程持有锁，state>0表示已有线程持有锁，他的值就表示重入的次数。当然了state是基于CAS原子操作的，compareAndSetState方法就是用来修改state的值。
+
+ state是AQS中的一个实例变量（private volatile int state;），他主要负责记录是否有线程持有锁，以及同一个线程重入的次数。当state=0的时候表示没有线程持有锁，state>0表示已有线程持有锁，他的值就表示重入的次数。当然了state是基于CAS原子操作的，compareAndSetState方法就是用来修改state的值。
+
 * 理解自旋锁和重入锁
-> [java的可重入锁用在哪些场合？](https://www.zhihu.com/question/23284564)
+ 
+ [java的可重入锁用在哪些场合？](https://www.zhihu.com/question/23284564)
 
  线程2进入nonfairTryAcquire方法后，此时state为1，getExclusiveOwnerThread为线程1，最终return false，回到【代码块1】线程2会执行到『acquireQueued(addWaiter(Node.EXCLUSIVE), arg)』这里，代码会先走到addWaiter方法，我们先看看addWaiter的源码。
 
@@ -470,6 +475,66 @@ private void unparkSuccessor(Node node) {
 
  ![](../../resources/image/ReentrantLock/waitStatusChange.jpg)
 
+### 非公平锁和公平锁的区别
+
+ 不看源码真的不好理解他们两者的区别，假如你去百度搜索"ReentrantLock 公平锁和非公平锁的区别"，去看好多帖子，可能会看的云里雾里各种举例子，还不如直接上代码理解的快。他们两者的区别主要在于tryAcquire方法，NonfairSync调用调用tryAcquire方法后，然后调用到了nonfairTryAcquire方法。下面贴出源码。
+
+````
+final boolean nonfairTryAcquire(int acquires) {
+            final Thread current = Thread.currentThread();
+            int c = getState();
+            if (c == 0) {
+                //直接插队
+                if (compareAndSetState(0, acquires)) {
+                    setExclusiveOwnerThread(current);
+                    return true;
+                }
+            }
+            else if (current == getExclusiveOwnerThread()) {
+                int nextc = c + acquires;
+                if (nextc < 0) // overflow
+                    throw new Error("Maximum lock count exceeded");
+                setState(nextc);
+                return true;
+            }
+            return false;
+        }
+````
+
+````
+protected final boolean tryAcquire(int acquires) {
+            final Thread current = Thread.currentThread();
+            int c = getState();
+            if (c == 0) {
+                //hasQueuedPredecessors检测当前面没有排在该节点（Node）前面
+                if (!hasQueuedPredecessors() &&
+                    compareAndSetState(0, acquires)) {
+                    setExclusiveOwnerThread(current);
+                    return true;
+                }
+            }
+            else if (current == getExclusiveOwnerThread()) {
+                int nextc = c + acquires;
+                if (nextc < 0)
+                    throw new Error("Maximum lock count exceeded");
+                setState(nextc);
+                return true;
+            }
+            return false;
+        }
+````
+
+ 这里引用用其它文章的内容说明非公平锁的优势([ReentrantLock公平锁与非公平锁](https://blog.csdn.net/caomiao2006/article/details/53385669))。
+> 在公平的锁上，线程按照他们发出请求的顺序获取锁，但在非公平锁上，则允许‘插队’：当一个线程请求非公平锁时，如果在发出请求的同时该锁变成可用状态，那么这个线程会跳过队列中所有的等待线程而获得锁。     非公平的ReentrantLock 并不提倡 插队行为，但是无法防止某个线程在合适的时候进行插队。
+
+> 在公平的锁中，如果有另一个线程持有锁或者有其他线程在等待队列中等待这个所，那么新发出的请求的线程将被放入到队列中。而非公平锁上，只有当锁被某个线程持有时，新发出请求的线程才会被放入队列中。
+
+> 非公平锁性能高于公平锁性能的原因：在恢复一个被挂起的线程与该线程真正运行之间存在着严重的延迟。
+假设线程A持有一个锁，并且线程B请求这个锁。由于锁被A持有，因此B将被挂起。当A释放锁时，B将被唤醒，因此B会再次尝试获取这个锁。与此同时，如果线程C也请求这个锁，那么C很可能会在B被完全唤醒之前获得、使用以及释放这个锁。这样就是一种双赢的局面：B获得锁的时刻并没有推迟，C更早的获得了锁，并且吞吐量也提高了。
+
+> 当持有锁的时间相对较长或者请求锁的平均时间间隔较长，应该使用公平锁。在这些情况下，插队带来的吞吐量提升（当锁处于可用状态时，线程却还处于被唤醒的过程中）可能不会出现。
+
+
 # 参考
 * [ReentrantLock解析](http://blog.csdn.net/yanlinwang/article/details/40450769)
 * [AbstractQueuedSynchronizer源码剖析（六）- 深刻解析与模拟线程竞争资源](http://blog.csdn.net/pfnie/article/details/53191892)
@@ -482,4 +547,5 @@ private void unparkSuccessor(Node node) {
 * [Java AbstractQueuedSynchronizer源码阅读3-cancelAcquire()](https://www.jianshu.com/p/01f2046aab64)
 * [Java线程中断的本质和编程原则](http://blog.csdn.net/dlite/article/details/4218105)
 * [AQS的原理浅析](http://ifeve.com/java-special-troops-aqs/)
+* [ReentrantLock公平锁与非公平锁](https://blog.csdn.net/caomiao2006/article/details/53385669)
 
