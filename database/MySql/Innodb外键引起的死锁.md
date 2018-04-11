@@ -1,6 +1,6 @@
-# 现象
- 最近项目中突然发现一次锁现象，订单多次付款，最后一次退款。退款完成后支付系统手动第三方回调，支付系统多次通知订单系统，订单系统在这个过程中发生死锁，下面给出订单系统表结构做模拟死锁。
+最近项目中突然发现一次锁现象，订单多次付款，最后一次退款。退款完成后支付系统手动第三方回调，支付系统多次通知订单系统，订单系统在这个过程中发生死锁，下面给出订单系统表结构做模拟死锁。
 
+# 情景
 * 数据库结构
 ````
 create database test_deadlock default character set utf8 collate utf8_general_ci;
@@ -42,8 +42,38 @@ commit ;
 * 第二个事务
 ````
 start transaction;
-  insert into db_payment(order_id, payment_amount) values (1,100);
+  insert into db_payment(order_id, payment_amount) values (1,200);
   update db_order set order_status=7 where id=1;
 commit ;
 ````
 
+# 模拟
+ 为了方便模拟，这个使用idea连接数据库分别打开两个console，并且开启Manual模式。
+
+ * 事务A
+  
+  ![图2](../../resources/image/死锁事务模拟2.png)
+
+ * 事务B
+  
+  ![图1](../../resources/image/死锁事务模拟.jpg)
+
+  这里我们使用TA(1)表示执行第一个事务的第一行代码。首先我们执行TA(1)和TA(2)，然后执行TB(1),TB(2)，然后在执行TA(3),再执行TB(3),此时得到结构如下。
+
+````
+[40001][1213] Deadlock found when trying to get lock; try restarting transaction
+````
+
+ 可以看出InnoDB检测到死锁。
+
+ 接下来我们删除外键，执行操作
+
+````
+ alter table db_payment drop foreign key fk_order_id;
+````
+
+ 然后再次执行上面的操作，操作过程分别问TA(1)，TA(2)，TB(1)，TB(2)，TA(3)，TB(3)，TA(4),TB(4),最后两个事务都完成执行。
+
+  可以看出一个有外键和一个没有外键的区别。
+
+# 分析原因
