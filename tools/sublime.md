@@ -6,3 +6,6 @@
 
 ## 搜索技巧
 * 搜索文件 ctrl + p
+
+## markdown
+* 快捷键 ctrl + alt + o
