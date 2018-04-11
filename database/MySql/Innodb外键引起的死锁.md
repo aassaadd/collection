@@ -80,6 +80,8 @@ commit ;
 * 核心知识点
  为了理解上文中死锁的原因，必须要理解清楚Innodb的锁的机制，MySQL锁的机制文章很多，可以去官网找文档或者阅读他人的博客，这里给出一篇博客[快速了解innodb锁概念](https://www.cnblogs.com/janehoo/p/5603983.html)， [快速了解innodb锁概念](https://www.cnblogs.com/janehoo/p/5603983.html)以便于我们理解本文中的死锁问题。
 
+![图3](../../resources/image/MySQL_deadlock.jpg)
+
 
  
 
