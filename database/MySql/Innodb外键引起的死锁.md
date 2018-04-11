@@ -1,7 +1,7 @@
 最近项目中突然发现一次锁现象，订单多次付款，最后一次退款。退款完成后支付系统手动第三方回调，支付系统多次通知订单系统，订单系统在这个过程中发生死锁，下面给出订单系统表结构做模拟死锁。
 
 # 情景
-* 数据库结构
+* 数据库结构(5.7.13)
 ````
 create database test_deadlock default character set utf8 collate utf8_general_ci;
 
@@ -77,3 +77,9 @@ commit ;
   可以看出一个有外键和一个没有外键的区别。
 
 # 分析原因
+* 核心知识点
+ 
+
+# 参考
+* [Mysql中那些锁机制之InnoDB](https://blog.csdn.net/zhanghongzheng3213/article/details/51721903)
+* [MySQL自增长与锁的进一步认识](https://blog.csdn.net/poxiaonie/article/details/72899975)
