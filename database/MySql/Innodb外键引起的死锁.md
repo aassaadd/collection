@@ -78,8 +78,14 @@ commit ;
 
 # 分析原因
 * 核心知识点
+ 为了理解上文中死锁的原因，必须要理解清楚Innodb的锁的机制，MySQL锁的机制文章很多，可以去官网找文档或者阅读他人的博客，这里给出一篇博客[快速了解innodb锁概念](https://www.cnblogs.com/janehoo/p/5603983.html)， [快速了解innodb锁概念](https://www.cnblogs.com/janehoo/p/5603983.html)以便于我们理解本文中的死锁问题。
+
+
  
 
 # 参考
 * [Mysql中那些锁机制之InnoDB](https://blog.csdn.net/zhanghongzheng3213/article/details/51721903)
 * [MySQL自增长与锁的进一步认识](https://blog.csdn.net/poxiaonie/article/details/72899975)
+* [MySQL InnoDB自增长锁和外键锁](http://www.ywnds.com/?p=9129)
+* [快速了解innodb锁概念](https://www.cnblogs.com/janehoo/p/5603983.html)
+* [MySQL 共享锁、排他锁、意向锁解析-对意向锁解释的清楚](http://blog.sina.com.cn/s/blog_a1e9c7910102vkg4.html)
