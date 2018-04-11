@@ -80,9 +80,14 @@ commit ;
 * 核心知识点
  为了理解上文中死锁的原因，必须要理解清楚Innodb的锁的机制，MySQL锁的机制文章很多，可以去官网找文档或者阅读他人的博客，这里给出一篇博客[快速了解innodb锁概念](https://www.cnblogs.com/janehoo/p/5603983.html)， [快速了解innodb锁概念](https://www.cnblogs.com/janehoo/p/5603983.html)以便于我们理解本文中的死锁问题。
 
+* 分析
 ![图3](../../resources/image/MySQL_deadlock.jpg)
 
+ 我们用这一张图分析完为什么死锁，在第5步和第6步的时候发生了相互等待，Innodb在TB中检查到了死锁，反过来思考，加入数据库删除了外键，在第2步我第3步做insert db_payment操作的时候都没有对db_order id=1的这行数据加入S锁，那么就没有步骤5对步骤4的S锁等待，显然这个执行过程只有步骤6对步骤5等待，TAcommit之后，TB就会获得锁执行下一步commit。
 
+# 总结
+ 
+ 使用MySQL开发过程中需要对锁的知识理解清楚，不然在业务代码中就有可能产生死锁，尤其是要知道Innodb使用外键的时候的锁机制，才能更好的避免生产环境发生死锁，造成严重bug。
  
 
 # 参考
