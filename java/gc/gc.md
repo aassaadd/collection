@@ -1,2 +1,15 @@
 
+* 年轻代复制算法(gc的时候回收掉可以回收的，剩余的做移动操作)
+* 
+
+
+
+
 * [Java Hotspot G1 GC的一些关键技术](https://tech.meituan.com/g1.html)
+* [[JVM]Java内存区域与垃圾收集 - 思维导图](https://www.jianshu.com/p/088d71f20a47)
+* [聊聊JVM的年轻代](http://ifeve.com/jvm-yong-generation/)
+* [VisualVM安装插件报错](https://blog.csdn.net/xionglangs/article/details/77603343)
+* [Java GC系列：Java垃圾回收详解](https://my.oschina.net/dyyweb/blog/398651)
+* [java 8 JVM性能优化-年轻代的理解](http://itindex.net/detail/53159-java-jvm-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96)
+* [JVM内存结构--新生代及新生代里的两个Survivor区(下一轮S0与S1交换角色，如此循环往复)、常见调优参数](https://blog.csdn.net/u012799221/article/details/73180509)
+* [jvm:停止复制、标记清除、标记整理算法（垃圾回收）](https://blog.csdn.net/u010841296/article/details/50945390)
