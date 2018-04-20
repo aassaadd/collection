@@ -9,6 +9,8 @@
 * jstat
 * jvisualvm(Visual GC插件)
 
+## Metaspace
+
 
 ## 问题
 * gc触发条件？
@@ -33,3 +35,4 @@
 * [GC算法 垃圾收集器](https://www.cnblogs.com/ityouknow/p/5614961.html)
 * [GC详解及Minor GC和Full GC触发条件总结](https://blog.csdn.net/yhyr_ycy/article/details/52566105)
 * [Major GC和Full GC的区别是什么？触发条件呢？](https://www.zhihu.com/search?type=content&q=full%20gc)
+* [Java PermGen 去哪里了?](http://ifeve.com/java-permgen-removed/)
