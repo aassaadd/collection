@@ -1,3 +1,12 @@
+
+## 什么是垃圾
+
+## 分代回收
+
+## GC 步骤
+https://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/cms.html
+
+
 ## GC算法
  GC算法用来标记或者筛选哪些对象需要回收或标记或移动。
 
@@ -24,6 +33,7 @@
 
 
 
+* [Java Platform, Standard Edition HotSpot Virtual Machine Garbage Collection Tuning Guide](https://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/toc.html)
 * [Java Hotspot G1 GC的一些关键技术](https://tech.meituan.com/g1.html)
 * [[JVM]Java内存区域与垃圾收集 - 思维导图](https://www.jianshu.com/p/088d71f20a47)
 * [聊聊JVM的年轻代](http://ifeve.com/jvm-yong-generation/)
@@ -36,3 +46,4 @@
 * [GC详解及Minor GC和Full GC触发条件总结](https://blog.csdn.net/yhyr_ycy/article/details/52566105)
 * [Major GC和Full GC的区别是什么？触发条件呢？](https://www.zhihu.com/search?type=content&q=full%20gc)
 * [Java PermGen 去哪里了?](http://ifeve.com/java-permgen-removed/)
+* [JVM Run-Time Data Areas](https://www.programcreek.com/2013/04/jvm-run-time-data-areas/)
