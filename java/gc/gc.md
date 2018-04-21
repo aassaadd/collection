@@ -32,7 +32,7 @@ https://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/cms.html
 #### G1 GC
 
 
-
+* [javase-books](https://docs.oracle.com/javase/8/javase-books.htm)
 * [Java Platform, Standard Edition HotSpot Virtual Machine Garbage Collection Tuning Guide](https://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/toc.html)
 * [Java Hotspot G1 GC的一些关键技术](https://tech.meituan.com/g1.html)
 * [[JVM]Java内存区域与垃圾收集 - 思维导图](https://www.jianshu.com/p/088d71f20a47)
