@@ -1,3 +1,7 @@
+## java runtime data areas
+
+![](https://raw.githubusercontent.com/moxingwang/collection/master/resources/image/gc/JVM-runtime-data-area.jpg)
+
 
 ## 什么是垃圾
 
