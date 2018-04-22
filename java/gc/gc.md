@@ -71,7 +71,7 @@
 
  ![](https://raw.githubusercontent.com/moxingwang/collection/master/resources/image/gc/复制算法原理图.png)
 
-### 标记-清楚（Mark-Sweep）算法
+### 标记-清除（Mark-Sweep）算法
 
  标记－清除（Mark-Sweep）算法是最基础的垃圾收集算法，后续的收集算法都是基于它的思路并对其不足进行改进而得到的。顾名思义，算法分成“标记”、“清除”两个阶段：首先标记出所有需要回收的对象，在标记完成后统一回收所有被标记的对象，标记过程在前一节讲述对象标记判定时已经讲过了。
 
