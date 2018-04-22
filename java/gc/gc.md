@@ -28,7 +28,7 @@
 
 * Method Area
 
- 方法区（Method Area）与Java堆一样，是各个线程共享的内存区域，它用于存储已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。 
+ 方法区（Method Area）与Java堆一样，是各个线程共享的内存区域，它用于存储已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。
 
  JVM 中，程序计数器、虚拟机栈、本地方法栈都是随线程而生随线程而灭，栈帧随着方法的进入和退出做入栈和出栈操作，实现了自动的内存清理，因此，我们的内存垃圾回收主要集中于 Java堆和方法区中，在程序运行期间，这部分内存的分配和使用都是动态的，所以可以看出jvm gc主要是针对堆和方法区这块的内存做回收。
 
@@ -253,8 +253,8 @@
 
 * 总结
 
-| 收集器 | 串行/并行/并发 | 新生代/老年代 | 算法 | 目标 | 适合场景 |
-| - | - | - | - | - | - |
+| 收集器 | 串行/并行/并发 | 新生代/老年代 | 算法 | 目标 | 适合场景 | GC触发条件 |
+| - | - | - | - | - | - | - |
 | Serial | 串行 | 新生代 | 复制算法 | 响应速度优先 | 单CPU环境下的Client模式 |
 | Serial Old | 串行 | 老年代 | 标记-整理 | 响应速度优先 | 单CPU环境下的Client模式、CMS的后备预案|
 | ParNew | 并行 | 新生代 | 复制算法 | 响应速度优先 | 多CPU环境时在Server模式下与CMS配合 |
@@ -267,42 +267,20 @@
 ## 动手透视GC知识点    
 
 
-
-
 ## finalize()方法
 
-## GC 步骤
-https://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/cms.html
-
-
-## GC算法
- GC算法用来标记或者筛选哪些对象需要回收或标记或移动。
-
-* 年轻代复制算法(gc的时候回收掉可以回收的，剩余的做移动操作)
-
-
-## GC触发条件
-
-## gc研究工具
-* jps
-* jmap
-* jstat
-* jvisualvm(Visual GC插件)
 
 ## Metaspace
 
 
 ## 问题
 * gc触发条件？
+* jps
+* jmap
+* jstat
+* jvisualvm(Visual GC插件)
 
-## Hotspot JVM GC
-#### Serial GC
-
-#### Parallel GC
-#### CMS GC
-#### G1 GC
-
-
+## 参考
 * [javase-books](https://docs.oracle.com/javase/8/javase-books.htm)
 * [Java Platform, Standard Edition HotSpot Virtual Machine Garbage Collection Tuning Guide](https://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/toc.html)
 * [Java Hotspot G1 GC的一些关键技术](https://tech.meituan.com/g1.html)
