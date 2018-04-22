@@ -1,6 +1,9 @@
- 最近一直在继续理解jvm gc，为什么说是继续理解呢？记得上学的时候就知道有gc这一回事，工作到现在快四年了一直不断不断的coding业务代码，对java的研究也随着多少个夜班被遗忘在了备忘录里，想必也有不少朋友有同样的感受。接下来总结我对gc相关的理解，一起探索吧。
+## 哪些内存区域要被回收
+### Java程序的编译和执行过程
 
-## Java runtime data areas
+![](https://raw.githubusercontent.com/moxingwang/collection/master/resources/image/gc/执行和编译过程.png)
+
+### Java runtime data areas
  Java虚拟机规范定义了Java虚拟机在执行Java程序过程中会把内存区域划分为若干个不同的数据区域，这些区域各有各自的用途、创建和销毁时间。
 
 ![](https://raw.githubusercontent.com/moxingwang/collection/master/resources/image/gc/JVM-Runtime-data-area.jpg)
@@ -27,10 +30,13 @@
 
  方法区（Method Area）与Java堆一样，是各个线程共享的内存区域，它用于存储已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。 
 
+ JVM 中，程序计数器、虚拟机栈、本地方法栈都是随线程而生随线程而灭，栈帧随着方法的进入和退出做入栈和出栈操作，实现了自动的内存清理，因此，我们的内存垃圾回收主要集中于 Java堆和方法区中，在程序运行期间，这部分内存的分配和使用都是动态的，所以可以看出jvm gc主要是针对堆和方法区这块的内存做回收。
 
+## 内存垃圾
+* 什么是内存垃圾
+* 为什要回收
 
-
-## 什么是垃圾
+## 判断对象是否存活
 
 ## 分代回收
 
@@ -78,3 +84,4 @@ https://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/cms.html
 * [Major GC和Full GC的区别是什么？触发条件呢？](https://www.zhihu.com/search?type=content&q=full%20gc)
 * [Java PermGen 去哪里了?](http://ifeve.com/java-permgen-removed/)
 * [JVM Run-Time Data Areas](https://www.programcreek.com/2013/04/jvm-run-time-data-areas/)
+* [jvm优化必知系列——监控工具](https://my.oschina.net/u/1859679/blog/1552290)
