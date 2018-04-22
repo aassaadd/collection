@@ -34,11 +34,35 @@
 
 ## 内存垃圾
 * 什么是内存垃圾
-* 为什要回收
+
+ 简单的说就是那些不再被引用的对象或无用的信息对象。
+
+* 垃圾回收的意义
+
+ 垃圾回收可以有效的防止内存泄露，有效的使用空闲的内存。
 
 ## 判断对象是否存活
+ 首先，内存中的垃圾要被回收要解决的第一个问题就是如何判断这些对象是否还存活是否还有用，jvm垃圾回收器通常有两种算法来决定对象是否还存活需要回收。
+
+* 引用计数
+
+ 每个对象有一个引用计数属性，新增一个引用时计数加1，引用释放时计数减1，计数为0时可以回收。此方法简单，无法解决对象相互循环引用的问题。
+
+* 可达分析
+
+ 从GC Roots开始向下搜索，搜索所走过的路径称为引用链。当一个对象到GC Roots没有任何引用链相连时，则证明此对象是不可用的。不可达对象。在Java语言中，GC Roots包括：虚拟机栈中引用的对象，方法区中类静态属性实体引用的对象，方法区中常量引用的对象，本地方法栈中JNI引用的对象。
+
+![](https://raw.githubusercontent.com/moxingwang/collection/master/resources/image/gc/gcroots可达.png)
+
+## Garbage Collection
+  Java垃圾回收是一个自动运行的管理程序运行时使用的内存的过程。通过GC的自动执行JVM将程序员从申请和释放内存的繁重操作中解放出来。那么Java的自动内存管理最终可以归结为自动化地解决了两个问题：
+
+1. 给对象分配内存
+2. 回收分配给对象的内存
 
 ## 分代回收
+
+## finalize()方法
 
 ## GC 步骤
 https://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/cms.html
@@ -48,6 +72,9 @@ https://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/cms.html
  GC算法用来标记或者筛选哪些对象需要回收或标记或移动。
 
 * 年轻代复制算法(gc的时候回收掉可以回收的，剩余的做移动操作)
+
+
+## GC触发条件
 
 ## gc研究工具
 * jps
@@ -85,3 +112,5 @@ https://docs.oracle.com/javase/8/docs/technotes/guides/vm/gctuning/cms.html
 * [Java PermGen 去哪里了?](http://ifeve.com/java-permgen-removed/)
 * [JVM Run-Time Data Areas](https://www.programcreek.com/2013/04/jvm-run-time-data-areas/)
 * [jvm优化必知系列——监控工具](https://my.oschina.net/u/1859679/blog/1552290)
+* [怎么在面试时回答Java垃圾回收机制（GC）相关问题？](https://www.zhihu.com/question/35164211)
+* [深入理解JVM(2)——GC算法与内存分配策略](https://crowhawk.github.io/2017/08/10/jvm_2/)
