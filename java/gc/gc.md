@@ -80,7 +80,7 @@
  1. 空间问题：标记清除之后会产生大量不连续的内存碎片，空间碎片太多可能会导致以后在程序运行过程中需要分配较大对象时，无法找到足够的连续内存而不得不触发另一次垃圾收集动作。
  2. 效率问题：因为内存碎片的存在，操作会变得更加费时，因为查找下一个可用空闲块已不再是一个简单操作。
 
- ![](https://raw.githubusercontent.com/moxingwang/collection/master/resources/image/gc/标记清理算法.png)
+ ![](https://raw.githubusercontent.com/moxingwang/collection/master/resources/image/gc/标记清除算法.png)
 
 ### 标记-整理（Mark-Compact）算法
 ### 分代收集（Generation Collection）算法
