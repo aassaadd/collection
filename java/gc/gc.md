@@ -1,9 +1,9 @@
 ## 哪些内存区域要被回收
 ### Java程序的编译和执行过程
 
-![](https://raw.githubusercontent.com/moxingwang/collection/master/resources/image/gc/执行和编译过程.png)
+![](https://raw.githubusercontent.com/moxingwang/collection/master/resources/image/gc/执行和编译过程1.png)
 
-### Java runtime data areas
+### 运行时数据区域
  Java虚拟机规范定义了Java虚拟机在执行Java程序过程中会把内存区域划分为若干个不同的数据区域，这些区域各有各自的用途、创建和销毁时间。
 
 ![](https://raw.githubusercontent.com/moxingwang/collection/master/resources/image/gc/JVM-Runtime-data-area.jpg)
