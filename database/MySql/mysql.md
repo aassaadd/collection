@@ -2,7 +2,7 @@
 
 
 * centOs安装
-[Centos 7 安装 MySQL](https://www.jianshu.com/p/7cccdaa2d177)
+https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-centos-7
 
 * 主从配置
 [mysql 5.7 主从同步配置（windows）](https://blog.csdn.net/natahew/article/details/71122569)
