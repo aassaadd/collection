@@ -35,4 +35,22 @@ export PATH=$PATH:$MAVEN_HOME/bin
 
 # 安装rabbitMQ
 * [CentOS 安装 Erlang](https://blog.zfanw.com/install-erlang-on-centos/) 
+* 下载rabbitMQ [Installing on RPM-based Linux (RHEL, CentOS, Fedora, openSUSE)](https://www.rabbitmq.com/install-rpm.html)
+* 安装
+````$xslt
+yum -y install rabbitmq-server-3.6.6-1.el6.noarch.rpm
+````
+* 启动web管理界面
+````$xslt
+rabbitmq-plugins enable rabbitmq_management
+````
+
+* 增加用户设置角色
+````$xslt
+rabbitmqctl add_user dev dev_user
+rabbitmqctl set_user_tags dev administrator
+rabbitmqctl set_permissions -p "/" admin "." "." ".*"
+````
+
+
 * [centos 7 安装rabbitmq 3.6.12](https://blog.csdn.net/lsb2002/article/details/78128489)
