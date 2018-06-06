@@ -63,5 +63,37 @@ rabbitmqctl set_user_tags dev administrator
 rabbitmqctl set_permissions -p "/" dev "." "." ".*"
 ````
 
+* 附 [centos 7 安装rabbitmq 3.6.12](https://blog.csdn.net/lsb2002/article/details/78128489)
 
-* [centos 7 安装rabbitmq 3.6.12](https://blog.csdn.net/lsb2002/article/details/78128489)
+
+
+# 安装Mysql
+* 查看Linux发行版本
+````$xslt
+cat /etc/redhat-release
+````
+* 下载MySQL官方的Yum Repository [Download MySQL Yum Repository](https://dev.mysql.com/downloads/repo/yum/)
+* 安装MySQL的Yum Repository
+````$xslt
+yum -y install mysql57-community-release-el7-7.noarch.rpm
+````
+* 安装MySQL数据库的服务器版本
+````$xslt
+yum -y install mysql-community-server
+````
+* 启动数据库
+````$xslt
+systemctl start  mysqld.service
+
+````
+* 获取初始密码
+````$xslt
+grep "password" /var/log/mysqld.log
+````
+* 修改root用户密码
+````$xslt
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'password';
+````
+
+
+* 附 [CentOS 7.2使用yum安装MYSQL 5.7.10](https://typecodes.com/linux/yuminstallmysql5710.html)
