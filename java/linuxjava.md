@@ -34,4 +34,5 @@ export PATH=$PATH:$MAVEN_HOME/bin
 
 
 # 安装rabbitMQ
+* [CentOS 安装 Erlang](https://blog.zfanw.com/install-erlang-on-centos/) 
 * [centos 7 安装rabbitmq 3.6.12](https://blog.csdn.net/lsb2002/article/details/78128489)
