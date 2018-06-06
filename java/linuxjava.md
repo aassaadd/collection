@@ -92,7 +92,9 @@ grep "password" /var/log/mysqld.log
 ````
 * 修改root用户密码
 ````$xslt
-ALTER USER 'root'@'localhost' IDENTIFIED BY 'password';
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'Password@123';
+update user set host = '%'  where user ='root';
+
 ````
 
 
