@@ -30,3 +30,9 @@ export MAVEN_HOME
 export PATH=$PATH:$MAVEN_HOME/bin
 ````
 * source /etc/profile
+
+
+
+# 安装rabbitMQ
+### 下载
+### 安装
