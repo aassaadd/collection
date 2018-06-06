@@ -49,7 +49,7 @@ rabbitmq-plugins enable rabbitmq_management
 ````$xslt
 rabbitmqctl add_user dev dev_user
 rabbitmqctl set_user_tags dev administrator
-rabbitmqctl set_permissions -p "/" admin "." "." ".*"
+rabbitmqctl set_permissions -p "/" dev "." "." ".*"
 ````
 
 
