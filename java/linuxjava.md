@@ -45,6 +45,17 @@ yum -y install rabbitmq-server-3.6.6-1.el6.noarch.rpm
 rabbitmq-plugins enable rabbitmq_management
 ````
 
+* 开机自动启动
+````$xslt
+systemctl enable rabbitmq-server
+````
+
+* 启动关闭
+````$xslt
+rabbitmq-server start
+rabbitmq-server stop
+````
+
 * 增加用户设置角色
 ````$xslt
 rabbitmqctl add_user dev dev_user
