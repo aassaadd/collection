@@ -94,7 +94,7 @@ grep "password" /var/log/mysqld.log
 ````$xslt
 ALTER USER 'root'@'localhost' IDENTIFIED BY 'Password@123';
 update user set host = '%'  where user ='root';
-
+flush privileges;
 ````
 
 
