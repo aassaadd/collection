@@ -97,7 +97,7 @@ update user set host = '%'  where user ='root';
 flush privileges;
 ````
 
-* 设置密码的安全级别
+* 设置密码的安全级别 附[6.5.3.2 Password Validation Options and Variables](https://dev.mysql.com/doc/refman/8.0/en/validate-password-options-variables.html)
 ````apple js
 SHOW VARIABLES LIKE 'validate_password.%';
 set global validate_password.policy=0;
