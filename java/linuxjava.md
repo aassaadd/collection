@@ -103,5 +103,13 @@ SHOW VARIABLES LIKE 'validate_password.%';
 set global validate_password.policy=0;
 ````
 
+* mysql8 ：客户端连接caching-sha2-password问题
+````apple js
+ALTER USER 'root'@'%' IDENTIFIED BY 'password' PASSWORD EXPIRE NEVER; #修改加密规则 
+ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'password'; #更新一下用户的密码 
+FLUSH PRIVILEGES; #刷新权限 
+ALTER USER 'root'@'%' IDENTIFIED BY 'password';
+````
+
 
 * 附 [CentOS 7.2使用yum安装MYSQL 5.7.10](https://typecodes.com/linux/yuminstallmysql5710.html)
