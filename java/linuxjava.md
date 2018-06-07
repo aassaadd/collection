@@ -97,5 +97,11 @@ update user set host = '%'  where user ='root';
 flush privileges;
 ````
 
+* 设置密码的安全级别
+````apple js
+SHOW VARIABLES LIKE 'validate_password.%';
+set global validate_password.policy=0;
+````
+
 
 * 附 [CentOS 7.2使用yum安装MYSQL 5.7.10](https://typecodes.com/linux/yuminstallmysql5710.html)
