@@ -90,8 +90,6 @@
     eg: sed -n '1,5p' aaa.sh
 #### ack 
     eg: ack -n ffff aaa.sh 
-#### find
-    eg:find /home -name tmp.txt 
 
 ### 日志查看
 #### head
