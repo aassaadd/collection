@@ -74,6 +74,17 @@
 
 # 本次改造
  本次业务改动的时候，本来想直接使用支持消息延时/定时消息的MQ，但是受限（公司生产环境只使用了Rabbit MQ，那么最好就是安装插件了，这还得求着架构组，并且还要一定的测试，整体麻烦，上线时间紧急还是使用其它的方式简单实现可靠）。最后想到的是使用JAVA本身的队列-DelayQueue。DelayQueue是一个无界的BlockingQueue，用于放置实现了Delayed接口的对象，其中的对象只能在其到期时才能从队列中取走。这种队列是有序的，即队头对象的延迟到期时间最长。整体架构如下。
+![](https://github.com/moxingwang/collection/blob/master/resources/image/%E6%B6%88%E6%81%AF%E5%BB%B6%E8%BF%9F%E6%94%B9%E9%80%A0%E5%90%8E.jpg?raw=true)
+## 实现流程
+* Service层创建订单成功后，把订单号和订单关闭延迟时间包装成一个对象
+````
+public class DelayQueueTaskMessage<T extends Serializable> implements Serializable, Comparable<DelayQueueTaskMessage> {
+    private Long id;//订单id
+    private int type;
+    private Date endDate;
+    private T message;
+}
+````
 
 
 
