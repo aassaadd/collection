@@ -76,7 +76,7 @@
  本次业务改动的时候，本来想直接使用支持消息延时/定时消息的MQ，但是受限（公司生产环境只使用了Rabbit MQ，那么最好就是安装插件了，这还得求着架构组，并且还要一定的测试，整体麻烦，上线时间紧急还是使用其它的方式简单实现可靠）。最后想到的是使用JAVA本身的队列-DelayQueue。DelayQueue是一个无界的BlockingQueue，用于放置实现了Delayed接口的对象，其中的对象只能在其到期时才能从队列中取走。这种队列是有序的，即队头对象的延迟到期时间最长。整体架构如下。
 ![](https://github.com/moxingwang/collection/blob/master/resources/image/%E6%B6%88%E6%81%AF%E5%BB%B6%E8%BF%9F%E6%94%B9%E9%80%A0%E5%90%8E.jpg?raw=true)
 ## 实现流程
-* Service层创建订单成功后，把订单号和订单关闭延迟时间包装成一个对象
+* Service服务创建订单成功后，把订单号和订单关闭延迟时间包装成一个对象
 ````
 public class DelayQueueTaskMessage<T extends Serializable> implements Serializable, Comparable<DelayQueueTaskMessage> {
     private Long id;//订单id
@@ -85,8 +85,43 @@ public class DelayQueueTaskMessage<T extends Serializable> implements Serializab
     private T message;
 }
 ````
+* job服务作为MQ consumer开启ACK，接收到消息后先持久化到MySQL数据库。
+````
+CREATE TABLE `db_order_task` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键，自增长，步长＝1',
+  `task_type` int(4) DEFAULT NULL COMMENT '类型 1 定时关闭',
+  `task_value` varchar(1024) DEFAULT NULL COMMENT '执行内容',
+  `task_status` tinyint(2) DEFAULT '0' COMMENT '状态 0 未执行 1成功',
+  `deadline_date` datetime DEFAULT NULL COMMENT '计划执行时间',
+  `execute_date` datetime DEFAULT NULL COMMENT '执行时间',
+  `create_date` datetime NOT NULL COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='订单任务调度表';
+````
+* job服务维护一个DelayQueue队列，通过上一步操作，task任务落地之后，再把task任务放到DelayQueue队列中（这里面其它逻辑比如说防止内存爆掉，队列元素超过阀值不再添加到队列，延迟时间过长也不用添加到队列等等），启动一个线程执行操作队列取队列元素。
+````
+private static final DelayQueue<DelayQueueTask> delayQueue = new DelayQueue<>();
+
+@PostConstruct
+public void init() {
+    Runnable task = () -> {
+        try {
+            DelayQueueTask delayQueueTask = delayQueue.take();
+            orderTaskService.execute(delayQueueTask.getMsg());
+        } catch (Exception e) {
+            logger.error("消息处理异常", e);
+        }
+    };
+    Thread consumer = new Thread(task);
+    consumer.start();
+}
+````
+* 如果延续消息到期执行成功后回写db_order_task的状态。
+* 添加一个补偿job（调度频率可以降低些，降低数据库的压力），这个job专门处理db_order_task表到期还未执行的数据（执行异常或者断电关机等等都有可能导致队列数据丢失等等），由于job是多态服务集群，必须要有分布式作业调度系统完成如 [XXL-JOB](http://www.xuxueli.com/xxl-job/#/）(保证任务不会被多态机器同时调度)。
 
 
+# 总结
+ 本文中使用MQ结合DelayQueue再使用补偿机制的实现是一个可靠安全的模型，不但减轻了job刷库的压力并且提高了任务执行的精确度，在整个过程中消息也不会丢失，简单易用，对于普通的生产应用需求是足够的。
 
 # 参考
 * [基于redis的延迟消息队列设计](https://www.cnblogs.com/peachyy/p/7398430.html)
