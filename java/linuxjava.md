@@ -33,7 +33,7 @@ export PATH=$PATH:$MAVEN_HOME/bin
 
 
 
-# 安装rabbitMQ
+# 安装RabbitMQ
 * [CentOS 安装 Erlang](https://blog.zfanw.com/install-erlang-on-centos/) 
 * 下载rabbitMQ [Installing on RPM-based Linux (RHEL, CentOS, Fedora, openSUSE)](https://www.rabbitmq.com/install-rpm.html)
 * 安装
