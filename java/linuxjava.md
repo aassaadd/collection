@@ -6,7 +6,7 @@
 * 解压：tar -zxvf 文件.tar.gz
 * 打开/etc/profile（vim /etc/profile）在最后面添加如下内容：
 ````apple js
-JAVA_HOME=/usr/java/jdk1.
+JAVA_HOME=/usr/java/jdk安装目录
 export JRE_HOME=$JAVA_HOME/jre 
 export CLASSPATH=$JAVA_HOME/lib:$JRE_HOME/lib:$CLASSPATH 
 export PATH=$JAVA_HOME/bin:$JRE_HOME/bin:$PATH
