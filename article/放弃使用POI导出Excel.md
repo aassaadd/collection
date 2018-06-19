@@ -3,7 +3,11 @@
 ![](https://github.com/moxingwang/collection/blob/master/resources/image/majorization/%E8%AE%A2%E5%8D%95%E5%AF%BC%E5%87%BA%E4%BC%98%E5%8C%96%E5%89%8D.png?raw=true)
 ![](https://github.com/moxingwang/collection/blob/master/resources/image/majorization/%E8%AE%A2%E5%8D%95%E5%AF%BC%E5%87%BA%E4%BC%98%E5%8C%96%E5%89%8Dheap.png?raw=true)
 
+ 再来看看使用POI导出本地jvisualvm的内存动态变化图。
+
+![](https://github.com/moxingwang/collection/blob/master/resources/image/majorization/poiExportOne.gif?raw=true)
+
 # 分析问题
 
 1. 导出请求耗时，排查SQL语句以及数据量。
-2. 应用内存居高不下，分析Thread Dump。
+2. 应用内存居高不下（内存在新生代未回收掉进入了老年代），分析Thread Dump。
