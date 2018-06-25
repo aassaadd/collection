@@ -1,2 +1,2 @@
-* 去重
-[Java List<Object>去掉重复对象-java8](https://blog.csdn.net/jiaobuchong/article/details/54412094)
+### 去重
+[Java List Object去掉重复对象-java8](https://blog.csdn.net/jiaobuchong/article/details/54412094)
