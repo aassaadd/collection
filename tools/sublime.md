@@ -11,3 +11,6 @@
 使用OmniMarkupPreviewer这一个插件足够了。
 * 用Sublime Text 3写Markdown](https://blog.csdn.net/qazxswed807/article/details/51235792)
 * 快捷键 ctrl + alt + o
+
+## Terminal
+shift + command +d 
