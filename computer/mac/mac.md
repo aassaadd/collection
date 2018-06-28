@@ -8,3 +8,6 @@
 https://my.oschina.net/weichou/blog/369146
 https://blog.csdn.net/f6619082/article/details/73473028
 ````
+
+## 性能优化
+* [让变慢的Mac获得重生这15个Tips不得不学](https://bbs.feng.com/mobile-news-read-673744.html)
