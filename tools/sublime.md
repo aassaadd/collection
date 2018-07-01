@@ -13,4 +13,5 @@
 * 快捷键 ctrl + alt + o
 
 ## Terminal
-shift + command +d 
+* mac : shift + command + d 
+* win : shift + ctrl    + d 
