@@ -10,6 +10,10 @@ export JAVA_HOME=/usr/jdk安装目录
 export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
 export PATH=$JAVA_HOME/bin:$PATH
 ````
+* win环境变量配置
+````aidl
+%JAVA_HOME%\bin;%Java_Home%\jre\bin;
+````
 * source /etc/profile
 
 
