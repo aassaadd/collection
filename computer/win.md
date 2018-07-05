@@ -14,6 +14,19 @@ dir
 explorer
 ````
 
+## gvim
+* 乱码设置
+C:\Program Files (x86)\Vim
+修改_vimrc添加
+````aidl
+set encoding=utf-8
+set fileencodings=utf-8,gbk,gb18030,gk2312
+source $VIMRUNTIME/delmenu.vim
+source $VIMRUNTIME/menu.vim
+language messages zh_CN.utf-8
+
+````
+
 
 
 # 子系统
