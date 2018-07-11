@@ -1,3 +1,9 @@
+# 用户操作
+* 修改当前用户密码 passwd
+* 修改用户密码 passwd userName
+* 新增用户到组 useradd -G root test
+
+
 ### 命令行操作
 ````
      常用
