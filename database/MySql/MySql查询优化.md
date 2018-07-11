@@ -1,1 +1,16 @@
+* count(*) count(字段)的区别
+>
+
+
+
+
+
+
+
+
+
+
+
+
+
 * [MySQL Explain详解](http://www.cnblogs.com/xuanzhi201111/p/4175635.html)
