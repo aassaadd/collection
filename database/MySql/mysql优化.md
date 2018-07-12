@@ -27,6 +27,13 @@
 
 
 
+# 总结
+* order by desc 的效果没有asc的效果好
+````
+alter table tx_order ADD INDEX idx_shop_create_date_2(shop_id,create_date desc );
+desc select * from tx_order.tx_order where  shop_id = '111'    order by create_date asc ;
+desc select * from tx_order.tx_order where  shop_id = '111'    order by create_date desc ;
+````
 
 
 
