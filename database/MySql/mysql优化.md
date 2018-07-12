@@ -19,6 +19,8 @@
 * 了解不同引擎的调优特性。
 *
 
+## 索引下推优化
+* [MySQL 执行计划(Using where,Using index 和 Using index condition)](https://segmentfault.com/q/1010000004197413)
 
 
 
