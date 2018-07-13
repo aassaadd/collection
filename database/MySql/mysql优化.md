@@ -21,7 +21,7 @@
 
 ## 索引下推优化
 * [MySQL 执行计划(Using where,Using index 和 Using index condition)](https://segmentfault.com/q/1010000004197413)
-
+* file sort [MySQL如何执行ORDER BY](http://s.petrunia.net/blog/?p=24)
 
 
 
