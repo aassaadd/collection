@@ -34,7 +34,7 @@ alter table tx_order ADD INDEX idx_shop_create_date_2(shop_id,create_date desc )
 desc select * from tx_order.tx_order where  shop_id = '111'    order by create_date asc ;
 desc select * from tx_order.tx_order where  shop_id = '111'    order by create_date desc ;
 ````
-
+* mysql会根据数据量的大小来确定是否需要全部扫描。
 
 
 * count(*) count(字段)的区别
