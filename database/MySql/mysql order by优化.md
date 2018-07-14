@@ -248,5 +248,4 @@ desc select market_name from tx_order.tx_order order by RAND() desc limit 10;
 
 # 参考
 * [How MySQL executes ORDER BY](http://s.petrunia.net/blog/?p=24)
-* [mysql order by 优化与索引的应用](http://www.itkeyword.com/doc/1647618271369999201/sql-order-mysql)
 * [Mysql 排序优化与索引使用（转)](https://www.cnblogs.com/moss_tan_jun/p/6021822.html)
