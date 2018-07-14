@@ -238,9 +238,15 @@ desc select market_name from tx_order.tx_order order by RAND() desc limit 10;
 
 我们在写sql语句并且使用order by的时候，首先考虑满足索引条件，如果不满足那么满足内存中filesort，最坏的情况就是临时文件出现了，当然这种情况是我们最不想看到的。
 
+同时这里要说一下我的个人经验：
+
+1. 联合索引是个好东西，能够应用到项目中的很多使用场景，详细优化可以参照[8.3 Optimization and Indexes](https://dev.mysql.com/doc/refman/5.7/en/optimization-indexes.html)。
+2. sql改写，复杂的单条sql可以改写成两条或者三条，使用上索引。
+3. 建立好的表结构，为字段分配最合身的类型和长度。
+
 开放过程中多去琢磨sql，多看执行计划，有效的避免慢查询，提高服务的性能。
 
 # 参考
 * [How MySQL executes ORDER BY](http://s.petrunia.net/blog/?p=24)
-* [【mysql】order by 优化与索引的应用](http://www.itkeyword.com/doc/1647618271369999201/sql-order-mysql)
+* [mysql order by 优化与索引的应用](http://www.itkeyword.com/doc/1647618271369999201/sql-order-mysql)
 * [Mysql 排序优化与索引使用（转)](https://www.cnblogs.com/moss_tan_jun/p/6021822.html)
