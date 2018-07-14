@@ -21,7 +21,7 @@ CREATE TABLE `tx_order` (
   `market_name` varchar(255) DEFAULT NULL ,
   `shop_id` varchar(50) DEFAULT NULL ,
   `shop_name` varchar(100) DEFAULT NULL ,
-  `mobile` varchar(255) DEFAULT NULL ,
+  `mobile` varchar(64) DEFAULT NULL ,
   `create_date` datetime DEFAULT NULL ,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=2333702 DEFAULT CHARSET=utf8;
@@ -76,8 +76,70 @@ desc select market_id,create_date from tx_order.tx_order order by market_id asc 
 
 ````
 
-* where子语句中的范围索引优于表扫描，优化器会选择索引。
+* 下面的查询where子语句中的范围索引优于表扫描，优化器会选择索引解析order by。
 ````
+desc select market_id,create_date from tx_order.tx_order where market_id > '1009' order by market_id asc;
+
+1	SIMPLE	tx_order		range	idx_market_date	idx_market_date	33		835978	100	Using where; Using index
+
+desc select market_id,create_date from tx_order.tx_order where market_id < '1009' order by market_id desc;
+
+1	SIMPLE	tx_order		range	idx_market_date	idx_market_date	33		230966	100	Using where; Using index
+````
+
+* 下面这个查询中，order by的不再是market_id，但是所有查询的行market_id都是一个常量，所以还是会走到索引的解析order by。
+````
+desc select market_id,create_date from tx_order.tx_order where market_id = '1009' and create_date>'2018-01-01' order by create_date desc;
+
+1	SIMPLE	tx_order		range	idx_market_date	idx_market_date	39		94002	100	Using where; Using index
+````
+
+在一些情况下，虽然MySQL对where条件处理的时候用会用到索引，但是不能够用索引来解析order by, 看下面的例子。
+
+* order by使用到的索引非连续，MySQL解析order by还是会扫描表，我这里有一个索引 idx_market_id(market_id,order_status,create_date)，看下面的sql执行结果。
+````
+desc select market_id,create_date from tx_order.tx_order where  market_id='1009' order by market_id ,create_date ;
+
+1	SIMPLE	tx_order		ref	idx_market_id,idx_market_type_create_date	idx_market_id	33	const	138084	100	Using where; Using index; Using filesort
+````
+
+* 混合排序asc,desc
+````
+desc select market_id,create_date from tx_order.tx_order order by market_id asc ,create_date desc;
+
+1	SIMPLE	tx_order		index		idx_market_date	39		1671956	100	Using index; Using filesort
+````
+
+* order by字段使用函数，优化器解析order by放弃索引
+````
+desc select mobile from tx_order.tx_order order by  abs(mobile);
+
+1	SIMPLE	tx_order		index		idx_mobile	768		1671956	100	Using index; Using filesort
+
+````
+
+* 在多表关联查询中，并且ORDER BY中的列并不是全部来自第1个用于搜索行的非常量表。(这是EXPLAIN输出中的没有const联接类型的第1个表）。
+````
+desc select a.market_id from tx_order.tx_order a ,tx_order_item b where a.id = b.order_id and a.market_id = '1009'  order by a.market_id,b.sku;
+
+1	SIMPLE	b		ALL	idx_order_create				1	100	Using filesort
+1	SIMPLE	a		eq_ref	PRIMARY,idx_market_date	PRIMARY	8	tx_order.b.order_id	1	10.19	Using where
+
+````
+
+* 有不同的ORDER BY和GROUP BY表达式。
+````
+desc select market_id,create_date from tx_order.tx_order   group by market_id,create_date order by create_date;
+
+1	SIMPLE	tx_order		index	idx_market_date	idx_market_date	39		1671956	100	Using index; Using temporary; Using filesort
+
+````
+
+* 对于指定了排序索引长度的索引。在这种情况下，索引不能完全解析排序顺序，需要使用filesort来排序。例如，建立索引alter table tx_order add index idx_mobile(mobile(5)); 然而mobile varchar(64).
+````
+desc select mobile from tx_order.tx_order order by mobile desc ;
+
+1	SIMPLE	tx_order		ALL					1671956	100	Using filesort
 
 ````
 
