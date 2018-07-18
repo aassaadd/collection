@@ -106,4 +106,5 @@ docker login --username=阿里云docker用户名 registry.cn-hangzhou.aliyuncs.c
 ````
 
 # 推荐阅读
+* [jib Official：GoogleContainerTools/jib](https://github.com/GoogleContainerTools/jib)
 * [谷歌开源Java镜像构建工具Jib](http://www.infoq.com/cn/news/2018/07/google-opensource-Jib)
