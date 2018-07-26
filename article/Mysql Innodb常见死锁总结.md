@@ -1,10 +1,13 @@
+## InnoDB锁
+
+## InnoDB事物
+
+## 死锁举例
 
 
 
 
 ```
-
-
 -- 第一种
 start transaction ;
 
@@ -48,15 +51,6 @@ update tx_order.tx_order set last_update_date=now() where id = 784330;
 
 
 COMMIT;
-
-
-
-
-
-
-
-
-
 ```
 
 # reference
