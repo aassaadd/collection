@@ -55,3 +55,4 @@ COMMIT;
 
 # reference
 * [14.5 InnoDB Locking and Transaction Model](https://dev.mysql.com/doc/refman/5.7/en/innodb-locking-transaction-model.html)
+* [MySQL 加锁处理分析](http://hedengcheng.com/?p=771#_Toc374698318)
