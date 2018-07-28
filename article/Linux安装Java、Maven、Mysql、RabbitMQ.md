@@ -106,6 +106,11 @@ service mysqld start
 service mysqld status
 
 ````
+* 重启和关闭
+```
+service mysqld restart
+service mysqld stop
+```
 * 获取初始密码
 ````$xslt
 grep "password" /var/log/mysqld.log
