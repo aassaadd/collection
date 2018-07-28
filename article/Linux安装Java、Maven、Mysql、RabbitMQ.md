@@ -71,6 +71,7 @@ rabbitmqctl set_permissions -p "/" dev "." "." ".*"
 
 
 # 安装Mysql
+> [https://dev.mysql.com/doc/refman/5.7/en/linux-installation-yum-repo.html](https://dev.mysql.com/doc/refman/5.7/en/linux-installation-yum-repo.html)
 * 查看Linux发行版本
 ````$xslt
 cat /etc/redhat-release
@@ -78,8 +79,17 @@ cat /etc/redhat-release
 * 下载MySQL官方的Yum Repository [Download MySQL Yum Repository](https://dev.mysql.com/downloads/repo/yum/)
 * 安装MySQL的Yum Repository
 ````$xslt
-yum -y install mysql57-community-release-el7-7.noarch.rpm
+wget https://dev.mysql.com/get/mysql80-community-release-el7-1.noarch.rpm
+yum localinstall mysql80-community-release-el7-1.noarch.rpm
 ````
+* 选择版本
+```
+yum repolist all | grep mysql
+
+yum-config-manager --disable mysql80-community
+yum-config-manager --enable mysql57-community
+
+```
 * 安装MySQL数据库的服务器版本
 ````$xslt
 yum -y install mysql-community-server
