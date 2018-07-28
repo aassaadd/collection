@@ -139,5 +139,17 @@ FLUSH PRIVILEGES; #刷新权限
 ALTER USER 'root'@'%' IDENTIFIED BY 'password';
 ````
 
+## MySQL binlog配置
+* 修改 my.cnf
+```
+log-bin=/var/lib/mysql/mysql-bin
+server-id=1
+```
+
+* 查看
+```
+show variables like '%log_bin%'
+```
+
 
 * 附 [CentOS 7.2使用yum安装MYSQL 5.7.10](https://typecodes.com/linux/yuminstallmysql5710.html)
