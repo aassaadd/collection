@@ -101,7 +101,7 @@ docker run -it --rm -p8080:8080 moxingwang/jibtest
 docker login --username=你的hub.docker的用户名 registry.hub.docker.com
 ```
 
-* registry.hub.docker.com
+* registry.cn-hangzhou.aliyuncs.com
 ```
 docker login --username=阿里云docker用户名 registry.cn-hangzhou.aliyuncs.com
 ```
