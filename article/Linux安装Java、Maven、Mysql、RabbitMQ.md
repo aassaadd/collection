@@ -71,6 +71,11 @@ rabbitmqctl set_permissions -p "/" dev "." "." ".*"
 
 
 # 安装Mysql
+> 提前关闭防火墙
+```
+systemctl stop firewalld.service #停止firewall
+systemctl disable firewalld.service #禁止firewall开机启动
+```
 > [https://dev.mysql.com/doc/refman/5.7/en/linux-installation-yum-repo.html](https://dev.mysql.com/doc/refman/5.7/en/linux-installation-yum-repo.html)
 * 查看Linux发行版本
 ````$xslt
@@ -96,7 +101,9 @@ yum -y install mysql-community-server
 ````
 * 启动数据库
 ````$xslt
-systemctl start  mysqld.service
+service mysqld start
+
+service mysqld status
 
 ````
 * 获取初始密码
@@ -105,8 +112,11 @@ grep "password" /var/log/mysqld.log
 ````
 * 修改root用户密码
 ````$xslt
+mysql -uroot -p
 ALTER USER 'root'@'localhost' IDENTIFIED BY 'Password@123';
+use mysql;
 update user set host = '%'  where user ='root';
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'Password@123' WITH GRANT OPTION;
 flush privileges;
 ````
 
