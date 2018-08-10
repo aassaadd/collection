@@ -141,4 +141,10 @@ pwd    显示当前在哪个目录下
 * [CentOS 7安装Fail2ban防御暴力破解密码（配合FirewallD)](http://blog.163.com/l1_jun/blog/static/14386388201642443431107/)
 * systemctl start firewalld 开启防火墙
 * firewall-cmd --zone=public --list-ports  查看已开放的端口
-* firewall-cmd --add-port=443/tcp   开放端口                                   
+* firewall-cmd --add-port=443/tcp   开放端口
+
+##### 关闭firewall
+````aidl
+systemctl stop firewalld.service #停止firewall
+systemctl disable firewalld.service #禁止firewall开机启动
+````
