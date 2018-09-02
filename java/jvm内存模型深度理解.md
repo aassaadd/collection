@@ -10,7 +10,7 @@
 对于这个问题，我每一次去深入思考就会有很多疑惑，很多问题不明白，总想追根问底。根据我的总结，想要把自己的这些疑惑搞清楚需要理解几门必要的知识点，计算机组成原理、cpu工作原理、虚拟化技术，需要对这些知识有自己的理解，然后再去理解jvm里面的知识就不难了。
 
 那么jvm是如何工作的呢？要搞清楚这个问题，首先得搞清楚jvm是如何一个架构。
-![image](https://raw.githubusercontent.com/moxingwang/collection/master/resources/image/JVM-Architecture.png)[图1]
+![image](https://raw.githubusercontent.com/moxingwang/resource/master/image/JVM-Architecture.png)[图1]
 [原图出处(The JVM Architecture Explained)](https://dzone.com/articles/jvm-architecture-explained)
 
 这就是jvm工作三大重要组成部分架构图，它包含了类加载子系统、运行时数据区域、执行引擎。一提及到jvm执行原理我们应该脑海中应该是这样的一张架构图，我们写的java文件首先通过javac编译成class文件，类加载子系统把class文件加载到内存中，并且存放到相应划分的区域，然后再由jvm执行引擎执行。
@@ -19,7 +19,7 @@
 
 在理解jvm内存模型的时候我突然在想jvm内存模型是什么？在自己的脑海里有没有一个明确的概念或者有没有一个形象的比方能够把它描述清楚，下面我画了一张图按照我的理解描述一下jvm内存模型是什么。
 
-![image](https://raw.githubusercontent.com/moxingwang/collection/master/resources/image/jvm%20data%20areas%20structure.png)[图2]
+![image](https://raw.githubusercontent.com/moxingwang/resource/master/image/jvm%20data%20areas%20structure.png)[图2]
 
 jvm内存模型就是java虚拟机对数据操作的一个抽象概念、是jvm内存数据区域架构的一种设计，这些数据真实存放地址要么在硬件的主存或者cpu的寄存器里面，他们通过一层映射关系保证了jvm只需要关注它本身的内存数据。
 
@@ -31,7 +31,7 @@ jvm内存模型就是java虚拟机对数据操作的一个抽象概念、是jvm�
 
 ## 4. jvm内存模型架构
 
-![](https://raw.githubusercontent.com/moxingwang/collection/master/resources/image/JVM-structure.png)[图3]
+![](https://raw.githubusercontent.com/moxingwang/resource/master/image/JVM-structure.png)[图3]
 
 # 二、运行时数据区
 
@@ -50,14 +50,14 @@ Java的并发采用的是共享内存模型，Java线程之间的通信总是隐
 在java中，所有实例域、静态域和数组元素存储在堆内存中，堆内存在线程之间共享（本文使用“共享变量”这个术语代指实例域，静态域和数组元素）。局部变量（Local variables），方法定义参数（java语言规范称之为formal method parameters）和异常处理器参数（exception handler parameters）不会在线程之间共享，它们不会有内存可见性问题，也不受内存模型的影响。
 
 Java线程之间的通信由Java内存模型（本文简称为JMM）控制，JMM决定一个线程对共享变量的写入何时对另一个线程可见。从抽象的角度来看，JMM定义了线程和主内存之间的抽象关系：线程之间的共享变量存储在主内存（main memory）中，每个线程都有一个私有的本地内存（local memory），本地内存中存储了该线程以读/写共享变量的副本。本地内存是JMM的一个抽象概念，并不真实存在。它涵盖了缓存，写缓冲区，寄存器以及其他的硬件和编译器优化。Java内存模型的抽象示意图如下：
-![image](https://raw.githubusercontent.com/moxingwang/collection/master/resources/image/jvm-memorry-1.png)[图4]
+![image](https://raw.githubusercontent.com/moxingwang/resource/master/image/jvm-memorry-1.png)[图4]
 
 从上图来看，线程A与线程B之间如要通信的话，必须要经历下面2个步骤：
 
 1. 首先，线程A把本地内存A中更新过的共享变量刷新到主内存中去。
 2. 然后，线程B到主内存中去读取线程A之前已更新过的共享变量。
 下面通过示意图来说明这两个步骤：
-![image](https://raw.githubusercontent.com/moxingwang/collection/master/resources/image/jvm-memmory-2.png)[图5]
+![image](https://raw.githubusercontent.com/moxingwang/resource/master/image/jvm-memmory-2.png)[图5]
 
 如上图所示，本地内存A和B有主内存中共享变量x的副本。假设初始时，这三个内存中的x值都为0。线程A在执行时，把更新后的x值（假设值为1）临时存放在自己的本地内存A中。当线程A和线程B需要通信时，线程A首先会把自己本地内存中修改后的x值刷新到主内存中，此时主内存中的x值变为了1。随后，线程B到主内存中去读取线程A更新后的x值，此时线程B的本地内存的x值也变为了1。
 
@@ -87,7 +87,7 @@ sun jvm是基于栈架构的实现。
 #### 2.1 栈帧
 
 栈帧(Stack Frame)是用于支持虚拟机进行方法调用和方法执行的数据结构，它是虚拟机运行时数据区的虚拟机栈(Virtual Machine Stack)的栈元素。栈帧存储了方法的局部变量表，操作数栈，动态连接和方法返回地址等信息。第一个方法从调用开始到执行完成，就对应着一个栈帧在虚拟机栈中从入栈到出栈的过程。每一个栈帧都包括了局部变量表，操作数栈，动态连接，方法返回地址和一些额外的附加信息。在编译代码的时候，栈帧中需要多大的局部变量表，多深的操作数栈都已经完全确定了，并且写入到了方法表的Code属性中，因此一个栈帧需要分配多少内存，不会受到程序运行期变量数据的影响，而仅仅取决于具体虚拟机的实现。一个线程中的方法调用链可能会很长，很多方法都同时处理执行状态。对于执行引擎来讲，活动线程中，只有虚拟机栈顶的栈帧才是有效的，称为当前栈帧(Current Stack Frame)，这个栈帧所关联的方法称为当前方法(Current Method)。执行引用所运行的所有字节码指令都只针对当前栈帧进行操作。
-![image](https://raw.githubusercontent.com/moxingwang/collection/master/resources/image/20141214124019390.png)[图6]
+![image](https://raw.githubusercontent.com/moxingwang/resource/master/image/20141214124019390.png)[图6]
 
 ##### 2.1.1 局部变量表
 
@@ -96,7 +96,7 @@ sun jvm是基于栈架构的实现。
 ##### 2.1.2 操作数栈
 
 操作数栈也常被称为操作栈，它是一个后入先出栈。同局部变量表一样，操作数栈的最大深度也是编译的时候被写入到方法表的Code属性的max_stacks数据项中。操作数栈的每一个元素可以是任意Java数据类型，包括long和double。32位数据类型所占的栈容量为1，64位数据类型所占的栈容量为2。栈容量的单位为“字宽”，对于32位虚拟机来说，一个”字宽“占4个字节，对于64位虚拟机来说，一个”字宽“占8个字节。当一个方法刚刚执行的时候，这个方法的操作数栈是空的，在方法执行的过程中，会有各种字节码指向操作数栈中写入和提取值，也就是入栈与出栈操作。例如，在做算术运算的时候就是通过操作数栈来进行的，又或者调用其它方法的时候是通过操作数栈来行参数传递的。另外，在概念模型中，两个栈帧作为虚拟机栈的元素，相互之间是完全独立的，但是大多数虚拟机的实现里都会作一些优化处理，令两个栈帧出现一部分重叠。让下栈帧的部分操作数栈与上面栈帧的部分局部变量表重叠在一起，这样在进行方法调用返回时就可以共用一部分数据，而无须进行额外的参数复制传递了，重叠过程如下图：
-![image](https://raw.githubusercontent.com/moxingwang/collection/master/resources/image/20141214124042156.png)[图7]
+![image](https://raw.githubusercontent.com/moxingwang/resource/master/image/20141214124042156.png)[图7]
 
 ##### 2.1.3 动态连接
 
@@ -144,7 +144,7 @@ Java 虚拟机对Class文件的每一部分（自然也包括常量池）的格�
 3. 内存系统的重排序。由于处理器使用缓存和读/写缓冲区,这使得加载和存储操 作看上去可能是在乱序执行。
 
 从 java 源代码到最终实际执行的指令序列,会分别经历下面三种重排序:
-![image](https://raw.githubusercontent.com/moxingwang/collection/master/resources/image/%E5%B8%B8%E8%A7%81%E6%8C%87%E4%BB%A4%E9%87%8D%E6%8E%92.png)
+![image](https://raw.githubusercontent.com/moxingwang/resource/master/image/%E5%B8%B8%E8%A7%81%E6%8C%87%E4%BB%A4%E9%87%8D%E6%8E%92.png)
 上述的 1 属于编译器重排序,2 和 3属于处理器重排序。这些重排序都可能会导致多线程程序出现内存可见性问题。对于编译器,JMM 的编译器重排序规则会禁止特定类型的编译器重排序(不是所有的编译器重排序都要禁止)。对于处理器重排 序,JMM 的处理器重排序规则会要求 java 编译器在生成指令序列时,插入特定类 型的内存屏障(memory barriers,intel 称之为 memory fence)指令,通过内存屏障指令来禁止特定类型的处理器重排序(不是所有的处理器重排序都要禁 止)。
 
 JMM 属于语言级的内存模型,它确保在不同的编译器和不同的处理器平台之上, 通过禁止特定类型的编译器重排序和处理器重排序,为程序员提供一致的内存可见 性保证。
@@ -164,7 +164,7 @@ JMM 属于语言级的内存模型,它确保在不同的编译器和不同的处
 * 传递性:如果 A happens- before B,且 B happens- before C,那么 A happens- before C。
 
 注意,两个操作之间具有 happens-before 关系,并不意味着前一个操作必须要在 后一个操作之前执行!happens-before 仅仅要求前一个操作(执行的结果)对后 一个操作可见,且前一个操作按顺序排在第二个操作之前(the first is visible to and ordered before the second)。happens- before 的定义很微妙,后文会具 体说明 happens-before 为什么要这么定义。happens-before 与 JMM 的关系如下图所示:
-![image](https://raw.githubusercontent.com/moxingwang/collection/master/resources/image/happens-before.png)
+![image](https://raw.githubusercontent.com/moxingwang/resource/master/image/happens-before.png)
 如上图所示,一个 happens-before 规则对应于一个或多个编译器和处理器重排序 规则。对于 java 程序员来说,happens-before 规则简单易懂,它避免 java 程序 员为了理解 JMM 提供的内存可见性保证而去学习复杂的重排序规则以及这些规则 的具体实现。
 
 ### 数据依赖性

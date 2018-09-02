@@ -1,12 +1,12 @@
 ## 哪些内存区域要被回收
 ### 一 Java程序的编译和执行过程
 
-![](https://raw.githubusercontent.com/moxingwang/collection/master/resources/image/gc/执行和编译过程1.png)
+![](https://raw.githubusercontent.com/moxingwang/resource/master/image/gc/执行和编译过程1.png)
 
 ### 二 运行时数据区域
  Java虚拟机规范定义了Java虚拟机在执行Java程序过程中会把内存区域划分为若干个不同的数据区域，这些区域各有各自的用途、创建和销毁时间。
 
-![](https://raw.githubusercontent.com/moxingwang/collection/master/resources/image/gc/JVM-Runtime-data-area.jpg)
+![](https://raw.githubusercontent.com/moxingwang/resource/master/image/gc/JVM-Runtime-data-area.jpg)
 
 [附：JAVA虚拟机规范-运行时数据区域](https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-2.html#jvms-2.5)
 
@@ -52,7 +52,7 @@
 
  从GC Roots开始向下搜索，搜索所走过的路径称为引用链。当一个对象到GC Roots没有任何引用链相连时，则证明此对象是不可用的。不可达对象。在Java语言中，GC Roots包括：虚拟机栈中引用的对象，方法区中类静态属性实体引用的对象，方法区中常量引用的对象，本地方法栈中JNI引用的对象。
 
-![](https://raw.githubusercontent.com/moxingwang/collection/master/resources/image/gc/gcroots可达.png)
+![](https://raw.githubusercontent.com/moxingwang/resource/master/image/gc/gcroots可达.png)
 
 ## Garbage Collection
   Java垃圾回收是一个自动运行的管理程序运行时使用的内存的过程。通过GC的自动执行JVM将程序员从申请和释放内存的繁重操作中解放出来。那么Java的自动内存管理最终可以归结为自动化地解决了两个问题：
@@ -69,7 +69,7 @@
 
  这样做使得每次都是对整个半区进行内存回收，内存分配时也就不用考虑内存碎片等复杂情况，只要移动堆顶指针，按顺序分配内存即可，实现简单，运行高效。只是这种算法的代价是将内存缩小为原来的一半，代价可能过高了。复制算法的执行过程如下图所示：
 
- ![](https://raw.githubusercontent.com/moxingwang/collection/master/resources/image/gc/复制算法原理图.png)
+ ![](https://raw.githubusercontent.com/moxingwang/resource/master/image/gc/复制算法原理图.png)
 
 ### 二 标记-清除（Mark-Sweep）算法
 
@@ -80,14 +80,14 @@
  1. 空间问题：标记清除之后会产生大量不连续的内存碎片，空间碎片太多可能会导致以后在程序运行过程中需要分配较大对象时，无法找到足够的连续内存而不得不触发另一次垃圾收集动作。
  2. 效率问题：因为内存碎片的存在，操作会变得更加费时，因为查找下一个可用空闲块已不再是一个简单操作。
 
- ![](https://raw.githubusercontent.com/moxingwang/collection/master/resources/image/gc/标记清除算法.png)
+ ![](https://raw.githubusercontent.com/moxingwang/resource/master/image/gc/标记清除算法.png)
 
 ### 三 标记-整理（Mark-Compact）算法
  复制算法在对象存活率较高时要进行较多的复制操作，效率将会变低。更关键的是：如果不想浪费50%的空间，就需要有额外的空间进行分配担保，以应对被使用的内存中所有对象都100%存活的极端情况，所以在老年代一般不能直接选用复制算法。
 
  根据老年代的特点，标记－整理（Mark-Compact）算法被提出来，主要思想为：此算法的标记过程与标记－清除算法一样，但后续步骤不是直接对可回收对象进行清理，而是让所有存活的对象都向一端移动，然后直接清理掉边界以外的内存。
 
- ![](https://raw.githubusercontent.com/moxingwang/collection/master/resources/image/gc/标记整理算法.png)
+ ![](https://raw.githubusercontent.com/moxingwang/resource/master/image/gc/标记整理算法.png)
 
 ### 四 分代收集（Generation Collection）算法
 
@@ -96,13 +96,13 @@
 1. 新生代：在新生代中，每次垃圾收集时都发现有大批对象死去，只有少量存活，那就选用复制算法，只需要付出少量存活对象的复制成本就可以完成收集。
 2. 老年代：在老年代中，因为对象存活率高、没有额外空间对它进行分配担保，就必须使用“标记-清除”或“标记-整理”算法来进行回收。
 
- ![](https://raw.githubusercontent.com/moxingwang/collection/master/resources/image/gc/分代回收算法1.png)
+ ![](https://raw.githubusercontent.com/moxingwang/resource/master/image/gc/分代回收算法1.png)
 
 ##### 大多数垃圾回收器选择分代回收的原因
 
   对于典型的对象生命周期分布图中，大多数对象的生命周期是非常短的，有的对象存活时间很长，如果让新创建的对象都在年轻代里创建，然后频繁收集年轻代，则大部分垃圾都能在年轻代中能够被收集掉。这样一来只是GC了内存中的一部分，这样就不但能降低单次GC的时间长度，还可以提高GC的工作效率。
 
- ![](https://raw.githubusercontent.com/moxingwang/collection/master/resources/image/gc/对象生命周期典型分布图.png)
+ ![](https://raw.githubusercontent.com/moxingwang/resource/master/image/gc/对象生命周期典型分布图.png)
 
 
 
@@ -164,7 +164,7 @@
 #### Serial收集器
  Serial（串行）收集器是最基本、发展历史最悠久的收集器，它是采用复制算法的新生代收集器，曾经（JDK 1.3.1之前）是虚拟机新生代收集的唯一选择。它是一个单线程收集器，只会使用一个CPU或一条收集线程去完成垃圾收集工作，更重要的是它在进行垃圾收集时，必须暂停其他所有的工作线程，直至Serial收集器收集结束为止（“Stop The World”）。这项工作是由虚拟机在后台自动发起和自动完成的，在用户不可见的情况下把用户正常工作的线程全部停掉，这对很多应用来说是难以接收的。
 
-  ![](https://raw.githubusercontent.com/moxingwang/collection/master/resources/image/gc/serial收集器.png)
+  ![](https://raw.githubusercontent.com/moxingwang/resource/master/image/gc/serial收集器.png)
 
  为了消除或减少工作线程因内存回收而导致的停顿，HotSpot虚拟机开发团队在JDK 1.3之后的Java发展历程中研发出了各种其他的优秀收集器，这些将在稍后介绍。但是这些收集器的诞生并不意味着Serial收集器已经“老而无用”，实际上到现在为止，它依然是HotSpot虚拟机运行在Client模式下的默认的新生代收集器。它也有着优于其他收集器的地方：简单而高效（与其他收集器的单线程相比），对于限定单个CPU的环境来说，Serial收集器由于没有线程交互的开销，专心做垃圾收集自然可以获得更高的单线程收集效率。
 
@@ -173,7 +173,7 @@
 #### ParNew收集器
  ParNew收集器就是Serial收集器的多线程版本，它也是一个新生代收集器。除了使用多线程进行垃圾收集外，其余行为包括Serial收集器可用的所有控制参数、收集算法（复制算法）、Stop The World、对象分配规则、回收策略等与Serial收集器完全相同，两者共用了相当多的代码。
 
-  ![](https://raw.githubusercontent.com/moxingwang/collection/master/resources/image/gc/ParNew收集器.png)
+  ![](https://raw.githubusercontent.com/moxingwang/resource/master/image/gc/ParNew收集器.png)
 
  ParNew收集器除了使用多线程收集外，其他与Serial收集器相比并无太多创新之处，但它却是许多运行在Server模式下的虚拟机中首选的新生代收集器，其中有一个与性能无关的重要原因是，除了Serial收集器外，目前只有它能和CMS收集器（Concurrent Mark Sweep）配合工作，CMS收集器是JDK 1.5推出的一个具有划时代意义的收集器，具体内容将在稍后进行介绍。
 
@@ -196,12 +196,12 @@
 作为CMS收集器的后备预案，在并发收集发生Concurrent Mode Failure时使用。
 * 它的工作流程与Serial收集器相同，这里再次给出Serial/Serial Old配合使用的工作流程图：
 
-  ![](https://raw.githubusercontent.com/moxingwang/collection/master/resources/image/gc/SerialOld收集器.png)
+  ![](https://raw.githubusercontent.com/moxingwang/resource/master/image/gc/SerialOld收集器.png)
 
 #### Paralldl Old收集器
  Parallel Old收集器是Parallel Scavenge收集器的老年代版本，使用多线程和“标记-整理”算法。前面已经提到过，这个收集器是在JDK 1.6中才开始提供的，在此之前，如果新生代选择了Parallel Scavenge收集器，老年代除了Serial Old以外别无选择，所以在Parallel Old诞生以后，“吞吐量优先”收集器终于有了比较名副其实的应用组合，在注重吞吐量以及CPU资源敏感的场合，都可以优先考虑Parallel Scavenge加Parallel Old收集器。Parallel Old收集器的工作流程与Parallel Scavenge相同，这里给出Parallel Scavenge/Parallel Old收集器配合使用的流程图：
 
-  ![](https://raw.githubusercontent.com/moxingwang/collection/master/resources/image/gc/ParallelOld收集器.png)
+  ![](https://raw.githubusercontent.com/moxingwang/resource/master/image/gc/ParallelOld收集器.png)
 
 #### CMS收集器
  CMS（Concurrent Mark Sweep）收集器是一种以获取最短回收停顿时间为目标的收集器，它非常符合那些集中在互联网站或者B/S系统的服务端上的Java应用，这些应用都非常重视服务的响应速度。从名字上（“Mark Sweep”）就可以看出它是基于“标记-清除”算法实现的。
@@ -214,7 +214,7 @@
 * 并发清除（CMS concurrent sweep）
 由于整个过程中耗时最长的并发标记和并发清除过程收集器线程都可以与用户线程一起工作，所以，从总体上来说，CMS收集器的内存回收过程是与用户线程一起并发执行的。通过下图可以比较清楚地看到CMS收集器的运作步骤中并发和需要停顿的时间。
 
-  ![](https://raw.githubusercontent.com/moxingwang/collection/master/resources/image/gc/CMS收集器.png)
+  ![](https://raw.githubusercontent.com/moxingwang/resource/master/image/gc/CMS收集器.png)
 
 ##### 优点
  CMS是一款优秀的收集器，它的主要优点在名字上已经体现出来了：并发收集、低停顿，因此CMS收集器也被称为并发低停顿收集器（Concurrent Low Pause Collector）。
@@ -253,12 +253,12 @@
 * 最终标记（Final Marking） 为了修正在并发标记期间因用户程序继续运作而导致标记产生变动的那一部分标记记录，虚拟机将这段时间对象变化记录在线程的Remembered Set Logs里面，最终标记阶段需要把Remembered Set Logs的数据合并到Remembered Set中，这阶段需要停顿线程，但是可并行执行。
 * 筛选回收（Live Data Counting and Evacuation） 首先对各个Region中的回收价值和成本进行排序，根据用户所期望的GC 停顿是时间来制定回收计划。此阶段其实也可以做到与用户程序一起并发执行，但是因为只回收一部分Region，时间是用户可控制的，而且停顿用户线程将大幅度提高收集效率。
 
-  ![](https://raw.githubusercontent.com/moxingwang/collection/master/resources/image/gc/G1收集器.png)
+  ![](https://raw.githubusercontent.com/moxingwang/resource/master/image/gc/G1收集器.png)
 
 ### 五 收集器特点总结
 * 分代组合使用
 
-  ![](https://raw.githubusercontent.com/moxingwang/collection/master/resources/image/gc/分代结合使用收集器.jpg)
+  ![](https://raw.githubusercontent.com/moxingwang/resource/master/image/gc/分代结合使用收集器.jpg)
 
 * 总结
 
