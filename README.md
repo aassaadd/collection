@@ -1,3 +1,17 @@
+`notice`:文件存储发生变化
+
+```
+https://github.com/moxingwang/collection/blob/master/resources
+
+https://github.com/moxingwang/resource/blob/master
+
+
+
+https://raw.githubusercontent.com/moxingwang/collection/master/resources
+
+https://raw.githubusercontent.com/moxingwang/resource/master
+```
+
 # 开发点注意事项
 * 多个update保证顺序一致性
 * 对每个sql负责，去琢磨sql，官方手册搞明白执行原理和过程，如何优化。
