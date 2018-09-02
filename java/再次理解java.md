@@ -27,7 +27,7 @@
 ## java基础
 
 * Java发展历史
-![image](https://github.com/moxingwang/collection/blob/master/resources/image/java_history.png)
+![image](https://github.com/moxingwang/resource/blob/master/image/java_history.png)
 * 特点
 * jdk
 * java Api
@@ -38,13 +38,13 @@
 我们想要让cpu做事情，让它处理运算，而cup只能够读懂特殊的指令。我们写的java程序代码首先被编译成class文件，
 能够让jvm读懂，再由ClassLoader把这些class文件加载到jvm运行时的数据区域，并最终由jvm翻译、调用c/c++执行。
 
-![image](https://github.com/moxingwang/collection/blob/master/resources/image/java%E6%96%87%E4%BB%B6%E7%BC%96%E8%AF%91%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B%E7%AE%80%E5%8D%95%E5%9B%BE.png?raw=true)
+![image](https://github.com/moxingwang/resource/blob/master/image/java%E6%96%87%E4%BB%B6%E7%BC%96%E8%AF%91%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B%E7%AE%80%E5%8D%95%E5%9B%BE.png?raw=true)
 
 参考
 [Java详解之——Javac 编译原理](http://blog.csdn.net/qq756161569/article/details/50486946)
 
 ## java技术体系
-![image](https://github.com/moxingwang/collection/blob/master/resources/image/java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB%E5%9B%BE.png)
+![image](https://github.com/moxingwang/resource/blob/master/image/java%E6%8A%80%E6%9C%AF%E4%BD%93%E7%B3%BB%E5%9B%BE.png)
 
 ## java文件编译
 
@@ -104,7 +104,7 @@ Java的动态类加载功能由类加载器子系统处理。它在运行时首�
 ### 运行时数据区（jvm内存模型）
 
 运行时数据区分为5个主要组件。
-![image](https://github.com/moxingwang/collection/blob/master/resources/image/jvm%20data%20areas%20structure.png)
+![image](https://github.com/moxingwang/resource/blob/master/image/jvm%20data%20areas%20structure.png)
 
 #### the pc register
 > 每个线程都有单独的PC寄存器，用于保存当前执行指令的地址，一旦指令执行，PC寄存器将更新到下一条指令。
@@ -137,7 +137,7 @@ sun jvm是基于栈架构的实现。
 > 栈帧(Stack Frame)是用于支持虚拟机进行方法调用和方法执行的数据结构，它是虚拟机运行时数据区的虚拟机栈(Virtual Machine Stack)的栈元素。栈帧存储了方法的局部变量表，操作数栈，动态连接和方法返回地址等信息。第一个方法从调用开始到执行完成，就对应着一个栈帧在虚拟机栈中从入栈到出栈的过程。
    每一个栈帧都包括了局部变量表，操作数栈，动态连接，方法返回地址和一些额外的附加信息。在编译代码的时候，栈帧中需要多大的局部变量表，多深的操作数栈都已经完全确定了，并且写入到了方法表的Code属性中，因此一个栈帧需要分配多少内存，不会受到程序运行期变量数据的影响，而仅仅取决于具体虚拟机的实现。
    一个线程中的方法调用链可能会很长，很多方法都同时处理执行状态。对于执行引擎来讲，活动线程中，只有虚拟机栈顶的栈帧才是有效的，称为当前栈帧(Current Stack Frame)，这个栈帧所关联的方法称为当前方法(Current Method)。执行引用所运行的所有字节码指令都只针对当前栈帧进行操作。
-![image](https://github.com/moxingwang/collection/blob/master/resources/image/20141214124019390.png)
+![image](https://github.com/moxingwang/resource/blob/master/image/20141214124019390.png)
 
 > 1.局部变量表
      局部变量表是一组变量值存储空间，用于存放方法参数和方法内部定义的局部变量。在Java程序编译为Class文件时，就在方法表的Code属性的max_locals数据项中确定了该方法需要分配的最大局部变量表的容量。
@@ -148,7 +148,7 @@ sun jvm是基于栈架构的实现。
      操作数栈也常被称为操作栈，它是一个后入先出栈。同局部变量表一样，操作数栈的最大深度也是编译的时候被写入到方法表的Code属性的max_stacks数据项中。操作数栈的每一个元素可以是任意Java数据类型，包括long和double。32位数据类型所占的栈容量为1，64位数据类型所占的栈容量为2。栈容量的单位为“字宽”，对于32位虚拟机来说，一个”字宽“占4个字节，对于64位虚拟机来说，一个”字宽“占8个字节。
      当一个方法刚刚执行的时候，这个方法的操作数栈是空的，在方法执行的过程中，会有各种字节码指向操作数栈中写入和提取值，也就是入栈与出栈操作。例如，在做算术运算的时候就是通过操作数栈来进行的，又或者调用其它方法的时候是通过操作数栈来行参数传递的。
      另外，在概念模型中，两个栈帧作为虚拟机栈的元素，相互之间是完全独立的，但是大多数虚拟机的实现里都会作一些优化处理，令两个栈帧出现一部分重叠。让下栈帧的部分操作数栈与上面栈帧的部分局部变量表重叠在一起，这样在进行方法调用返回时就可以共用一部分数据，而无须进行额外的参数复制传递了，重叠过程如下图：
-![image](https://github.com/moxingwang/collection/blob/master/resources/image/20141214124042156.png)
+![image](https://github.com/moxingwang/resource/blob/master/image/20141214124042156.png)
 
 > 3.动态连接
     每个栈帧都包含一个指向运行时常量池中该栈帧所属性方法的引用，持有这个引用是为了支持方法调用过程中的动态连接。在Class文件的常量池中存有大量的符号引用，字节码中的方法调用指令就以常量池中指向方法的符号引用为参数。这些符号引用一部分会在类加载阶段或第一次使用的时候转化为直接引用，这种转化称为静态解析。另外一部分将在每一次的运行期期间转化为直接引用，这部分称为动态连接。
@@ -242,7 +242,7 @@ sun jvm是基于栈架构的实现。
 
 
 #### 对象的创建过程
-![image](https://github.com/moxingwang/collection/blob/master/resources/image/%E5%AF%B9%E8%B1%A1%E5%88%9B%E5%BB%BA%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E8%BF%87%E7%A8%8B.png)
+![image](https://github.com/moxingwang/resource/blob/master/image/%E5%AF%B9%E8%B1%A1%E5%88%9B%E5%BB%BA%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E8%BF%87%E7%A8%8B.png)
 
 #### 对象内存布局
 

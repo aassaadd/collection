@@ -1,6 +1,6 @@
  很多同学在项目中遇到类似这样的需求，触发某一个事件之后在指定的时间后触发其它事件。比如说用户下单之后，如果超过30分支关闭订单；或者下单使用了促销，促销活动在指定的时间过期了如若未付款需要关闭订单。 解决这样的问题，我们通常的做法是加一个job来做这件事情，设置job每隔几分钟跑一次把需要处理的数据线查询出来，然后再去执行。这种解决办法自然是最简单又可靠的，只要job和DB正常运行不会存在漏掉任何任务。这种方法针对不同的使用场景也存在问题，job过快数据库压力大，job慢了业务上不能精确的处理。
 
-![](https://github.com/moxingwang/collection/blob/master/resources/image/%E6%B6%88%E6%81%AF%E5%BB%B6%E8%BF%9F%E6%94%B9%E9%80%A0%E5%89%8D.jpg?raw=true)
+![](https://github.com/moxingwang/resource/blob/master/image/%E6%B6%88%E6%81%AF%E5%BB%B6%E8%BF%9F%E6%94%B9%E9%80%A0%E5%89%8D.jpg?raw=true)
 
  本人的项目中最近刚刚改造过一个这样的场景，顺便记录下来。项目初期业务简单粗暴用户下单后订单未付款订单30分钟关闭，使用了促销的订单，每次在支付的时候去验单必须验证促销活动信息，如果活动过期拦截终止支付请求并且关闭订单，显然这么做用户体验不好。本次改动方向简单（减少数据库查询，业务上更加精确），解决思路同样简单使用延时消息。
 
@@ -74,7 +74,7 @@
 
 # 本次改造
  本次业务改动的时候，本来想直接使用支持消息延时/定时消息的MQ，但是受限（公司生产环境只使用了Rabbit MQ，那么最好就是安装插件了，这还得求着架构组，并且还要一定的测试，整体麻烦，上线时间紧急还是使用其它的方式简单实现可靠）。最后想到的是使用JAVA本身的队列-DelayQueue。DelayQueue是一个无界的BlockingQueue，用于放置实现了Delayed接口的对象，其中的对象只能在其到期时才能从队列中取走。这种队列是有序的，即队头对象的延迟到期时间最长。整体架构如下。
-![](https://github.com/moxingwang/collection/blob/master/resources/image/%E6%B6%88%E6%81%AF%E5%BB%B6%E8%BF%9F%E6%94%B9%E9%80%A0%E5%90%8E.jpg?raw=true)
+![](https://github.com/moxingwang/resource/blob/master/image/%E6%B6%88%E6%81%AF%E5%BB%B6%E8%BF%9F%E6%94%B9%E9%80%A0%E5%90%8E.jpg?raw=true)
 ## 实现流程
 * Service服务创建订单成功后，把订单号和订单关闭延迟时间包装成一个对象
 ````
