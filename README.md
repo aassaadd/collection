@@ -19,24 +19,8 @@ https://raw.githubusercontent.com/moxingwang/resource/master
 
 
 
-
-
-
-
-
-
-
 # notice
 * 简单说明jit
-
-
-
-
-
-
-
-
-
 
 
 
