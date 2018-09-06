@@ -25,7 +25,9 @@ https://raw.githubusercontent.com/moxingwang/resource/master
 
 
 
-
+{
+  test
+}
 
 
 
