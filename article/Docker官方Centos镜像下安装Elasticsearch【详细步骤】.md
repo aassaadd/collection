@@ -97,6 +97,24 @@ http://127.0.0.1:9200/
 ````
 ![](https://github.com/moxingwang/elastic/blob/master/source/realhost.png?raw=true)
 
+
+## 集群配置
+* 修改discovery.zen.ping.unicast.hosts
+````
+discovery.zen.ping.unicast.hosts: ["172.17.0.2", "172.17.0.3"]
+````
+
+* 修改node.name不同
+
+* cluster.name保证相同
+
+# 常见问题
+* 出现with the same id but is a different node instance
+> 删除data目录即可 [搭建elsticsearch集群 报错with the same id but is a different node instance解决办法](https://blog.csdn.net/qq_24879495/article/details/77718032)
+
+# 参考
+[ElasticSearch 5学习(3)——单台服务器部署多个节点](https://www.cnblogs.com/wxw16/p/6160186.html)
+
 # 结尾
 * 当前镜像已经commit上传到阿里云镜像仓库
 ````
