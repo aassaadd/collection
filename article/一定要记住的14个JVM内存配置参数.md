@@ -83,3 +83,5 @@
 # REFERENCE
 * [Java HotSpot VM Options](https://www.oracle.com/technetwork/articles/java/vmoptions-jsp-140102.html)
 * [Java Platform, Standard Edition Tools Reference](https://docs.oracle.com/javase/8/docs/technotes/tools/unix/java.html)
+
+#### `原文地址：`[一定要记住的14个JVM内存配置参数](http://moxingwang.top/2018/09/09/%E4%B8%80%E5%AE%9A%E8%A6%81%E8%AE%B0%E4%BD%8F%E7%9A%8414%E4%B8%AAJVM%E5%86%85%E5%AD%98%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0/)
