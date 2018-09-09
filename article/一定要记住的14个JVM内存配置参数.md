@@ -4,20 +4,20 @@
 
 下面给出14个最常用和最基本的内存配置参数。
 
-参数                        | 等同于
-----                        | ---
--Xss1024k                   | -XX:ThreadStackSize=1024k
--Xms512m                    | 
--Xmx1024m                   | -XX:MaxHeapSize=1024m
--Xmn512m                    | 
--XX:NewSize=512m            | 
--XX:MaxNewSize=512m         |
--XX:NewRatio=8              |
--XX:SurvivorRatio=32        |
--XX:MinHeapFreeRatio=40     |
--XX:MaxHeapFreeRatio=70     |
--XX:MetaspaceSize=128m      |
--XX:MaxMetaspaceSize=256m   |
+| 参数                        | 等同于                       |
+| ----                        | ---                         |
+| -Xss1024k                   | -XX:ThreadStackSize=1024k   |
+| -Xms512m                    |                             |
+| -Xmx1024m                   | -XX:MaxHeapSize=1024m       |
+| -Xmn512m                    |                             |
+| -XX:NewSize=512m            |                             |
+| -XX:MaxNewSize=512m         |                             |
+| -XX:NewRatio=8              |                             |
+| -XX:SurvivorRatio=32        |                             |
+| -XX:MinHeapFreeRatio=40     |                             |
+| -XX:MaxHeapFreeRatio=70     |                             |
+| -XX:MetaspaceSize=128m      |                             |
+| -XX:MaxMetaspaceSize=256m   |                             |
 
 
 
