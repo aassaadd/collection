@@ -21,7 +21,7 @@
 
 
 
-首先我们来看看jvm内存模型结构，这里不详细叙述，我用一张图来让你过目不忘（jvisualvm visualVM插件，下图并非以上jvm参数设置，只是为了方便对jvm内存模型记忆）。当然了，这张图死磕也要永久记住的，有了他我们记忆以上几个参数不再是难事，时间久了也不会感觉陌生或者忘记。
+首先我们来看看jvm内存模型结构，这里不详细叙述，我用一张图来让你过目不忘（jvisualvm visualGC插件，下图并非以上jvm参数设置，只是为了方便对jvm内存模型记忆）。当然了，这张图死磕也要永久记住的，有了他我们记忆以上几个参数不再是难事，时间久了也不会感觉陌生或者忘记。
 
 ![](https://raw.githubusercontent.com/moxingwang/resource/master/image/jvm/java-8-hostspot-visualvm-0.png)
 
@@ -78,6 +78,7 @@
 * 意义：设置元空间的最大值，默认是没有上限的，也就是说你的系统内存上限是多少它就是多少。
 * 默认值：默认没有上限，在技术上，Metaspace的尺寸可以增长到交换空间。
 
+> 以上就是14个参数，为了深刻理解，建议本地配置让后观察内存大小变化（可以使用jmap -heap pid 或者 visualGC来帮助观察）验证自己的理解是否正确。
 
 # REFERENCE
 * [Java HotSpot VM Options](https://www.oracle.com/technetwork/articles/java/vmoptions-jsp-140102.html)
