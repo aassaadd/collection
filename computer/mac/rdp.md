@@ -7,3 +7,6 @@ rdesktop -f  -r disk:Hello=/Users/mo/Desktop -r clipboard:PRIMARYCLIPBOARD -u xi
 
 如果无法复杂就来回复制就好。
 ```
+
+
+## Parallels
