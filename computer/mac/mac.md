@@ -18,3 +18,12 @@ https://blog.csdn.net/f6619082/article/details/73473028
 ```
 sudo ifconfig en0 ether 20-7C-8F-73-B1-1E 
 ```
+
+## Pulse Secure
+* 关闭Pulse Secure 开机自动启动
+```
+sudo vim /Library/LaunchAgents/net.juniper.pulsetray.plist
+```
+修改KeepAlive值为false就可以了，这样，如果想再次改为开机启动，再把值改回true就好，同理可以推广到其他软件，找到相应的KeepAlive值就可以.
+
+如果找不到这个文件，先进入这个目录设置。
