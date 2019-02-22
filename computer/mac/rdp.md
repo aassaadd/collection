@@ -40,3 +40,6 @@ b1dec7a70e1a8d2696d4e8567eb7f334.jpg-wh_
 ## Microsoft Remote Desktop for Mac
 * [Microsoft Remote Desktop for Mac](https://rink.hockeyapp.net/apps/5e0c144289a51fca2d3bfa39ce7f2b06/)
 * [Microsoft Remote Desktop For Mac 哪里下载？](https://www.v2ex.com/t/365984)
+
+* 配置说明
+pc name使用ip:3390
