@@ -1,6 +1,7 @@
 ## 参考
 
 ## install java8
+* [最佳推荐](https://blog.csdn.net/rflyee/article/details/8989663)
 * [Ubuntu 安装 JDK 7 / JDK8 的两种方式](http://www.cnblogs.com/a2211009/p/4265225.html)
 * [Ubuntu的add-apt-repository: command not found](http://blog.csdn.net/dogfish/article/details/67150703)
 * [Hadoop安装教程_单机/伪分布式配置](http://www.powerxing.com/install-hadoop/)
