@@ -27,3 +27,6 @@ sudo vim /Library/LaunchAgents/net.juniper.pulsetray.plist
 修改KeepAlive值为false就可以了，这样，如果想再次改为开机启动，再把值改回true就好，同理可以推广到其他软件，找到相应的KeepAlive值就可以.
 
 如果找不到这个文件，先进入这个目录设置。
+
+## 间歇性断网的设置
+> 网络-高级-WI-FI 设置成WPA2
