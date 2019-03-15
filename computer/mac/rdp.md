@@ -46,3 +46,11 @@ pc name使用ip:3390
 
 
 # anydesk
+
+
+# windows vpn的情况下带域的远程使用
+* 使用方式  域\用户名
+例如：
+```
+group.xxxx.corp\xingwang.mo
+```
