@@ -43,3 +43,6 @@ b1dec7a70e1a8d2696d4e8567eb7f334.jpg-wh_
 
 * 配置说明
 pc name使用ip:3390
+
+
+# anydesk
