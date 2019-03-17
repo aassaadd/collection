@@ -4,8 +4,17 @@
 * 通知机制
 * 运行模式
 * 集群数据一致性
+* 读写机制
 
 
+# 学习流程
+
+* zk是什么
+* zk能干什么
+* 举例说明，先观察现象
+* 
+*
+*
 
 # reference
 * [ZooKeeper的Znode剖析](https://blog.csdn.net/lihao21/article/details/51810395)
