@@ -21,6 +21,7 @@ ipconfig /flushdns
 ```
 
 ### reference
+* [GitHub秘籍（中文版）](https://www.kancloud.cn/thinkphp/github-tips/37873)
 * [解决GitHub下载速度太慢的问题](https://blog.csdn.net/qing666888/article/details/79123742)
 * [Mac OS X 清除DNS缓存](https://www.cnblogs.com/qq952693358/p/9126860.html)
 * [在Linux/Windows/Mac上刷新DNS缓存的方法](http://cnzhx.net/blog/how-to-flush-dns-cache-in-linux-windows-mac/)
