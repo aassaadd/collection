@@ -16,7 +16,7 @@
 * 主节点崩溃
 * 从节点崩溃
 * 通行故障
-*
+### 主从架构模式带来的思考
 
 # reference
 * [ZooKeeper的Znode剖析](https://blog.csdn.net/lihao21/article/details/51810395)
