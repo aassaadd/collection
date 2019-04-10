@@ -37,6 +37,17 @@ https://raw.githubusercontent.com/moxingwang/resource/master
 
 
 
+190410
+```
+一致性hash如何保证负载均衡？方案优化？
+kafka和rocketmq各自的优缺点？然后各种原理追问？
+dubbo的一个请求过程、序列化方式，序列化框架、PB的缺点？
+JVM调优？都问到磁盘，切频，信道的，
+session一致性方案？
+数据一致性各种方案优缺点？
+红黑，B-树？Btree转图？图的最优算法，然后就转到数据库索引了 
+```
+
 
 0329聊天点
 * 最多是基础集合多线程 
