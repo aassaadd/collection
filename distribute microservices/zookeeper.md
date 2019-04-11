@@ -48,9 +48,32 @@
     * 数据模型znode
         * 相关文章
             * [zookeeper之数据模型](https://blog.csdn.net/usagoole/article/details/82944230)
-        * 1M
+        * 存储空间
             > client and server会校验数据不能超过1M
         
+        * 临时（Ephemeral）znode
+            * as long as the session
+            * 只能是在叶子节点上创建
+        * 持久（PERSISTENT）znode
+        * 顺序（SEQUENTIAL）znode
+            * 在父节点下有序自增
+            * int 
+        * zxid
+            * 有序
+            * 全局唯一
+        * zookeeper stat 结构
+            * czxid Created ZXID表示该数据节点被创建时的事务ID
+            * mzxid Modified ZXID 表示该节点最后一次被更新时的事务ID
+            * pzxid 表示该节点的子节点列表最后一次被修改时的事务ID。只有子节点列表变更了才会变更pZxid,子节点内容变更不会影响pZxid
+            * ctime Created Time表示节点被创建的时间
+            * mtime Modified Time表示节点最后一次被更新的时间
+            * dataVersion 数据节点版本号
+            * cversion 子节点的版本号
+            * aversion The number of changes to the ACL of this znode.
+            * ephemeralOwner The session id of the owner of this znode if the znode is an ephemeral node. If it is not an ephemeral node, it will be zero.
+            * dataLength The length of the data field of this znode.
+            * numChildren The number of children of this znode.
+
 
 * zookeeper是如何工作的
     * leader选举
