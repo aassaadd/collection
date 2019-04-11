@@ -46,6 +46,11 @@
 
 * 核心概念
     * 数据模型znode
+        * 相关文章
+            * [zookeeper之数据模型](https://blog.csdn.net/usagoole/article/details/82944230)
+        * 1M
+            > client and server会校验数据不能超过1M
+        
 
 * zookeeper是如何工作的
     * leader选举
@@ -58,3 +63,8 @@
 * 应用举例
 
 * api操作演示
+
+
+
+---思考问题---
+* 集群中clientPort不一致，可以等了解了读写机制理解
