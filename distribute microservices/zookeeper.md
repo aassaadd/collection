@@ -44,6 +44,9 @@
     * 能干什么
     * 特点
 
+* 核心概念
+    * 数据模型znode
+
 * zookeeper是如何工作的
     * leader选举
     * leader协调读写
