@@ -52,6 +52,10 @@
 
             ![](https://github.com/moxingwang/resource/blob/master/image/kafka/zookeeper%20session%20connect.png?raw=true)
 
+        * 客户端连接指定根路径
+            > 在ZooKeeper 3.2.0增加了可选的“chroot”后缀，可以改变当前客户端的根路径。例如，如果使用”127.0.0.1:4545/app/a”，客户端将使用”/app/a”作为其根路径，所有的路径都会相对于该路径。比如操作路径”/foo/bar”将真正对应到”/app/a/foo/bar”。这个特征在多租户环境下是非常有用的，可以简化客户端的应用逻辑（）。
+
+
 
 
 * zookeeper是如何工作的
