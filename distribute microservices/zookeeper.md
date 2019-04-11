@@ -16,9 +16,6 @@
 
 * 核心概念
     * 数据模型znode
-        * 相关文章
-            * [zookeeper之数据模型](https://blog.csdn.net/usagoole/article/details/82944230)
-            * [ZooKeeper session管理](https://blog.csdn.net/tomato__/article/details/78560727)
         * 存储空间
             > client and server会校验数据不能超过1M
         
@@ -98,6 +95,8 @@
 ### 主从架构模式带来的思考
 
 # reference
+* [zookeeper之数据模型](https://blog.csdn.net/usagoole/article/details/82944230)
+* [ZooKeeper session管理](https://blog.csdn.net/tomato__/article/details/78560727)
 * [ZooKeeper的Znode剖析](https://blog.csdn.net/lihao21/article/details/51810395)
 * [ZooKeeper数据一致性](https://blog.csdn.net/tomato__/article/details/78673365)
 * [一直对zookeeper的应用和原理比较迷糊，今天看一篇文章，讲得很通透](https://blog.csdn.net/gs80140/article/details/51496925)
