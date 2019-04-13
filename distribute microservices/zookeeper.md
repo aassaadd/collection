@@ -129,11 +129,22 @@
     * 注册与发现
     * 
 
+* 回顾zookeeper架构
 
 * Leader选举
     * leader选举发生的场景
         1. Server初始化
         2. server运行期间无法和leader保持连接
+
+* 分布式一致性原理
+    * CAP
+    * 2PC
+    * 3PC
+    * Paxos
+    * ZAB
+
+* zookeeper 一致性算法
+
 
 
 * Leader、Follower、Observer之间的关系
@@ -191,4 +202,4 @@
 * [ZooKeeper数据一致性](https://blog.csdn.net/tomato__/article/details/78673365)
 * [一直对zookeeper的应用和原理比较迷糊，今天看一篇文章，讲得很通透](https://blog.csdn.net/gs80140/article/details/51496925)
 * [Zookeeper - CLI](https://www.tutorialspoint.com/zookeeper/zookeeper_cli.htm)
-
+* [分布式一致性原理、Paxos算法与Zookeeper的ZAB协议、Zookeeper使用场景与在电商系统中的应用](https://blog.csdn.net/zhengzhihust/article/details/53456371)
