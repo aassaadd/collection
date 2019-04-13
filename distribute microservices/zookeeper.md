@@ -43,18 +43,29 @@
             * numChildren 当前节点的子节点个数
 
     * ZooKeeper Sessions
-        * 客户端如何选择连接到server
-            > ZooKeeper的每个客户端都维护一组服务端信息，在创建连接时由应用指定，客户端随机选择一个服务端进行连接，连接成功后，服务端为每个连接分配一个唯一标识。客户端在创建连接时可以指定溢出时间，客户端会周期性的向服务端发送PING请求来保持连接，当客户端检测到与服务端断开连接后，客户端将自动选择服务端列表中的另一个服务端进行重连。客户端允许应用修改服务端列表，但修改可能导致客户端与服务端的重连。
-        * client和server建立session过程
+        * 创建会话
             > 创建客户端session时，应用必须传入一组以逗号分隔的host:port列表，每个都对应一个ZooKeeper服务端，ZooKeeper客户端将选择任意一个服务端并尝试与其连接，如果连接失败，或者由于某些原因导致客户端与服务端连接断开，客户端将自动的选择列表中的另一个服务端进行连接，直到成功。当session创建成功后，ZooKeeper服务端为session分配一个唯一标识。
+        
+        * 会话状态
+            > Zookeeper会话在整个运行期间的生命周期中，会在不同的会话状态中之间进行切换，这些状态可以分为CONNECTING、CONNECTED、CLOSE。
 
-            > ZooKeeper使用session来表示客户端和服务端的连接。ZooKeeper的客户端管理一个可用的服务端列表，ZooKeeper客户端首先创建一个handle，handle建立后处于CONNECTING状态，然后客户端随机选择一个服务端进行连接，连接成功后，handle的状态更换到CONNECTED状态。如果出现无法恢复的错误，例如；会话终止或者认证失败，或者应用直接关闭handle，handle将转换到CLOSED状态。 
+            ![](https://github.com/moxingwang/resource/blob/master/image/kafka/zk-session-1.png?raw=true)
 
-            ![](https://github.com/moxingwang/resource/blob/master/image/kafka/zookeeper%20session%20connect.png?raw=true)
+            > 一旦客户端开始创建Zookeeper对象，那么客户端状态就会变成CONNECTING状态，同时客户端开始尝试连接服务端，连接成功后，客户端状态变为CONNECTED，通常情况下，由于断网或其他原因，客户端与服务端之间会出现断开情况，一旦碰到这种情况，Zookeeper客户端会自动进行重连服务，同时客户端状态再次变成CONNCTING，直到重新连上服务端后，状态又变为CONNECTED，在通常情况下，客户端的状态总是介于CONNECTING和CONNECTED之间。但是，如果出现诸如会话超时、权限检查或是客户端主动退出程序等情况，客户端的状态就会直接变更为CLOSE状态。
 
+        * session实体
+            > Session是Zookeeper中的会话实体，代表了一个客户端会话，其包含了如下四个属性
+
+        * 心跳检测
+            >  客户端会在会话超时时间过期范围内向服务端发送PING请求来保持会话的有效性
+         
         * 客户端连接指定根路径
             > 在ZooKeeper 3.2.0增加了可选的“chroot”后缀，可以改变当前客户端的根路径。例如，如果使用”127.0.0.1:4545/app/a”，客户端将使用”/app/a”作为其根路径，所有的路径都会相对于该路径。比如操作路径”/foo/bar”将真正对应到”/app/a/foo/bar”。这个特征在多租户环境下是非常有用的，可以简化客户端的应用逻辑（）。
 
+        * session id和password
+            > zookeeper的session id是每个会话的唯一标识，
+
+        * session过期
 
 
 
@@ -99,6 +110,9 @@
 ### 主从架构模式带来的思考
 
 # reference
+* [ZooKeeper解惑](http://jm.taobao.org/2011/05/30/947/)
+* [【分布式】Zookeeper会话](http://www.cnblogs.com/leesf456/p/6103870.html)
+* [zookeeper curator处理会话过期session expired](https://www.cnblogs.com/kangoroo/p/7538314.html)
 * [zookeeper之数据模型](https://blog.csdn.net/usagoole/article/details/82944230)
 * [ZooKeeper session管理](https://blog.csdn.net/tomato__/article/details/78560727)
 * [ZooKeeper的Znode剖析](https://blog.csdn.net/lihao21/article/details/51810395)
