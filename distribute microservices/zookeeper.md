@@ -1,3 +1,5 @@
+* 举例应用,自己如何设计一个真正意义上的分布式状态存储框架
+
 * 先从主从模式说起
     * 架构演讲
     * 主从常见问题
@@ -142,15 +144,16 @@
         1. Server初始化
         2. server运行期间无法和leader保持连接
 
-* 分布式一致性原理
-    * CAP
-    * 2PC
-    * 3PC
-    * Paxos
-    * ZAB
+    * 分布式选举算法
+
 
 * zookeeper 一致性算法
-
+    * 分布式一致性原理
+        * CAP
+        * 2PC
+        * 3PC
+        * Paxos
+        * ZAB
 
 
 * Leader、Follower、Observer之间的关系
