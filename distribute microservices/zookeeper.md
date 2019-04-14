@@ -2,17 +2,16 @@
 ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/server-single.png?raw=true)
 
 * 自己如何设计一个服务,能够保证可靠性、一致性、容错？
-    ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/server-replication-basic.png?raw=true)
-
-* 把应用放到分布式系统中
     > 在独立主机上运行的应用与分布式应用发生的故障存在显著的区别：在分布式应用中，可能会发生局部故障，当某独立主机崩溃，其他的主机继续工作，部影响整体服务对外工作.如果是独立主机崩溃了，就是去服务的可靠性了，整个服务无法对外提供服务。
+
+    ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/server-replication-basic.png?raw=true)
 
 * 先从主从模式说起
     > 在分布式系统设计中一个得到广泛应用的架构：一个主-从（master-worker）架构,该系统中遵循这个架构的一个重要例子是HBase——一个Google的数据存储系统（BigTable）模型的实现，在最高层，主节点服务器（HMaster）负责跟踪区域服务器（HRegionServer）是否可用，并分派区域到服务器。
 
     ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/master-worker-1.png?raw=true)
 
-    * 主从模式面临的问题
+    * 主从模式面对的问题
         * 主节点崩溃
             > 如果主节点发送错误并失效，系统将无法分配新的任务或重新分配已失败的任务。这就需要重选备份主节点接管主要主节点的角色，进行故障转移,数据恢复等等，更糟的是，如果一些从节点无法与主要主节点通信，如由于网络分区（network partition）错误导致，这些从节点可能会停止与主要主节点的通信，而与第二个主要主节点建立主-从关系。针对这个场景中导致的问题，我们一般称之为脑裂（split-brain）：系统中两个或者多个部分开始独立工作，导致整体行为不一致性。我们需要找出一种方法来处理主节点失效的情况，关键是我们需要避免发生脑裂的情况。
         * 从节点崩溃
