@@ -73,18 +73,24 @@
         * clientPort
             > 服务器监听客户端连接的端口, 也即客户端尝试连接的端口, 默认值是 2181。
     
-    * bin命令
+    * /bin/命令
         * zkCleanup：清理Zookeeper历史数据，包括食物日志文件和快照数据文件
         * zkCli：Zookeeper的一个简易客户端
         * zkEnv：设置Zookeeper的环境变量
         * zkServer：Zookeeper服务器的启动、停止、和重启脚本
 
-    * 常用命令
-        * 
+    * 监控命令
+        > 在客户端可以通过 telnet 或 nc 向 ZooKeeper 提交相应的服务信息查询命令。使用方式`echo mntr | nc localhost 2181 `.
+        * conf: 输出相关服务配置的详细信息。比如端口、zk数据及日志配置路径、最大连接数，session超时时间、serverId等
+        * cons: 列出所有连接到这台服务器的客户端连接/会话的详细信息。包括“接受/发送”的包数量、session id 、操作延迟、最后的操作执行等信息.
+        * stat: 输出服务器的详细信息：接收/发送包数量、连接数、模式（leader/follower）、节点总数、延迟。 所有客户端的列表。
+        * envi: 输出关于服务器的环境详细信息（不同于conf命令），比如host.name、java.version、java.home、user.dir=/data/zookeeper-3.4.6/bin之类信息
+        * ...
+
 
 * 复制模式配置演示
     * 配置说明
-    * 命令操作演示
+    
 
 * 核心概念
     * 数据模型znode
