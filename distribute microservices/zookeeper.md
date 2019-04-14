@@ -1,3 +1,6 @@
+* 有没有绝度稳定可靠的应用?
+![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/server-single.png?raw=true)
+
 * 举例应用,自己如何设计一个真正意义上的分布式状态存储框架
 
 * 先从主从模式说起
