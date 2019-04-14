@@ -32,17 +32,27 @@
     * 来源
         > zooKeeper最初由雅虎研究院开发，用于处理大量的大型分布式应.
     * zookeeper是什么
-        > ZooKeeper是一个分布式的，开放源码的分布式应用程序协调服务，它是集群的管理者，监视着集群中各个节点的状态根据节点提交的反馈进行下一步合理操作。最终，将简单易用的接口和性能高效、功能稳定的系统提供给用户.
-    * 概念
+        > ZooKeeper是一个典型的分布式数据一致性解决方案,其设计目标是将那些复杂且容易出错的分布式一致性服务封装起来，构成一个高效可靠的原语集，并以一系列简单易用的接口提供给用户使用。分布式应用程序可以基于 ZooKeeper 实现诸如数据发布/订阅、负载均衡、命名服务、分布式协调/通知、集群管理、Master 选举、分布式锁和分布式队列等功能。
+    * 一个最常见的使用场景(dubbo)
+    ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/dubbo-architecture-future.jpg?raw=true)
     * zk架构
+        ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/zkservice-1.jpg?raw=true)
         * 角色
         * 写操作
         * 读操作
         * ZAB协议
-            > ZAB 协议是为分布式协调服务ZooKeeper专门设计的一种支持崩溃恢复的一致性协议。基于该协议，ZooKeeper 实现了一种主从模式的系统架构来保持集群中各个副本之间的数据一致性。ZAB协议运行过程中，所有的客户端更新都发往Leader，Leader写入本地日志后再复制到所有的Follower节点。一旦Leader节点故障无法工作，ZAB协议能够自动从Follower节点中重新选择出一个合适的替代者，这个过程被称为选主.
-    * 能干什么
     * 特点
-
+        * 简单化：ZooKeeper允许各分布式进程通过一个共享的命名空间相互联系，该命名空间类似于一个标准的层次型的文件系统。
+        * 顺序一致性：按照客户端发送请求的顺序更新数据。
+        * 原子性：更新要么成功，要么失败，不会出现部分更新。
+        * 单一性 ：无论客户端连接哪个 server，都会看到同一个视图。
+        * 可靠性：一旦数据更新成功，将一直保持，直到新的更新。
+        * 及时性：客户端会在一个确定的时间内得到最新的数据。
+        * 速度优势：ZooKeeper特别适合于以读为主要负荷的场合。ZooKeeper可以运行在数千台机器上，如果大部分操作为读，例如读写比例为10:1，ZooKeeper的效率会很高。
+    * 常见运用场景
+        *
+        *
+        *
 * Standalone模式演示开始，本地启动
     * 配置
         * tickTime
@@ -252,7 +262,8 @@
         * Paxos
         * ZAB
     
-    * ZAB (原子广播)
+    * ZAB协议
+        > ZAB 协议是为分布式协调服务ZooKeeper专门设计的一种支持崩溃恢复的一致性协议。基于该协议，ZooKeeper 实现了一种主从模式的系统架构来保持集群中各个副本之间的数据一致性。ZAB协议运行过程中，所有的客户端更新都发往Leader，Leader写入本地日志后再复制到所有的Follower节点。一旦Leader节点故障无法工作，ZAB协议能够自动从Follower节点中重新选择出一个合适的替代者，这个过程被称为选主.
         * 特点
             * 一致性保证
                 * 可靠提交(Reliable delivery) -如果一个事务 A 被一个server提交(committed)了，那么它最终一定会被所有的server提交
