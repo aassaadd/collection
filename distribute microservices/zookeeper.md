@@ -1,4 +1,4 @@
-* 有没有绝度稳定可靠的服务?
+* 有没有绝对稳定可靠的服务?
 ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/server-single.png?raw=true)
 
 * 自己如何设计一个服务,能够保证可靠性、一致性、容错等等。
