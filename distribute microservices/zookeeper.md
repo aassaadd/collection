@@ -327,3 +327,4 @@
 * [深入浅出Zookeeper（一） Zookeeper架构及FastLeaderElection机制](http://www.jasongj.com/zookeeper/fastleaderelection/)
 * [聊聊zookeeper的ZAB算法](https://juejin.im/entry/5b84d589e51d453885032159)
 * [ZAB协议的那些事？](https://juejin.im/post/5b0633f96fb9a07ab45903ed)
+* [ZooKeeper典型应用场景一览](http://jm.taobao.org/2011/10/08/1232/)
