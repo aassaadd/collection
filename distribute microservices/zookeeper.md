@@ -11,7 +11,8 @@
         * 角色
         * 写操作
         * 读操作
-        * 原子广播（ZAB） 
+        * ZAB协议
+            > ZAB 协议是为分布式协调服务ZooKeeper专门设计的一种支持崩溃恢复的一致性协议。基于该协议，ZooKeeper 实现了一种主从模式的系统架构来保持集群中各个副本之间的数据一致性。ZAB协议运行过程中，所有的客户端更新都发往Leader，Leader写入本地日志后再复制到所有的Follower节点。一旦Leader节点故障无法工作，ZAB协议能够自动从Follower节点中重新选择出一个合适的替代者，这个过程被称为选主.
     * 能干什么
     * 特点
 
@@ -135,8 +136,10 @@
 
 * 回顾zookeeper架构
 
-* Leader选举
-    * 思考问题
+* 选举
+    * 问题1: 为什么要选举leader
+        > 我们在了解分布式选举算法之前，我们需要这样一种算法产生的背景。在一个分布式系统中，因为各种意外的因素，有的服务器可能会崩溃或变得不可靠，它就不能和其他服务器达成一致状态。因而这样就需要一种Consensus协议，来确保服务器的容错性，也就是说即使系统中有一两个服务器节点Crash，也不会影响其处理过程。为了让容错方式达成一致，我们不可能要求所有的服务器节点100%都达成Consensus状态，只要超过半数的大多数服务器节点Consensus即可，假设有N台服务器节点，(N/2)+1 就超过半数，即可代表大多数了。
+    * 问题2: 如何选举leader
         > 某个服务可以配置为多个实例共同构成一个集群对外提供服务。其每一个实例本地都存有冗余数据，每一个实例都可以直接对外提供读写服务。在这个集群中为了保证数据的一致性，需要有一个Leader来协调一些事务。那么问题来了：如何确定哪一个实例是Leader呢？
 
         * 问题的难点
@@ -145,12 +148,43 @@
 
     
     * 分布式选举算法
+        * 拜占庭问题
+        * Paxos
+        * raft
+        * ZooKeeper ZAB
 
-    
+* zookeeper选举
+    * 搞清楚几个问题
+        * 一个Server是如何知道其它的Server？
+            > 在ZooKeeper集群中，Server的信息都在zoo.conf配置文件中，根据配置文件的信息就可以知道其它Server的信息。
+        * ZooKeeper服务器有哪几种状态？（选主相关的状态）
+            * LOOKING：寻找leader状态
+            * LEADING：领导状态（节点为leader）
+            * FOLLOWING：跟随者状态
+            * OBSERVING：观察者状态（此状态不参与选举）
+        * 成为Leader的必要条件？
+            > Leader要具有最高的zxid；集群中大多数的机器（至少n/2+1）得到响应并follow选出的Leader。
+        * 如果所有zxid都相同(例如: 刚初始化时)，此时有可能不能形成n/2+1个Server，怎么办？
+            > ZooKeeper中每一个Server都有一个ID，这个ID是不重复的，如果遇到这样的情况时，ZooKeeper就推荐ID最大的哪个Server作为Leader。
+        * ZooKeeper中Leader怎么知道Fllower还存活，Fllower怎么知道Leader还存活？
+            > Leader定时向Fllower发ping消息，Fllower定时向Leader发ping消息，当发现Leader无法ping通时，就改变自己的状态(LOOKING)，发起新的一轮选举。
 
-    * leader选举发生的场景
+    * leader选主时机
         1. Server初始化
         2. server运行期间无法和leader保持连接
+    
+    * 核心概念
+        * myid
+            > 每个Zookeeper服务器，都需要在数据文件夹下创建一个名为myid的文件，该文件包含整个Zookeeper集群唯一的ID（整数）。例如某Zookeeper集群包含三台服务器，hostname分别为zoo1、zoo2和zoo3，其myid分别为1、2和3，则在配置文件中其ID与hostname必须一一对应，如下所示。在该配置文件中，server.后面的数据即为myid.
+            ```
+            server.1=zoo1:2888:3888
+            server.2=zoo2:2888:3888
+            server.3=zoo3:2888:3888
+            ```
+        * zxid
+
+    
+    * 
 
 
 * zookeeper 一致性算法
@@ -162,7 +196,9 @@
         * ZAB
 
 
-* Leader、Follower、Observer之间的关系
+* 运维
+    * 水平扩容
+
 
 * zookeeper是如何工作的
     * leader选举
@@ -182,6 +218,7 @@
 
 * 思考问题
     * 集群中clientPort不一致，可以等了解了读写机制理解
+    * observer是怎么设置的
 
 
 
@@ -207,6 +244,7 @@
 ### 主从架构模式带来的思考
 
 # reference
+* [ZooKeeper基本原理](https://www.cnblogs.com/luxiaoxun/p/4887452.html)
 * [【Zookeeper源码五】Zookeeper 集群版建立连接过程](https://my.oschina.net/xianggao/blog/538839)
 * [ZooKeeper解惑](http://jm.taobao.org/2011/05/30/947/)
 * [【分布式】Zookeeper会话](http://www.cnblogs.com/leesf456/p/6103870.html)
@@ -218,3 +256,6 @@
 * [一直对zookeeper的应用和原理比较迷糊，今天看一篇文章，讲得很通透](https://blog.csdn.net/gs80140/article/details/51496925)
 * [Zookeeper - CLI](https://www.tutorialspoint.com/zookeeper/zookeeper_cli.htm)
 * [分布式一致性原理、Paxos算法与Zookeeper的ZAB协议、Zookeeper使用场景与在电商系统中的应用](https://blog.csdn.net/zhengzhihust/article/details/53456371)
+* [关于若干选举算法的解释与实现](http://blog.jobbole.com/104832/)
+* [Zookeeper的FastLeaderElection算法分析](https://www.jianshu.com/p/ccaecde36dd3)
+* [深入浅出Zookeeper（一） Zookeeper架构及FastLeaderElection机制](http://www.jasongj.com/zookeeper/fastleaderelection/)
