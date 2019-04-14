@@ -89,7 +89,16 @@
 
 
 * 复制模式配置演示
-    * 配置说明
+    * 配置server id
+        > zookeeper集群模式下还要配置一个myid文件,这个文件需要放在dataDir目录下,问价中写入一个id即可。
+    * zoo.cfg配置集群server列表
+        * 集群模式多了 server.id=host:port1:port2 的配置。
+            ```
+            server.1= 192.168.1.9:2888:3888
+            server.2= 192.168.1.124:2888:3888
+            server.3= 192.168.1.231:2888:3888
+            ```
+        > 其中，id 被称为 Server ID，用来标识该机器在集群中的机器序号（在每台机器的 dataDir 目录下创建 myid 文件，文件内容即为该机器对应的 Server ID 数字）。host 为机器 IP，port1 用于指定 Follower 服务器与 Leader 服务器进行通信和数据同步的端口，port2 用于进行 Leader 选举过程中的投票通信。
     
 
 * 核心概念
