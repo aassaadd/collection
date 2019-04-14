@@ -208,64 +208,68 @@
         * Leader重启选举
 
 * zookeeper 数据一致
-    * 问题
+    * 拜占庭问题
+
+    * 分布式一致问题
         > 分布式中有这么一个疑难问题，客户端向一个分布式集群的服务端发出一系列更新数据的消息，由于分布式集群中的各个服务端节点是互为同步数据的，所以运行完客户端这系列消息指令后各服务端节点的数据应该是一致的，但由于网络或其他原因，各个服务端节点接收到消息的序列可能不一致，最后导致各节点的数据不一致。
 
     * 分布式一致性原理
         * CAP
+            * Consistency (一致性)
+            * Availability (可用性)
+            * Partition tolerance (分区容错)
+
+            > 这三个基本需求，最多只能同时满足其中的两项。
         * 2PC
         * 3PC
         * Paxos
         * ZAB
+    
+    * ZAB (原子广播)
+        * 特点
+            * 一致性保证
+                * 可靠提交(Reliable delivery) -如果一个事务 A 被一个server提交(committed)了，那么它最终一定会被所有的server提交
+                * 全局有序(Total order) - 假设有A、B两个事务，有一台server先执行A再执行B，那么可以保证所有server上A始终都被在B之前执行
+                * 因果有序(Causal order) - 如果发送者在事务A提交之后再发送B,那么B必将在A之前执行
+            * 只要大多数（法定数量）节点启动，系统就行正常运行
+            * 当节点下线后重启，它必须保证能恢复到当前正在执行的事务
+    
+    * ZAB工作模式
+        * 广播(broadcast)模式
+            > Zab 协议中，所有的写请求都由 leader 来处理。正常工作状态下，leader 接收请求并通过广播协议来处理。
+
+            * 工作步骤
+                1. leader从客户端收到一个写请求
+                2. leader生成一个新的事务并为这个事务生成一个唯一的ZXID，
+                3. leader将这个事务发送给所有的follows节点
+                4. follower节点将收到的事务请求加入到历史队列(history queue)中,并发送ack给ack给leader
+                5. 当leader收到大多数follower（超过法定数量）的ack消息，leader会发送commit请求
+                6. 当follower收到commit请求时，会判断该事务的ZXID是不是比历史队列中的任何事务的ZXID都小，如果是则提交，如果不是则等待比它更小的事务的commit
+        * 恢复(recovery)模式
+            > 当服务初次启动，或者 leader 节点挂了，系统就会进入恢复模式，直到选出了有合法数量 follower 的新 leader，然后新 leader 负责将整个系统同步到最新状态。
+
+            * 恢复模式需要解决的两个重要问题
+                * 已经被处理的消息不能丢
+                * 被丢弃的消息不能再次出现
+
+            * 工作步骤
+                * 选举
+                * 同步
 
 
-* 运维
-    * 水平扩容
+* 扩展
+    * api操作演示
 
-
-* zookeeper是如何工作的
-    * leader选举
-    * leader协调读写
-    * 数据存储模式znode
-    * 复制模式工作图
-    * 数据一致性
-    * 通知机制
-
-* 扩容
-
-* 应用举例
-
-* api操作演示
-
+* 整体回顾
 
 
 * 思考问题
     * 集群中clientPort不一致，可以等了解了读写机制理解
     * observer是怎么设置的
     * zxid溢出变成负数了怎么办
+    * 水平扩容
 
 
-
-
-# 学习重点
-* leader选举
-* znode
-* 通知机制
-* 运行模式
-* 集群数据一致性
-* 读写机制
-
-
-# 学习流程
-
-## zk是什么
-## zk能干什么
-## 举例说明，先观察现象
-## 主从模式系统
-* 主节点崩溃
-* 从节点崩溃
-* 通行故障
-### 主从架构模式带来的思考
 
 # reference
 * [ZooKeeper基本原理](https://www.cnblogs.com/luxiaoxun/p/4887452.html)
@@ -283,3 +287,5 @@
 * [关于若干选举算法的解释与实现](http://blog.jobbole.com/104832/)
 * [Zookeeper的FastLeaderElection算法分析](https://www.jianshu.com/p/ccaecde36dd3)
 * [深入浅出Zookeeper（一） Zookeeper架构及FastLeaderElection机制](http://www.jasongj.com/zookeeper/fastleaderelection/)
+* [聊聊zookeeper的ZAB算法](https://juejin.im/entry/5b84d589e51d453885032159)
+* [ZAB协议的那些事？](https://juejin.im/post/5b0633f96fb9a07ab45903ed)
