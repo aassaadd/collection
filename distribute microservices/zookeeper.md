@@ -1,7 +1,7 @@
-* 有没有绝对稳定可靠的服务?
+* 单机应用
 ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/server-single.png?raw=true)
 
-* 自己如何设计一个服务,能够保证可靠性、一致性、容错？
+* 分布式集群
     > 在独立主机上运行的应用与分布式应用发生的故障存在显著的区别：在分布式应用中，可能会发生局部故障，当某独立主机崩溃，其他的主机继续工作，部影响整体服务对外工作.如果是独立主机崩溃了，就是去服务的可靠性了，整个服务无法对外提供服务。
 
     ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/server-replication-basic.png?raw=true)
