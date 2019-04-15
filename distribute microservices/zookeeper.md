@@ -120,7 +120,7 @@
 
 * 复制模式配置演示
     * 配置server id
-        > zookeeper集群模式下还要配置一个myid文件,这个文件需要放在dataDir目录下,问价中写入一个id即可。
+        > zookeeper集群模式下还要配置一个myid文件,这个文件需要放在dataDir目录下,文件中写入一个id即可。
     * zoo.cfg配置集群server列表
         * 集群模式多了 server.id=host:port1:port2 的配置。
             ```
