@@ -1,7 +1,9 @@
 * 任务计算
+
     ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/workers.png?raw=true)
 
 * 主从架构
+
     ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/worker-master-slae.png?raw=true)
 
     > 在分布式系统设计中一个得到广泛应用的架构：一个主-从（master-worker）架构,该系统中遵循这个架构的一个重要例子是HBase——一个Google的数据存储系统（BigTable）模型的实现，在最高层，主节点服务器（HMaster）负责跟踪区域服务器（HRegionServer）是否可用，并分派区域到服务器。
