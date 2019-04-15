@@ -87,6 +87,8 @@
         ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/zookeeper-construct-readandwrite.png?raw=true)
     
     * ZAB协议
+        * 崩溃恢复
+        * 原子广播
 
 * Standalone模式演示开始，本地启动
     * 配置
