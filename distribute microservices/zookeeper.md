@@ -66,8 +66,9 @@
         * 分布式队列
 
 * zk架构
-    ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/zkservice-1.jpg?raw=true)
     * 角色
+        ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/zookeeper-construct-1.png?raw=true)
+
         * Leader
             > Leader作为整个ZooKeeper集群的主节点，负责响应所有对ZooKeeper状态变更的请求。它会将每个状态更新请求进行排序和编号，以便保证整个集群内部消息处理的FIFO。
 
@@ -77,8 +78,14 @@
             > 为客户端提供读服务器，如果是写服务则转发给Leader。不参与选举过程中的投票，也不参与“过半写成功”策略。在不影响写性能的情况下提升集群的读性能。
         * client
             > 连接zookeeper服务器的使用着，请求的发起者。独立于zookeeper服务器集群之外的角色。
-    * 写操作
-    * 读操作
+    
+    * 数据模型znode
+        ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/zknamespace.jpg?raw=true)
+
+    * client读写操作
+
+        ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/zookeeper-construct-readandwrite.png?raw=true)
+    
     * ZAB协议
 
 * Standalone模式演示开始，本地启动
