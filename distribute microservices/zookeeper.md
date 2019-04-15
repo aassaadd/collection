@@ -1,16 +1,8 @@
-* 单机应用
-![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/server-single.png?raw=true)
+* 任务计算
+    ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/workers.png?raw=true)
 
-![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/server-single-trouble.png?raw=true)
-
-* 分布式集群
-    ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/server-replication-basic.png?raw=true)
-
-    > 在独立主机上运行的应用与分布式应用发生的故障存在显著的区别：在分布式应用中，可能会发生局部故障，当某独立主机崩溃，其他的主机继续工作，部影响整体服务对外工作.如果是独立主机崩溃了，就是去服务的可靠性了，整个服务无法对外提供服务; 同时，分布式集群部署又有更好的新能。
-
-* 主从模式
-
-    ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/master-worker-1.png?raw=true)
+* 主从架构
+    ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/worker-master-slae.png?raw=true)
 
     > 在分布式系统设计中一个得到广泛应用的架构：一个主-从（master-worker）架构,该系统中遵循这个架构的一个重要例子是HBase——一个Google的数据存储系统（BigTable）模型的实现，在最高层，主节点服务器（HMaster）负责跟踪区域服务器（HRegionServer）是否可用，并分派区域到服务器。
 
@@ -24,8 +16,13 @@
 
     * 主从模式总结
         * 主节点选举
+            > 这是关键的一步，使得主节点可以给从节点分配任务。
         * 崩溃检测
-        * 成员管理
+            > 主节点必须具有检测从节点崩溃或失去连接的能力。
+        * 组成员关系管理
+            > 主节点必须具有知道哪一个从节点可以执行任务的能力。
+        * 元数据管理
+            > 主节点和从节点必须具有通过某种可靠的方式来保存分配状态和执行状态的能力。
 
     * 分布式系统的难点
         * 拜占庭将军问题
