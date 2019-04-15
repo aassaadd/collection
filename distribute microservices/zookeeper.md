@@ -24,12 +24,11 @@
         * 组成员关系管理
             > 主节点必须具有知道哪一个从节点可以执行任务的能力。
         * 元数据管理
-
-            ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/coordinate-dream.png?raw=true)
-
             > 主节点和从节点必须具有通过某种可靠的方式来保存分配状态和执行状态的能力。
 
     * 理想
+         ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/coordinate-dream.png?raw=true)
+
         > 理想的方式是，以上每一个任务都需要通过原语(内核或微核提供核外调用的过程或函数称为原语(primitive))的方式暴露给应用，对开发者完全隐藏实现细节。ZooKeeper提供了实现这些原语的关键机制，因此，开发者可以通过这些实现一个最适合他们需求、更加关注应用逻辑的分布式应用。
 
 * 什么是zookeeper
