@@ -166,7 +166,7 @@
             * numChildren 当前节点的子节点个数
 
     * ZooKeeper Sessions
-            
+        > ZooKeeper的每个客户端都维护一组服务端信息，在创建连接时由应用指定，客户端随机选择一个服务端进行连接，连接成功后，服务端为每个连接分配一个唯一标识。客户端在创建连接时可以指定溢出时间，客户端会周期性的向服务端发送PING请求来保持连接，当客户端检测到与服务端断开连接后，客户端将自动选择服务端列表中的另一个服务端进行重连。
 
         * 创建会话
             ```
@@ -177,7 +177,7 @@
         
             * 创建过程
                 * client进行tcp建立连接
-                * 当tcp连接成功之后，,client发送一个ConnectRequest包，将ZooKeeper构造函数传入的sessionTimeout数值发给Server。zookeeper server会验证客户端发来的sessionTimeout值;zookeeper server中有连个配置项.
+                * 当tcp连接成功之后，client发送一个ConnectRequest包，将ZooKeeper构造函数传入的sessionTimeout数值发给Server。zookeeper server会验证客户端发来的sessionTimeout值;zookeeper server中有连个配置项.
                     
                     * minSessionTimeout 单位毫秒。默认2倍tickTime
                     * maxSessionTimeout 单位毫秒。默认20倍tickTime
@@ -365,6 +365,7 @@
 
 
 * 思考问题
+    * 一个客户端修改了某个节点的数据，其它客户端能够马上获取到这个最新数据吗
     * 集群中clientPort不一致，可以等了解了读写机制理解
     * observer是怎么设置的
     * zxid溢出变成负数了怎么办
