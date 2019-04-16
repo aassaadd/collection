@@ -365,7 +365,7 @@
 
 
 * 思考问题
-    * 一个客户端修改了某个节点的数据，其它客户端能够马上获取到这个最新数据吗
+    * 一个客户端修改了某个节点的数据，其它客户端能够马上获取到这个最新数据吗(跨客户端视图的并发一致性)
     * 集群中clientPort不一致，可以等了解了读写机制理解
     * observer是怎么设置的
     * zxid溢出变成负数了怎么办
@@ -393,3 +393,4 @@
 * [聊聊zookeeper的ZAB算法](https://juejin.im/entry/5b84d589e51d453885032159)
 * [ZAB协议的那些事？](https://juejin.im/post/5b0633f96fb9a07ab45903ed)
 * [ZooKeeper典型应用场景一览](http://jm.taobao.org/2011/10/08/1232/)
+* [Zookeeper的sync操作是什么？](https://www.jianshu.com/p/44a1b28b1c98)
