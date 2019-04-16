@@ -41,6 +41,11 @@
         > ZooKeeper is a high-performance coordination service for distributed applications. It exposes common services - such as naming, configuration management, synchronization, and group services - in a simple interface so you don't have to write them from scratch. You can use it off-the-shelf to implement consensus, group management, leader election, and presence protocols. And you can build on it for your own, specific needs.
         
         > ZooKeeper是一个典型的分布式数据一致性解决方案,其设计目标是将那些复杂且容易出错的分布式一致性服务封装起来，构成一个高效可靠的原语集，并以一系列简单易用的接口提供给用户使用。分布式应用程序可以基于 ZooKeeper 实现诸如数据发布/订阅、负载均衡、命名服务、分布式协调/通知、集群管理、Master 选举、分布式锁和分布式队列等功能。
+    
+    
+    * 初识
+
+        ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/dubbo-architecture-future.jpg?raw=true)
 
     * zk架构
         * 角色
@@ -67,9 +72,6 @@
             * 崩溃恢复
             * 原子广播
 
-    * 一个最常见的使用场景(dubbo)
-
-        ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/dubbo-architecture-future.jpg?raw=true)
         
     * 特点
         * 简单化：ZooKeeper允许各分布式进程通过一个共享的命名空间相互联系，该命名空间类似于一个标准的层次型的文件系统。
@@ -103,7 +105,7 @@
             > 服务器监听客户端连接的端口, 也即客户端尝试连接的端口, 默认值是 2181。
     
     * /bin/命令
-        * zkCleanup：清理Zookeeper历史数据，包括食物日志文件和快照数据文件
+        * zkCleanup：清理Zookeeper历史数据，包括事务日志文件和快照数据文件
         * zkCli：Zookeeper的一个简易客户端
         * zkEnv：设置Zookeeper的环境变量
         * zkServer：Zookeeper服务器的启动、停止、和重启脚本
