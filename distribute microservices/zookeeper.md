@@ -134,7 +134,9 @@
 
 * 核心概念
     * 数据模型znode
+    
         ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/zknamespace.jpg?raw=true)
+
         * 存储空间
             > client and server会校验数据不能超过1M
         
