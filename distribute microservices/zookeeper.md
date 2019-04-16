@@ -42,6 +42,31 @@
         
         > ZooKeeper是一个典型的分布式数据一致性解决方案,其设计目标是将那些复杂且容易出错的分布式一致性服务封装起来，构成一个高效可靠的原语集，并以一系列简单易用的接口提供给用户使用。分布式应用程序可以基于 ZooKeeper 实现诸如数据发布/订阅、负载均衡、命名服务、分布式协调/通知、集群管理、Master 选举、分布式锁和分布式队列等功能。
 
+    * zk架构
+        * 角色
+            ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/zookeeper-construct-1.png?raw=true)
+
+            * Leader
+                > Leader作为整个ZooKeeper集群的主节点，负责响应所有对ZooKeeper状态变更的请求。它会将每个状态更新请求进行排序和编号，以便保证整个集群内部消息处理的FIFO。
+
+            * Follower
+                > Follower主要是响应本服务器上的读请求外，另外follower还要处理leader的提议，并在leader提交该提议时在本地也进行提交。另外需要注意的是，leader和follower构成ZooKeeper集群的法定人数，也就是说，只有他们才参与新leader的选举、响应leader的提议。
+            * Observe
+                > 为客户端提供读服务器，如果是写服务则转发给Leader。不参与选举过程中的投票，也不参与“过半写成功”策略。在不影响写性能的情况下提升集群的读性能。
+            * client
+                > 连接zookeeper服务器的使用着，请求的发起者。独立于zookeeper服务器集群之外的角色。
+        
+        * 数据模型znode
+            ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/zknamespace.jpg?raw=true)
+
+        * client读写操作
+
+            ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/zookeeper-construct-readandwrite.png?raw=true)
+        
+        * ZAB协议
+            * 崩溃恢复
+            * 原子广播
+
     * 一个最常见的使用场景(dubbo)
 
         ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/dubbo-architecture-future.jpg?raw=true)
@@ -63,31 +88,6 @@
         * 集群管理与Master选举
         * 分布式锁
         * 分布式队列
-
-* zk架构
-    * 角色
-        ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/zookeeper-construct-1.png?raw=true)
-
-        * Leader
-            > Leader作为整个ZooKeeper集群的主节点，负责响应所有对ZooKeeper状态变更的请求。它会将每个状态更新请求进行排序和编号，以便保证整个集群内部消息处理的FIFO。
-
-        * Follower
-            > Follower主要是响应本服务器上的读请求外，另外follower还要处理leader的提议，并在leader提交该提议时在本地也进行提交。另外需要注意的是，leader和follower构成ZooKeeper集群的法定人数，也就是说，只有他们才参与新leader的选举、响应leader的提议。
-        * Observe
-            > 为客户端提供读服务器，如果是写服务则转发给Leader。不参与选举过程中的投票，也不参与“过半写成功”策略。在不影响写性能的情况下提升集群的读性能。
-        * client
-            > 连接zookeeper服务器的使用着，请求的发起者。独立于zookeeper服务器集群之外的角色。
-    
-    * 数据模型znode
-        ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/zknamespace.jpg?raw=true)
-
-    * client读写操作
-
-        ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/zookeeper-construct-readandwrite.png?raw=true)
-    
-    * ZAB协议
-        * 崩溃恢复
-        * 原子广播
 
 * Standalone模式演示开始，本地启动
     * 配置
