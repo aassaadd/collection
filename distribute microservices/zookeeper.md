@@ -134,7 +134,7 @@
 
 * 核心概念
     * 数据模型znode
-    
+
         ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/zknamespace.jpg?raw=true)
 
         * 存储空间
@@ -150,7 +150,9 @@
         * zxid
             * 有序
             * 全局唯一
-        * zookeeper stat 结构
+        * zookeeper znode stat 结构
+            ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/zkgetcommanresponse.png?raw=true)
+
             * czxid Created ZXID表示该数据节点被创建时的事务ID
             * mzxid Modified ZXID 表示该节点最后一次被更新时的事务ID
             * pzxid 表示该节点的子节点列表最后一次被修改时的事务ID。只有子节点列表变更了才会变更pZxid,子节点内容变更不会影响pZxid
@@ -164,6 +166,8 @@
             * numChildren 当前节点的子节点个数
 
     * ZooKeeper Sessions
+            
+
         * 创建会话
             ```
             ZooKeeper zk = new ZooKeeper(serverList, sessionTimeout, watcher);
@@ -194,16 +198,17 @@
 
 
         * session激活
-            > 客户端发送心跳检测，服务端就会进行一次会话激活，心跳检测由客户端主动发起，以PING请求形式向服务端发送，在Zookeeper的实际设计中，只要客户端有请求发送到服务端，那么就会触发一次会话激活，总结下来两种情况都会触发会话激活。
+            > 在ZooKeeper中，服务器和客户端之间维持的是一个长连接，在 SESSION_TIMEOUT 时间内，服务器会确定客户端是否正常连接(客户端会定时向服务器发送heart_beat),服务器重置下次SESSION_TIMEOUT时间。；同时在Zookeeper的实际设计中，只要客户端有请求发送到服务端，那么就会触发一次会话激活，总结下来两种情况都会触发会话激活。
 
             * 客户端向服务端发送请求，包括读写请求，就会触发会话激活。
-            * 客户端发现在sessionTimeout时间内尚未和服务端进行任何通信，那么就会主动发起PING请求，服务端收到该请求后，就会触发会话激活。
+            * 客户端会定时向服务器发送heart_beat。
 
         
         * 会话清理
             > leader server的SessionTracker管理线程会管理者session,执行session的过期检查,如果会话过期就执行清理操作.
 
         * 会话重连
+            > 服务器与客户端之间维持长连接的过程了。在这个过程中，用户可能会看到两类异常CONNECTIONLOSS(连接断开) 和SESSIONEXPIRED(Session 过期)。CONNECTIONLOSS发生在上面红色文字部分，应用在进行操作A时，发生了CONNECTIONLOSS，此时用户不需要关心我的会话是否可用，应用所要做的就是等待客户端帮我们自动连接上新的zk机器，一旦成功连接上新的zk机器后，确认刚刚的操作A是否执行成功了。SESSIONEXPIRED发生在上面蓝色文字部分，这个通常是zk客户端与服务器的连接断了，试图连接上新的zk机器，这个过程如果耗时过长，超过 SESSION_TIMEOUT 后还没有成功连接上服务器，那么服务器认为这个session已经结束了（服务器无法确认是因为其它异常原因还是客户端主动结束会话），开始清除和这个会话有关的信息，包括这个会话创建的临时节点和注册的Watcher。在这之后，客户端重新连接上了服务器在，但是很不幸，服务器会告诉客户端SESSIONEXPIRED。此时客户端要做的事情就看应用的复杂情况了，总之，要重新实例zookeeper对象，重新操作所有临时数据（包括临时节点和注册Watcher）。
 
 
         * 客户端连接指定根路径
@@ -371,6 +376,7 @@
 * [ZooKeeper基本原理](https://www.cnblogs.com/luxiaoxun/p/4887452.html)
 * [【Zookeeper源码五】Zookeeper 集群版建立连接过程](https://my.oschina.net/xianggao/blog/538839)
 * [ZooKeeper解惑](http://jm.taobao.org/2011/05/30/947/)
+* [ZooKeeper FAQ](http://jm.taobao.org/2013/10/07/zookeeper-faq/)
 * [【分布式】Zookeeper会话](http://www.cnblogs.com/leesf456/p/6103870.html)
 * [zookeeper curator处理会话过期session expired](https://www.cnblogs.com/kangoroo/p/7538314.html)
 * [zookeeper之数据模型](https://blog.csdn.net/usagoole/article/details/82944230)
