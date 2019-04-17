@@ -241,12 +241,30 @@
 * ZAB协议
     > ZAB协议（Zookeeper Atomic Broadcast Protocol）是Zookeeper系统专门设计的一种支持崩溃恢复的原子广播协议。Zookeeper使用该协议来实现分布数据一致性并实现了一种主备模式的系统架构来保持各集群中各个副本之间的数据一致性。采用zab协议的最大目标就是建立一个高可用可扩展的分布式数据主备系统。即在任何时刻只要leader发生宕机，都能保证分布式系统数据的可靠性和最终一致性。
 
-    * ZAB协议原理
+    * 特点
+        * 一致性保证
+            * 可靠提交(Reliable delivery) -如果一个事务 A 被一个server提交(committed)了，那么它最终一定会被所有的server提交
+            * 全局有序(Total order) - 假设有A、B两个事务，有一台server先执行A再执行B，那么可以保证所有server上A始终都被在B之前执行
+            * 因果有序(Causal order) - 如果发送者在事务A提交之后再发送B,那么B必将在A之前执行
+        * 只要大多数（法定数量）节点启动，系统就行正常运行
+        * 当节点下线后重启，它必须保证能恢复到当前正在执行的事务
+
+    * ZAB协议工作原理
         > ZAB协议要求每个leader都要经历三个阶段，即发现，同步，广播。
 
-            * 发现：即要求zookeeper集群必须选择出一个leader进程，同时leader会维护一个follower可用列表。将来客户端可以这follower中的节点进行通信。
+            * 发现：即要求zookeeper集群必须选择出一个leader进程，同时leader会维护一个follower可用列表。将来客户端可以与这个follower中的节点进行通信。
             * 同步：leader要负责将本身的数据与follower完成同步，做到多副本存储。这样也是体现了CAP中高可用和分区容错。follower将队列中未处理完的请求消费完成后，写入本地事物日志中。
             * 广播：leader可以接受客户端新的proposal请求，将新的proposal请求广播给所有的follower。
+
+    * ZAB两种模式
+        * 崩溃恢复
+            > 当服务初次启动，或者 leader 节点挂了，系统就会进入恢复模式，直到选出了有合法数量 follower 的新 leader，然后新 leader 负责将整个系统同步到最新状态。
+        * 消息广播模式
+            > Zab 协议中，所有的写请求都由 leader 来处理。正常工作状态下，leader 接收请求并通过广播协议来处理。
+
+
+
+        
         
 
 * 选举
@@ -320,7 +338,16 @@
         * Follower重启选举
         * Leader重启选举
 
-* zookeeper 数据一致
+
+* 数据同步
+    * 恢复模式需要解决的两个重要问题
+        * 已经被处理的消息不能丢
+        * 被丢弃的消息不能再次出现
+
+
+
+
+* 原子广播
     * 拜占庭问题
 
     * 分布式一致问题
@@ -337,38 +364,16 @@
         * 3PC
         * Paxos
         * ZAB
+
+    * 工作步骤
+            1. leader从客户端收到一个写请求
+            2. leader生成一个新的事务并为这个事务生成一个唯一的ZXID，
+            3. leader将这个事务发送给所有的follows节点
+            4. follower节点将收到的事务请求加入到历史队列(history queue)中,并发送ack给ack给leader
+            5. 当leader收到大多数follower（超过法定数量）的ack消息，leader会发送commit请求
+            6. 当follower收到commit请求时，会判断该事务的ZXID是不是比历史队列中的任何事务的ZXID都小，如果是则提交，如果不是则等待比它更小的事务的commit
     
-    * ZAB协议
-        > ZAB 协议是为分布式协调服务ZooKeeper专门设计的一种支持崩溃恢复的一致性协议。基于该协议，ZooKeeper 实现了一种主从模式的系统架构来保持集群中各个副本之间的数据一致性。ZAB协议运行过程中，所有的客户端更新都发往Leader，Leader写入本地日志后再复制到所有的Follower节点。一旦Leader节点故障无法工作，ZAB协议能够自动从Follower节点中重新选择出一个合适的替代者，这个过程被称为选主.
-        * 特点
-            * 一致性保证
-                * 可靠提交(Reliable delivery) -如果一个事务 A 被一个server提交(committed)了，那么它最终一定会被所有的server提交
-                * 全局有序(Total order) - 假设有A、B两个事务，有一台server先执行A再执行B，那么可以保证所有server上A始终都被在B之前执行
-                * 因果有序(Causal order) - 如果发送者在事务A提交之后再发送B,那么B必将在A之前执行
-            * 只要大多数（法定数量）节点启动，系统就行正常运行
-            * 当节点下线后重启，它必须保证能恢复到当前正在执行的事务
-    
-    * ZAB工作模式
-        * 广播(broadcast)模式
-            > Zab 协议中，所有的写请求都由 leader 来处理。正常工作状态下，leader 接收请求并通过广播协议来处理。
 
-            * 工作步骤
-                1. leader从客户端收到一个写请求
-                2. leader生成一个新的事务并为这个事务生成一个唯一的ZXID，
-                3. leader将这个事务发送给所有的follows节点
-                4. follower节点将收到的事务请求加入到历史队列(history queue)中,并发送ack给ack给leader
-                5. 当leader收到大多数follower（超过法定数量）的ack消息，leader会发送commit请求
-                6. 当follower收到commit请求时，会判断该事务的ZXID是不是比历史队列中的任何事务的ZXID都小，如果是则提交，如果不是则等待比它更小的事务的commit
-        * 恢复(recovery)模式
-            > 当服务初次启动，或者 leader 节点挂了，系统就会进入恢复模式，直到选出了有合法数量 follower 的新 leader，然后新 leader 负责将整个系统同步到最新状态。
-
-            * 恢复模式需要解决的两个重要问题
-                * 已经被处理的消息不能丢
-                * 被丢弃的消息不能再次出现
-
-            * 工作步骤
-                * 选举
-                * 同步
 
 
 * 扩展
