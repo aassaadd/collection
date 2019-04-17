@@ -236,6 +236,19 @@
 
 * 回顾zookeeper架构
 
+    ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/worker-master-slae.png?raw=true)
+
+* ZAB协议
+    > ZAB协议（Zookeeper Atomic Broadcast Protocol）是Zookeeper系统专门设计的一种支持崩溃恢复的原子广播协议。Zookeeper使用该协议来实现分布数据一致性并实现了一种主备模式的系统架构来保持各集群中各个副本之间的数据一致性。采用zab协议的最大目标就是建立一个高可用可扩展的分布式数据主备系统。即在任何时刻只要leader发生宕机，都能保证分布式系统数据的可靠性和最终一致性。
+
+    * ZAB协议原理
+        > ZAB协议要求每个leader都要经历三个阶段，即发现，同步，广播。
+
+            * 发现：即要求zookeeper集群必须选择出一个leader进程，同时leader会维护一个follower可用列表。将来客户端可以这follower中的节点进行通信。
+            * 同步：leader要负责将本身的数据与follower完成同步，做到多副本存储。这样也是体现了CAP中高可用和分区容错。follower将队列中未处理完的请求消费完成后，写入本地事物日志中。
+            * 广播：leader可以接受客户端新的proposal请求，将新的proposal请求广播给所有的follower。
+        
+
 * 选举
     * 问题1: 为什么要选举leader
         > 我们在了解分布式选举算法之前，我们需要这样一种算法产生的背景。在一个分布式系统中，因为各种意外的因素，有的服务器可能会崩溃或变得不可靠，它就不能和其他服务器达成一致状态。因而这样就需要一种Consensus协议，来确保服务器的容错性，也就是说即使系统中有一两个服务器节点Crash，也不会影响其处理过程。为了让容错方式达成一致，我们不可能要求所有的服务器节点100%都达成Consensus状态，只要超过半数的大多数服务器节点Consensus即可，假设有N台服务器节点，(N/2)+1 就超过半数，即可代表大多数了。
@@ -394,3 +407,4 @@
 * [ZAB协议的那些事？](https://juejin.im/post/5b0633f96fb9a07ab45903ed)
 * [ZooKeeper典型应用场景一览](http://jm.taobao.org/2011/10/08/1232/)
 * [Zookeeper的sync操作是什么？](https://www.jianshu.com/p/44a1b28b1c98)
+* [ZAB协议详解](https://blog.csdn.net/xiaocai9999/article/details/80641404)
