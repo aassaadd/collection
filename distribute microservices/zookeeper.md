@@ -413,3 +413,4 @@
 * [ZooKeeper典型应用场景一览](http://jm.taobao.org/2011/10/08/1232/)
 * [Zookeeper的sync操作是什么？](https://www.jianshu.com/p/44a1b28b1c98)
 * [ZAB协议详解](https://blog.csdn.net/xiaocai9999/article/details/80641404)
+* [Zookeeper请求处理](http://www.cnblogs.com/leesf456/p/6140503.html)
