@@ -387,6 +387,7 @@
     * zxid溢出变成负数了怎么办
     * 水平扩容
     * zookeeper 有哪些缺点
+        * 数据量大，同步慢，超时
 
 
 
@@ -413,3 +414,4 @@
 * [Zookeeper的sync操作是什么？](https://www.jianshu.com/p/44a1b28b1c98)
 * [ZAB协议详解](https://blog.csdn.net/xiaocai9999/article/details/80641404)
 * [Zookeeper请求处理](http://www.cnblogs.com/leesf456/p/6140503.html)
+* [zookeeper leader和learner的数据同步](https://blog.csdn.net/weixin_36145588/article/details/75043611)
