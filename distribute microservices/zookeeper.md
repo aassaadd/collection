@@ -365,11 +365,21 @@
 
         * Follower重启
 
-            ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/start_election_1.png?raw=true)
+            ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/follower_restart_election_1.png?raw=true)
 
+            ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/follower_restart_election_2.png?raw=true)
 
         * Leader重启
 
+            ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/leader_restart_election_1.png?raw=true)
+
+            ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/leader_restart_election_2.png?raw=true)
+
+            ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/leader_restart_election_3.png?raw=true)
+
+            ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/leader_restart_election_4.png?raw=true)
+
+            ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/leader_restart_election_5.png?raw=true)
 
 
 * 数据同步
