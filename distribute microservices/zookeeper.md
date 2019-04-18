@@ -430,10 +430,13 @@
                     > 无论是二阶段提交还是三阶段提交都无法彻底解决分布式的一致性问题。那么世上只有一种一致性算法，那就是Paxos，所有其他一致性算法都是Paxos算法的不完整版。
 
             * Paxos
-            
+
+                ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/Paxos-1.jpg?raw=true)
+                
+
     
     * ZAB原子广播（数据一致原理）
-        >  paxos通过多数派和限制提案的值完美的解决了我们的问题，但是理论到实际是个艰难的过程。比如怎样在分布式环境下维持一个全局唯一递增的序列，如果是靠数据库的自增主键，那么整个系统的稳定和性能的瓶颈全都集中于这个单点。paxos算法也没有限制Proposer的个数，Proposer个数越多，那么达成一致所造成的碰撞将越多，甚至产生活锁，如果限制Proposer的个数为一个，那么就要考虑唯一的Proposer崩溃要怎么处理。
+        >  paxos理论到实际是个艰难的过程。比如怎样在分布式环境下维持一个全局唯一递增的序列，如果是靠数据库的自增主键，那么整个系统的稳定和性能的瓶颈全都集中于这个单点。paxos算法也没有限制Proposer的个数，Proposer个数越多，那么达成一致所造成的碰撞将越多，甚至产生活锁，如果限制Proposer的个数为一个，那么就要考虑唯一的Proposer崩溃要怎么处理。
 
     * 工作步骤
 
@@ -448,8 +451,6 @@
 
         ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/zab-2.jpg?raw=true)
     
-
-
 
 * 扩展
     * java api操作演示
