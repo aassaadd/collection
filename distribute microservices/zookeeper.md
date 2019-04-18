@@ -151,6 +151,7 @@
             * 有序
             * 全局唯一
         * zookeeper znode stat 结构
+        
             ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/zkgetcommanresponse.png?raw=true)
 
             * czxid Created ZXID表示该数据节点被创建时的事务ID
