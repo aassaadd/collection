@@ -151,7 +151,7 @@
             * 有序
             * 全局唯一
         * zookeeper znode stat 结构
-        
+
             ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/zkgetcommanresponse.png?raw=true)
 
             * czxid Created ZXID表示该数据节点被创建时的事务ID
@@ -246,7 +246,7 @@
 
 * 回顾zookeeper架构
 
-    ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/worker-master-slae.png?raw=true)
+    ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/zookeeper-construct-1.png?raw=true)
 
 * ZAB协议
     > ZAB协议（Zookeeper Atomic Broadcast Protocol）是Zookeeper系统专门设计的一种支持崩溃恢复的原子广播协议。Zookeeper使用该协议来实现分布数据一致性并实现了一种主备模式的系统架构来保持各集群中各个副本之间的数据一致性。采用zab协议的最大目标就是建立一个高可用可扩展的分布式数据主备系统。即在任何时刻只要leader发生宕机，都能保证分布式系统数据的可靠性和最终一致性。
