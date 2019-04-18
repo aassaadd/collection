@@ -49,7 +49,8 @@
 
     * zk架构
         * 角色
-            ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/zookeeper-construct-1.png?raw=true)
+
+            ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/zkservice-1.jpg?raw=true)
 
             * Leader
                 > Leader作为整个ZooKeeper集群的主节点，负责响应所有对ZooKeeper状态变更的请求。它会将每个状态更新请求进行排序和编号，以便保证整个集群内部消息处理的FIFO。
@@ -457,6 +458,7 @@
 
 * 整体回顾
 
+    ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/zkservice-1.jpg?raw=true)
 
 * 思考问题
     * 一个客户端修改了某个节点的数据，其它客户端能够马上获取到这个最新数据吗(跨客户端视图的并发一致性)
