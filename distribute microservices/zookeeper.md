@@ -434,3 +434,4 @@
 * [Zookeeper请求处理](http://www.cnblogs.com/leesf456/p/6140503.html)
 * [zookeeper leader和learner的数据同步](https://blog.csdn.net/weixin_36145588/article/details/75043611)
 * [品味ZooKeeper之Watcher机制](https://www.jianshu.com/p/4c071e963f18)
+* [关于分布式事务、两阶段提交协议、三阶提交协议](https://www.hollischuang.com/archives/681)
