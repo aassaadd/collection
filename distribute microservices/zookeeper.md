@@ -437,12 +437,16 @@
 
     * 工作步骤
 
+        ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/zab-1.jpg?raw=true)
+
         1. leader从客户端收到一个写请求
         2. leader生成一个新的事务并为这个事务生成一个唯一的ZXID，
         3. leader将这个事务发送给所有的follows节点
         4. follower节点将收到的事务请求加入到历史队列(history queue)中,并发送ack给ack给leader
         5. 当leader收到大多数follower（超过法定数量）的ack消息，leader会发送commit请求
-        6. 当follower收到commit请求时，会判断该事务的ZXID是不是比历史队列中的任何事务的ZXID都小，如果是则提交，如果不是则等待比它更小的事务的commit
+        6. 当follower收到commit请求时，会判断该事务的ZXID是不是比历史队列中的任何事务的ZXID都小，如果是则提交，如果不是则等待比它更小的事务的commit.
+
+        ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/zab-2.jpg?raw=true)
     
 
 
