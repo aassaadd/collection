@@ -357,12 +357,18 @@
     * 举例
         * 集群启动选举
 
-        ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/start_election_1.png?raw=true)
+            ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/start_election_1.png?raw=true)
 
-        ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/start_election_2.png?raw=true)
+            ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/start_election_2.png?raw=true)
 
-        ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/start_election_3.png?raw=true)
+            ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/start_election_3.png?raw=true)
 
+        * Follower重启
+
+            ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/start_election_1.png?raw=true)
+
+
+        * Leader重启
 
 
 
