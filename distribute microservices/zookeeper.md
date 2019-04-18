@@ -357,6 +357,14 @@
     * 举例
         * 集群启动选举
 
+        ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/start_election_1.png?raw=true)
+
+        ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/start_election_2.png?raw=true)
+
+        ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/start_election_3.png?raw=true)
+
+
+
 
 * 数据同步
     > 在完成leader选举阶段后，准Leader可以获取集群中最新的提议历史。准Leader在该阶段会把最新的提议历史同步到集群中的所有节点。当同步完成时(过半)，准Leader才会真正成为Leader，执行Leader的工作。
