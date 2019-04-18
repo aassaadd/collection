@@ -217,6 +217,8 @@
     * ZooKeeper Watches
         > 在ZooKeeper中，所有的读操作（getData，getChildren和exists）都可以设置监听,一个Watch事件是一个一次性的触发器，当被设置了Watch的数据发生了改变的时候，则服务器将这个改变发送给设置了Watch的客户端，以便通知它们。
 
+        ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/watcher-notice-art.png?raw=true)
+
         * zookeeper机制的特点
             * 一次性的触发器（one-time trigger）  
                 > 当数据改变的时候，那么一个Watch事件会产生并且被发送到客户端中。但是客户端只会收到一次这样的通知，如果以后这个数据再次发生改变的时候，之前设置Watch的客户端将不会再次收到改变的通知，因为Watch机制规定了它是一个一次性的触发器。      
@@ -416,3 +418,4 @@
 * [ZAB协议详解](https://blog.csdn.net/xiaocai9999/article/details/80641404)
 * [Zookeeper请求处理](http://www.cnblogs.com/leesf456/p/6140503.html)
 * [zookeeper leader和learner的数据同步](https://blog.csdn.net/weixin_36145588/article/details/75043611)
+* [品味ZooKeeper之Watcher机制](https://www.jianshu.com/p/4c071e963f18)
