@@ -296,11 +296,6 @@
     * 搞清楚几个问题
         * 一个Server是如何知道其它的Server？
             > 在ZooKeeper集群中，Server的信息都在zoo.conf配置文件中，根据配置文件的信息就可以知道其它Server的信息。
-        * ZooKeeper服务器有哪几种状态？（选主相关的状态）
-            * LOOKING：寻找leader状态
-            * LEADING：领导状态（节点为leader）
-            * FOLLOWING：跟随者状态
-            * OBSERVING：观察者状态（此状态不参与选举）
         * 成为Leader的必要条件？
             > Leader要具有最高的zxid；集群中大多数的机器（至少n/2+1）得到响应并follow选出的Leader。
         * 如果所有zxid都相同(例如: 刚初始化时)，此时有可能不能形成n/2+1个Server，怎么办？
@@ -313,6 +308,14 @@
         2. server运行期间无法和leader保持连接
     
     * 核心概念
+        * ZooKeeper服务器状态
+
+            ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/zookeeper-construct-1.png?raw=true)
+
+            * LOOKING：寻找leader状态
+            * LEADING：领导状态（节点为leader）
+            * FOLLOWING：跟随者状态
+            * OBSERVING：观察者状态（此状态不参与选举）
         * myid
             > 每个Zookeeper服务器，都需要在数据文件夹下创建一个名为myid的文件，该文件包含整个Zookeeper集群唯一的ID（整数）。例如某Zookeeper集群包含三台服务器，hostname分别为zoo1、zoo2和zoo3，其myid分别为1、2和3，则在配置文件中其ID与hostname必须一一对应，如下所示。在该配置文件中，server.后面的数据即为myid.
             ```
@@ -365,13 +368,13 @@
 
             ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/start_election_3.png?raw=true)
 
-        * Follower重启
+        * Follower重启选举
 
             ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/follower_restart_election_1.png?raw=true)
 
             ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/follower_restart_election_2.png?raw=true)
 
-        * Leader重启
+        * Leader重启选举
 
             ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/leader_restart_election_1.png?raw=true)
 
