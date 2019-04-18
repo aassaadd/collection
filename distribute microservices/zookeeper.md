@@ -457,7 +457,10 @@
     
 
 * 扩展
-    * java api操作演示
+    * Client-java
+    * Curator
+        > Curator是Netflix公司开源的一套Zookeeper客户端框架。了解过Zookeeper原生API都会清楚其复杂度。Curator帮助我们在其基础上进行封装、实现一些开发细节，包括接连重连、反复注册Watcher和NodeExistsException等。
+
 
 * 整体回顾
 
