@@ -236,6 +236,13 @@
     * ACL 权限控制
         > zk做为分布式架构中的重要中间件，通常会在上面以节点的方式存储一些关键信息，默认情况下，所有应用都可以读写任何节点，在复杂的应用中，这不太安全，ZK通过ACL机制来解决访问权限问题.
 
+        * 身份认证方式
+            * world：默认方式，相当于全世界都能访问
+            * auth：代表已经认证通过的用户(cli中可以通过addauth digest user:pwd 来添加当前上下文中的授权用户)
+            * digest：即用户名:密码这种方式认证，这也是业务系统中最常用的
+            * ip：使用Ip地址认证
+
+
 * 回顾zookeeper架构
 
     ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/worker-master-slae.png?raw=true)
