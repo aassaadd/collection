@@ -360,11 +360,18 @@
 
     * 分布式一致性原理
         * CAP
-            * Consistency (一致性)
-            * Availability (可用性)
-            * Partition tolerance (分区容错)
 
-            > 这三个基本需求，最多只能同时满足其中的两项。
+            ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/cap-0.jpg?raw=true)
+
+            > 分布式系统的最大难点，就是各个节点的状态如何同步。CAP 定理是这方面的基本定理，也是理解分布式系统的起点。
+            * Consistency (一致性)
+                > 写操作之后的读操作，必须返回该值。
+            * Availability (可用性)
+                > 意思是只要收到用户的请求，服务器就必须给出回应。每次请求都能获取到非错的响应——但是不保证获取的数据为最新数据。
+            * Partition tolerance (分区容错)
+                > 区间通信可能失败。
+
+            > 这三个基本需求，最多只能同时满足其中的两项，一致性和可用性不可能同时成立，因为可能通信失败（即出现分区容错）。
         * 2PC
         * 3PC
         * Paxos
