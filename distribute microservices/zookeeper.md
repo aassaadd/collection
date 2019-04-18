@@ -247,7 +247,7 @@
 
 * 回顾zookeeper架构
 
-    ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/zookeeper-construct-1.png?raw=true)
+    ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/zkservice-1.jpg.png?raw=true)
 
 * ZAB协议
     > ZAB协议（Zookeeper Atomic Broadcast Protocol）是Zookeeper系统专门设计的一种支持崩溃恢复的原子广播协议。Zookeeper使用该协议来实现分布数据一致性并实现了一种主备模式的系统架构来保持各集群中各个副本之间的数据一致性。采用zab协议的最大目标就是建立一个高可用可扩展的分布式数据主备系统。即在任何时刻只要leader发生宕机，都能保证分布式系统数据的可靠性和最终一致性。
@@ -280,7 +280,7 @@
     * 问题2: 如何选举leader
         > 某个服务可以配置为多个实例共同构成一个集群对外提供服务。其每一个实例本地都存有冗余数据，每一个实例都可以直接对外提供读写服务。在这个集群中为了保证数据的一致性，需要有一个Leader来协调一些事务。那么问题来了：如何确定哪一个实例是Leader呢？
 
-        * 问题的难点
+        * 选举的难点
             1. 没有一个仲裁者来选定Leader
             2. 每一个实例本地可能已经存在数据，不确定哪个实例上的数据是最新的
 
