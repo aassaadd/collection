@@ -122,7 +122,7 @@
         * ...
 
 
-* 复制模式配置演示
+* 复制模式配置
     * 配置server id
         > zookeeper集群模式下还要配置一个myid文件,这个文件需要放在dataDir目录下,文件中写入一个id即可。
     * zoo.cfg配置集群server列表
