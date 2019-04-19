@@ -140,8 +140,17 @@
 
         ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/zknamespace.jpg?raw=true)
 
-        * 存储空间
-            > client and server会校验数据不能超过1M
+        * 存储   
+            * 内存数据
+                > Zookeeper的数据模型是树结构，在内存数据库中，存储了整棵树的内容，包括所有的节点路径、节点数据、ACL信息，Zookeeper会定时将这个数据存储到磁盘上。
+                * DataTree
+                    > 　DataTree是内存数据存储的核心，是一个树结构，代表了内存中一份完整的数据。DataTree不包含任何与网络、客户端连接及请求处理相关的业务逻辑，是一个独立的组件。
+                * DataNode
+                    > DataNode是数据存储的最小单元，其内部除了保存了结点的数据内容、ACL列表、节点状态之外，还记录了父节点的引用和子节点列表两个属性，其也提供了对子节点列表进行操作的接口。
+                * ZKDatabase
+                    > Zookeeper的内存数据库，管理Zookeeper的所有会话、DataTree存储和事务日志。ZKDatabase会定时向磁盘dump快照数据，同时在Zookeeper启动时，会通过磁盘的事务日志和快照文件恢复成一个完整的内存数据库。
+            * 事务日志
+                > 事务日志指zookeeper系统在正常运行过程中，针对所有的更新操作，在返回客户端“更新成功”的响应前，zookeeper会保证已经将本次更新操作的事务日志已经写到磁盘上，只有这样，整个更新操作才会生效。
         
         * 临时（Ephemeral）znode
             * as long as the session
@@ -212,8 +221,8 @@
             > leader server的SessionTracker管理线程会管理者session,执行session的过期检查,如果会话过期就执行清理操作.
 
         * 会话重连
-            > 服务器与客户端之间维持长连接的过程了。在这个过程中，用户可能会看到两类异常CONNECTIONLOSS(连接断开) 和SESSIONEXPIRED(Session 过期)。CONNECTIONLOSS发生在上面红色文字部分，应用在进行操作A时，发生了CONNECTIONLOSS，此时用户不需要关心我的会话是否可用，应用所要做的就是等待客户端帮我们自动连接上新的zk机器，一旦成功连接上新的zk机器后，确认刚刚的操作A是否执行成功了。SESSIONEXPIRED发生在上面蓝色文字部分，这个通常是zk客户端与服务器的连接断了，试图连接上新的zk机器，这个过程如果耗时过长，超过 SESSION_TIMEOUT 后还没有成功连接上服务器，那么服务器认为这个session已经结束了（服务器无法确认是因为其它异常原因还是客户端主动结束会话），开始清除和这个会话有关的信息，包括这个会话创建的临时节点和注册的Watcher。在这之后，客户端重新连接上了服务器在，但是很不幸，服务器会告诉客户端SESSIONEXPIRED。此时客户端要做的事情就看应用的复杂情况了，总之，要重新实例zookeeper对象，重新操作所有临时数据（包括临时节点和注册Watcher）。
-
+            * CONNECTIONLOSS 
+            * SESSIONEXPIRED
 
         * 客户端连接指定根路径
             > 在ZooKeeper 3.2.0增加了可选的“chroot”后缀，可以改变当前客户端的根路径。例如，如果使用”127.0.0.1:4545/app/a”，客户端将使用”/app/a”作为其根路径，所有的路径都会相对于该路径。比如操作路径”/foo/bar”将真正对应到”/app/a/foo/bar”。这个特征在多租户环境下是非常有用的，可以简化客户端的应用逻辑（）。
@@ -481,10 +490,10 @@
 
 #### reference
 * [ZooKeeper基本原理](https://www.cnblogs.com/luxiaoxun/p/4887452.html)
-* [【Zookeeper源码五】Zookeeper 集群版建立连接过程](https://my.oschina.net/xianggao/blog/538839)
+* [源码Zookeeper 集群版建立连接过程](https://my.oschina.net/xianggao/blog/538839)
 * [ZooKeeper解惑](http://jm.taobao.org/2011/05/30/947/)
 * [ZooKeeper FAQ](http://jm.taobao.org/2013/10/07/zookeeper-faq/)
-* [【分布式】Zookeeper会话](http://www.cnblogs.com/leesf456/p/6103870.html)
+* [Zookeeper会话](http://www.cnblogs.com/leesf456/p/6103870.html)
 * [zookeeper curator处理会话过期session expired](https://www.cnblogs.com/kangoroo/p/7538314.html)
 * [zookeeper之数据模型](https://blog.csdn.net/usagoole/article/details/82944230)
 * [ZooKeeper session管理](https://blog.csdn.net/tomato__/article/details/78560727)
@@ -507,3 +516,4 @@
 * [关于分布式事务、两阶段提交协议、三阶提交协议](https://www.hollischuang.com/archives/681)
 * [分布式系统的一致性协议之 2PC 和 3PC](https://matt33.com/2018/07/08/distribute-system-consistency-protocol/)
 * [2PC/3PC、paxos与ZAB协议](https://my.oschina.net/chener/blog/1504093)
+* [Zookeeper数据与存储](https://www.cnblogs.com/leesf456/p/6179118.html)
