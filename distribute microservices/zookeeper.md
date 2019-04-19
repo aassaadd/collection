@@ -26,7 +26,8 @@
         * 元数据管理
             > 主节点和从节点必须具有通过某种可靠的方式来保存分配状态和执行状态的能力。
 
-    * 理想
+    * 期望
+
          ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/coordinate-dream.png?raw=true)
 
         > 理想的方式是，以上每一个任务都需要通过原语(内核或微核提供核外调用的过程或函数称为原语(primitive))的方式暴露给应用，对开发者完全隐藏实现细节。ZooKeeper提供了实现这些原语的关键机制，因此，开发者可以通过这些实现一个最适合他们需求、更加关注应用逻辑的分布式应用。
@@ -61,15 +62,14 @@
                 > Follower主要是响应本服务器上的读请求外，另外follower还要处理leader的提议，并在leader提交该提议时在本地也进行提交。另外需要注意的是，leader和follower构成ZooKeeper集群的法定人数，也就是说，只有他们才参与新leader的选举、响应leader的提议。
             * Observe
                 > 为客户端提供读服务器，如果是写服务则转发给Leader。不参与选举过程中的投票，也不参与“过半写成功”策略。在不影响写性能的情况下提升集群的读性能。
+
             * client
                 > 连接zookeeper服务器的使用着，请求的发起者。独立于zookeeper服务器集群之外的角色。
+                    
+                ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/zookeeper-construct-readandwrite.png?raw=true)
         
         * 数据模型znode
             ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/zknamespace.jpg?raw=true)
-
-        * client读写操作
-
-            ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/zookeeper-construct-readandwrite.png?raw=true)
         
         * ZAB协议
             * 崩溃恢复
@@ -336,14 +336,14 @@
             ```
         * zxid
             > 每次对Zookeeper的状态的改变都会产生一个zxid（ZooKeeper Transaction Id），zxid是全局有序的，如果zxid1小于zxid2，则zxid1在zxid2之前发生。为了保证顺序性，该zkid必须单调递增。因此Zookeeper使用一个64位的数来表示，高32位是Leader的epoch，从1开始，每次选出新的Leader，epoch加一。低32位为该epoch内的序号，每次epoch变化，都将低32位的序号重置。这样保证了zkid的全局递增性。
-        * logicClock 
-            > 每个服务器会维护一个自增的整数，名为logicClock，它表示这是该服务器发起的第多少轮投票。
+        * logicalclock 
+            > 每个服务器会维护一个自增的整数，名为logicalclock，它表示这是该服务器发起的第多少轮投票。
 
     * 选主步骤
         * 状态变更
             > 服务器启动的时候每个server的状态时Looking，如果是leader挂掉后进入选举，那么余下的非Observer的Server就会将自己的服务器状态变更为Looking，然后开始进入Leader的选举状态；
         * 自增选举轮次
-            > Zookeeper规定所有有效的投票都必须在同一轮次中。每个服务器在开始新一轮投票时，会先对自己维护的logicClock进行自增操作。
+            > Zookeeper规定所有有效的投票都必须在同一轮次中。每个服务器在开始新一轮投票时，会先对自己维护的logicalclock进行自增操作。
         * 初始化选票
             > 每个服务器在广播自己的选票前，会将自己的投票箱清空。该投票箱记录了所收到的选票。例：服务器2投票给服务器3，服务器3投票给服务器1，则服务器1的投票箱为(2, 3), (3, 1), (1, 1)。票箱中只会记录每一投票者的最后一票，如投票者更新自己的选票，则其它服务器收到该新选票后会在自己票箱中更新该服务器的选票。
         * 发起投票
@@ -351,9 +351,9 @@
         * 接收外部投票
             > 服务器会尝试从其它服务器获取投票，并记入自己的投票箱内。如果无法获取任何外部投票，则会确认自己是否与集群中其它服务器保持着有效连接。如果是，则再次发送自己的投票；如果否，则马上与之建立连接。
         * 判断选举轮次
-            > 收到外部投票后，首先会根据投票信息中所包含的logicClock来进行不同处理.
-                * 外部投票的logicClock大于自己的logicClock。说明该服务器的选举轮次落后于其它服务器的选举轮次，立即清空自己的投票箱并将自己的logicClock更新为收到的logicClock，然后再对比自己之前的投票与收到的投票以确定是否需要变更自己的投票，最终再次将自己的投票广播出去。
-                * 外部投票的logicClock小于自己的logicClock。当前服务器直接忽略该投票，继续处理下一个投票。
+            > 收到外部投票后，首先会根据投票信息中所包含的logicalclock来进行不同处理.
+                * 外部投票的logicalclock大于自己的logicalclock。说明该服务器的选举轮次落后于其它服务器的选举轮次，立即清空自己的投票箱并将自己的logicalclock更新为收到的logicalclock，然后再对比自己之前的投票与收到的投票以确定是否需要变更自己的投票，最终再次将自己的投票广播出去。
+                * 外部投票的logicalclock小于自己的logicalclock。当前服务器直接忽略该投票，继续处理下一个投票。
                 * 外部投票的logickClock与自己的相等。当时进行选票PK。
         * 处理投票
             > 对自己的投票和接收到的投票进行PK：
