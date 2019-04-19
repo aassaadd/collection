@@ -47,6 +47,8 @@
 
         ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/dubbo-architecture-future.jpg?raw=true)
 
+        ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/kafka-zookeeper.png?raw=true)
+
     * zk架构
         * 角色
 
