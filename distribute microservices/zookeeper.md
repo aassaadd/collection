@@ -258,7 +258,7 @@
 
 * 回顾zookeeper架构
 
-    ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/zkservice-1.jpg.png?raw=true)
+    ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/zkservice-1.jpg?raw=true)
 
 * ZAB协议
     > ZAB协议（Zookeeper Atomic Broadcast Protocol）是Zookeeper系统专门设计的一种支持崩溃恢复的原子广播协议。Zookeeper使用该协议来实现分布数据一致性并实现了一种主备模式的系统架构来保持各集群中各个副本之间的数据一致性。采用zab协议的最大目标就是建立一个高可用可扩展的分布式数据主备系统。即在任何时刻只要leader发生宕机，都能保证分布式系统数据的可靠性和最终一致性。
@@ -452,7 +452,7 @@
 
     * 工作步骤
 
-        ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/zab-1.jpg?raw=true)
+        ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/zab-1.png?raw=true)
 
         1. leader从客户端收到一个写请求
         2. leader生成一个新的事务并为这个事务生成一个唯一的ZXID，
@@ -461,7 +461,7 @@
         5. 当leader收到大多数follower（超过法定数量）的ack消息，leader会发送commit请求
         6. 当follower收到commit请求时，会判断该事务的ZXID是不是比历史队列中的任何事务的ZXID都小，如果是则提交，如果不是则等待比它更小的事务的commit.
 
-        ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/zab-2.jpg?raw=true)
+        ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/zab-2.png?raw=true)
     
 
 * 扩展
@@ -472,7 +472,7 @@
 
 * 整体回顾
 
-    ![](https://github.com/moxingwang/resource/blob/master/image/zookeeper/zkservice-1.jpg?raw=true)
+    ![](https://raw.githubusercontent.com/moxingwang/resource/master/image/zookeeper/zkservice-1.jpg)
 
 * 思考问题
     * 一个客户端修改了某个节点的数据，其它客户端能够马上获取到这个最新数据吗(跨客户端视图的并发一致性)
