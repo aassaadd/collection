@@ -1,0 +1,31 @@
+{
+    "root": {
+        "data": {
+            "id": "btod9ngtheg0",
+            "created": 1556342206776,
+            "text": "语法七要素"
+        },
+        "children": [
+            {
+                "data": {
+                    "id": "btoda44f1200",
+                    "created": 1556342243031,
+                    "text": "词类"
+                },
+                "children": []
+            },
+            {
+                "data": {
+                    "id": "btoda56llaw0",
+                    "created": 1556342245340,
+                    "text": "句子成分"
+                },
+                "children": []
+            }
+        ]
+    },
+    "template": "right",
+    "theme": "fresh-blue-compat",
+    "version": "1.4.43",
+    "id": "btod9ngtheg0"
+}
